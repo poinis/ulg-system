@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neem Karoli Baba Crystal Oracle</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #ece9e6; /* Muted off-white for calm */
+            color: #5c5c5c; /* Soft dark gray */
+            font-family: 'Open Sans', sans-serif;
+            text-align: center;
+            padding: 20px;
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #7a7a7a; /* Muted gray */
+            font-size: 2rem;
+            margin-bottom: 30px;
+        }
+        #crystals {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+            margin: 40px auto;
+            max-width: 900px;
+        }
+        .crystal {
+            font-size: 80px; /* Smaller for mobile compatibility */
+            cursor: pointer;
+            opacity: 0.85; /* Slightly muted for calm feel */
+            transition: opacity 0.3s ease, transform 0.2s ease;
+            padding: 10px;
+        }
+        .crystal:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+        #message {
+            display: none;
+            max-width: 700px;
+            width: 90%;
+            margin: 20px auto;
+            padding: 25px;
+            background-color: #f4f4f2; /* Light muted gray */
+            border-radius: 12px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+        #message h2 {
+            color: #6b6b6b; /* Muted gray */
+            font-size: 1.4rem;
+            margin: 20px 0 10px;
+        }
+        #quote {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #5a5a5a; /* Soft gray */
+            font-style: italic;
+            margin: 25px 0;
+            line-height: 1.4;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+        li {
+            margin: 12px 0;
+            font-size: 1.1rem;
+            color: #5c5c5c;
+        }
+        p {
+            font-size: 1.1rem;
+            color: #5c5c5c;
+        }
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 1.5rem;
+            }
+            .crystal {
+                font-size: 60px;
+            }
+            #quote {
+                font-size: 1.4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Select a Crystal for Your Daily Guidance<br>Inspired by Neem Karoli Baba</h1>
+    <div id="crystals">
+        <div class="crystal" onclick="revealMessage()" aria-label="Amethyst Crystal">🟣</div> <!-- Muted purple -->
+        <div class="crystal" onclick="revealMessage()" aria-label="Rose Quartz Crystal">🩷</div> <!-- Muted pink -->
+        <div class="crystal" onclick="revealMessage()" aria-label="Clear Quartz Crystal">⚪</div> <!-- Muted white -->
+        <div class="crystal" onclick="revealMessage()" aria-label="Citrine Crystal">🟡</div> <!-- Muted yellow -->
+        <div class="crystal" onclick="revealMessage()" aria-label="Selenite Crystal">⚪</div> <!-- Muted white -->
+    </div>
+    <div id="message">
+        <h2>Which Archangel Is with You Today?</h2>
+        <p id="archangel"></p>
+        <h2>Message from the Universe</h2>
+        <p id="messageUniverse"></p>
+        <h2>An Inspiring Spiritual Quote</h2>
+        <p id="quote"></p>
+        <h2>Three Things to Focus on Today</h2>
+        <ul id="focus"></ul>
+        <h2>Your Lucky Number for the Day</h2>
+        <p id="luckyNumber"></p>
+    </div>
+
+    <script>
+        const archangels = ["Michael", "Gabriel", "Raphael", "Uriel", "Metatron"];
+        const messages = [
+            "Serve others with love and compassion.",
+            "Be present in every moment.",
+            "Love all beings as manifestations of God.",
+            "Remember the divine in every action.",
+            "Embrace truth and simplicity in life."
+        ];
+        const quotes = [
+            "Love is the strongest medicine. It is more powerful than electricity.",
+            "You should love everyone as God, and love each other. If you cannot love each other, you cannot achieve your goal.",
+            "The best form in which to worship God is every form.",
+            "See God in everyone.",
+            "The whole universe is our home and all residing in it belong to our family.",
+            "I am like the wind. No one can hold me. I belong to everyone.",
+            "Even if a person hurts you, give him love.",
+            "All action is prayer. All trees are desire-fulfilling. All water is the Ganga. All land is Varanasi. Love everything.",
+            "Love everyone, serve everyone, remember God, and tell the truth.",
+            "See all women as mothers, serve them as your mother."
+        ];
+        const focuses = [
+            "Love",
+            "Service",
+            "Devotion",
+            "Meditation",
+            "Gratitude",
+            "Compassion",
+            "Forgiveness",
+            "Chanting Ram",
+            "Feeding the hungry",
+            "Being here now"
+        ];
+
+        function revealMessage() {
+            document.getElementById("crystals").style.display = "none";
+            document.getElementById("message").style.display = "block";
+
+            // Random archangel
+            document.getElementById("archangel").textContent = archangels[Math.floor(Math.random() * archangels.length)];
+
+            // Random message from universe
+            document.getElementById("messageUniverse").textContent = messages[Math.floor(Math.random() * messages.length)];
+
+            // Random quote
+            document.getElementById("quote").textContent = quotes[Math.floor(Math.random() * quotes.length)];
+
+            // Random three focuses
+            const shuffled = focuses.sort(() => 0.5 - Math.random()).slice(0, 3);
+            const ul = document.getElementById("focus");
+            ul.innerHTML = ""; // Clear previous list
+            shuffled.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                ul.appendChild(li);
+            });
+
+            // Random lucky number (1-100)
+            document.getElementById("luckyNumber").textContent = Math.floor(Math.random() * 100) + 1;
+        }
+    </script>
+</body>
+</html>

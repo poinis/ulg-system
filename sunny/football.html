@@ -1,0 +1,312 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Football Shirt Number Quiz for Kids</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+            padding: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        #quiz-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        #question {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .option {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            margin: 10px;
+            border-radius: 50%;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #000;
+            border: 2px solid #333;
+        }
+        #feedback {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+        #next-btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+        #score {
+            font-size: 24px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="quiz-container">
+        <h1>Football Shirt Number Quiz!</h1>
+        <p>Hey kiddo! Can you guess the shirt numbers of famous football stars? 50 random questions out of 100. Let's have fun!</p>
+        <div id="question"></div>
+        <div id="options"></div>
+        <div id="feedback"></div>
+        <button id="next-btn" onclick="nextQuestion()">Next Question</button>
+        <div id="score"></div>
+    </div>
+
+    <script>
+        let questions = [
+            { player: "Kylian Mbappé", number: 9, team: "Real Madrid", color: "#FFFFFF" },
+            { player: "Erling Haaland", number: 9, team: "Manchester City", color: "#6BAED6" },
+            { player: "Vinícius Júnior", number: 7, team: "Real Madrid", color: "#FFFFFF" },
+            { player: "Jude Bellingham", number: 5, team: "Real Madrid", color: "#FFFFFF" },
+            { player: "Mohamed Salah", number: 11, team: "Liverpool", color: "#C8102E" },
+            { player: "Lionel Messi", number: 10, team: "Inter Miami", color: "#F3CFC6" },
+            { player: "Cristiano Ronaldo", number: 7, team: "Al-Nassr", color: "#FFD700" },
+            { player: "Jamal Musiala", number: 10, team: "Bayern Munich", color: "#DC052D" },
+            { player: "Florian Wirtz", number: 10, team: "Bayer Leverkusen", color: "#E32219" },
+            { player: "Bukayo Saka", number: 7, team: "Arsenal", color: "#E32219" },
+            { player: "Phil Foden", number: 47, team: "Manchester City", color: "#6BAED6" },
+            { player: "Lamine Yamal", number: 19, team: "Barcelona", color: "#004D98" },
+            { player: "Pedri", number: 8, team: "Barcelona", color: "#004D98" },
+            { player: "Gavi", number: 6, team: "Barcelona", color: "#004D98" },
+            { player: "Robert Lewandowski", number: 9, team: "Barcelona", color: "#004D98" },
+            { player: "Harry Kane", number: 9, team: "Bayern Munich", color: "#DC052D" },
+            { player: "Declan Rice", number: 41, team: "Arsenal", color: "#E32219" },
+            { player: "Martin Ødegaard", number: 8, team: "Arsenal", color: "#E32219" },
+            { player: "Son Heung-min", number: 7, team: "Tottenham", color: "#FFFFFF" },
+            { player: "Kevin De Bruyne", number: 17, team: "Manchester City", color: "#6BAED6" },
+            { player: "Rodri", number: 16, team: "Manchester City", color: "#6BAED6" },
+            { player: "Virgil van Dijk", number: 4, team: "Liverpool", color: "#C8102E" },
+            { player: "Alisson Becker", number: 1, team: "Liverpool", color: "#C8102E" },
+            { player: "Trent Alexander-Arnold", number: 66, team: "Liverpool", color: "#C8102E" },
+            { player: "Andrew Robertson", number: 26, team: "Liverpool", color: "#C8102E" },
+            { player: "Bruno Fernandes", number: 8, team: "Manchester United", color: "#DA291C" },
+            { player: "Marcus Rashford", number: 10, team: "Manchester United", color: "#DA291C" },
+            { player: "Alejandro Garnacho", number: 17, team: "Manchester United", color: "#DA291C" },
+            { player: "Federico Valverde", number: 8, team: "Real Madrid", color: "#FFFFFF" },
+            { player: "Aurélien Tchouaméni", number: 18, team: "Real Madrid", color: "#FFFFFF" },
+            { player: "Eduardo Camavinga", number: 6, team: "Real Madrid", color: "#FFFFFF" },
+            { player: "Thibaut Courtois", number: 1, team: "Real Madrid", color: "#FFFFFF" },
+            { player: "Antonio Rüdiger", number: 22, team: "Real Madrid", color: "#FFFFFF" },
+            { player: "William Saliba", number: 2, team: "Arsenal", color: "#E32219" },
+            { player: "Gabriel Magalhães", number: 6, team: "Arsenal", color: "#E32219" },
+            { player: "Achraf Hakimi", number: 2, team: "PSG", color: "#001E62" },
+            { player: "Warren Zaïre-Emery", number: 33, team: "PSG", color: "#001E62" },
+            { player: "Gianluigi Donnarumma", number: 99, team: "PSG", color: "#001E62" },
+            { player: "Marquinhos", number: 5, team: "PSG", color: "#001E62" },
+            { player: "Neymar", number: 10, team: "Al-Hilal", color: "#003399" },
+            { player: "Victor Osimhen", number: 9, team: "Napoli", color: "#009CEB" },
+            { player: "Khvicha Kvaratskhelia", number: 77, team: "Napoli", color: "#009CEB" },
+            { player: "Lautaro Martínez", number: 10, team: "Inter Milan", color: "#0000FF" },
+            { player: "Nicolò Barella", number: 23, team: "Inter Milan", color: "#0000FF" },
+            { player: "Alessandro Bastoni", number: 95, team: "Inter Milan", color: "#0000FF" },
+            { player: "Antoine Griezmann", number: 7, team: "Atletico Madrid", color: "#E00000" },
+            { player: "Cole Palmer", number: 20, team: "Chelsea", color: "#034694" },
+            { player: "Enzo Fernández", number: 8, team: "Chelsea", color: "#034694" },
+            { player: "Moisés Caicedo", number: 25, team: "Chelsea", color: "#034694" },
+            { player: "Joško Gvardiol", number: 24, team: "Manchester City", color: "#6BAED6" },
+            { player: "Kyle Walker", number: 2, team: "Manchester City", color: "#6BAED6" },
+            { player: "Rúben Dias", number: 3, team: "Manchester City", color: "#6BAED6" },
+            { player: "John Stones", number: 5, team: "Manchester City", color: "#6BAED6" },
+            { player: "Bernardo Silva", number: 20, team: "Manchester City", color: "#6BAED6" },
+            { player: "Jack Grealish", number: 10, team: "Manchester City", color: "#6BAED6" },
+            { player: "Luis Díaz", number: 7, team: "Liverpool", color: "#C8102E" },
+            { player: "Darwin Núñez", number: 9, team: "Liverpool", color: "#C8102E" },
+            { player: "Cody Gakpo", number: 18, team: "Liverpool", color: "#C8102E" },
+            { player: "Diogo Jota", number: 20, team: "Liverpool", color: "#C8102E" },
+            { player: "Dominik Szoboszlai", number: 8, team: "Liverpool", color: "#C8102E" },
+            { player: "Alexis Mac Allister", number: 10, team: "Liverpool", color: "#C8102E" },
+            { player: "Lisandro Martínez", number: 6, team: "Manchester United", color: "#DA291C" },
+            { player: "Luke Shaw", number: 3, team: "Manchester United", color: "#DA291C" },
+            { player: "Casemiro", number: 18, team: "Manchester United", color: "#DA291C" },
+            { player: "Kobbie Mainoo", number: 37, team: "Manchester United", color: "#DA291C" },
+            { player: "Arda Güler", number: 15, team: "Real Madrid", color: "#FFFFFF" },
+            { player: "Dani Carvajal", number: 2, team: "Real Madrid", color: "#FFFFFF" },
+            { player: "Éder Militão", number: 3, team: "Real Madrid", color: "#FFFFFF" },
+            { player: "Ferland Mendy", number: 23, team: "Real Madrid", color: "#FFFFFF" },
+            { player: "Luka Modrić", number: 10, team: "Real Madrid", color: "#FFFFFF" },
+            { player: "Joshua Kimmich", number: 6, team: "Bayern Munich", color: "#DC052D" },
+            { player: "Leroy Sané", number: 10, team: "Bayern Munich", color: "#DC052D" },
+            { player: "Serge Gnabry", number: 7, team: "Bayern Munich", color: "#DC052D" },
+            { player: "Manuel Neuer", number: 1, team: "Bayern Munich", color: "#DC052D" },
+            { player: "Alphonso Davies", number: 19, team: "Bayern Munich", color: "#DC052D" },
+            { player: "Raphinha", number: 11, team: "Barcelona", color: "#004D98" },
+            { player: "Frenkie de Jong", number: 21, team: "Barcelona", color: "#004D98" },
+            { player: "Jules Koundé", number: 23, team: "Barcelona", color: "#004D98" },
+            { player: "Ronald Araújo", number: 4, team: "Barcelona", color: "#004D98" },
+            { player: "Marc-André ter Stegen", number: 1, team: "Barcelona", color: "#004D98" },
+            { player: "Kai Havertz", number: 29, team: "Arsenal", color: "#E32219" },
+            { player: "Gabriel Martinelli", number: 11, team: "Arsenal", color: "#E32219" },
+            { player: "Ben White", number: 4, team: "Arsenal", color: "#E32219" },
+            { player: "Thomas Partey", number: 5, team: "Arsenal", color: "#E32219" },
+            { player: "James Maddison", number: 10, team: "Tottenham", color: "#FFFFFF" },
+            { player: "Pedro Porro", number: 23, team: "Tottenham", color: "#FFFFFF" },
+            { player: "Cristian Romero", number: 17, team: "Tottenham", color: "#FFFFFF" },
+            { player: "Dejan Kulusevski", number: 21, team: "Tottenham", color: "#FFFFFF" },
+            { player: "Richarlison", number: 9, team: "Tottenham", color: "#FFFFFF" },
+            { player: "Ousmane Dembélé", number: 10, team: "PSG", color: "#001E62" },
+            { player: "Vitinha", number: 17, team: "PSG", color: "#001E62" },
+            { player: "Fabián Ruiz", number: 8, team: "PSG", color: "#001E62" },
+            { player: "Bradley Barcola", number: 29, team: "PSG", color: "#001E62" },
+            { player: "Gonçalo Ramos", number: 9, team: "PSG", color: "#001E62" },
+            { player: "Mike Maignan", number: 16, team: "AC Milan", color: "#FF0000" },
+            { player: "Rafael Leão", number: 10, team: "AC Milan", color: "#FF0000" },
+            { player: "Christian Pulisic", number: 11, team: "AC Milan", color: "#FF0000" },
+            { player: "Theo Hernández", number: 19, team: "AC Milan", color: "#FF0000" },
+            { player: "Paulo Dybala", number: 21, team: "Roma", color: "#8B0000" },
+            { player: "Karim Benzema", number: 9, team: "Al-Ittihad", color: "#FFFF00" }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let selected = false;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        // Shuffle and select 50 random questions
+        shuffle(questions);
+        questions = questions.slice(0, 50);
+
+        function loadQuestion() {
+            selected = false;
+            document.getElementById('feedback').innerHTML = '';
+            document.getElementById('next-btn').style.display = 'none';
+            const q = questions[currentQuestion];
+            document.getElementById('question').innerHTML = `What is the shirt number of ${q.player}? (Plays for ${q.team})`;
+            
+            // Generate realistic football shirt number options close to the correct number
+            let options = [q.number];
+            while (options.length < 4) {
+                // Generate numbers within ±3 of the correct number, ensuring they're within 1-99
+                const rand = Math.max(1, Math.min(99, q.number + Math.floor(Math.random() * 7) - 3));
+                if (!options.includes(rand)) {
+                    options.push(rand);
+                }
+            }
+            shuffle(options);
+
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('div');
+                btn.className = 'option';
+                btn.innerHTML = opt;
+                btn.style.backgroundColor = q.color;
+                // Adjust text color for readability
+                if (q.color === '#FFFFFF' || q.color === '#FFD700' || q.color === '#FFFF00') {
+                    btn.style.color = '#000000';
+                } else {
+                    btn.style.color = '#FFFFFF';
+                }
+                btn.onclick = () => checkAnswer(opt, q.number);
+                optionsDiv.appendChild(btn);
+            });
+
+            document.getElementById('score').innerHTML = `Score: ${score} / ${currentQuestion}`;
+        }
+
+        function checkAnswer(choice, correct) {
+            if (selected) return; // Prevent multiple clicks
+            selected = true;
+            const feedback = document.getElementById('feedback');
+            if (choice === correct) {
+                feedback.innerHTML = 'Yay! Correct! 🎉';
+                feedback.style.color = 'green';
+                score++;
+            } else {
+                feedback.innerHTML = `Oops! The correct number is ${correct}. 😊`;
+                feedback.style.color = 'red';
+            }
+            document.getElementById('next-btn').style.display = 'block';
+            document.getElementById('score').innerHTML = `Score: ${score} / ${currentQuestion + 1}`;
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                let trophy = '';
+                if (score >= 50) {
+                    trophy = 'Diamond Trophy 🏆💎';
+                } else if (score >= 40) {
+                    trophy = 'Platinum Trophy 🏆✨';
+                } else if (score >= 30) {
+                    trophy = 'Gold Trophy 🏆🥇';
+                } else if (score >= 20) {
+                    trophy = 'Silver Trophy 🏆🥈';
+                } else if (score >= 10) {
+                    trophy = 'Bronze Trophy 🏆🥉';
+                } else {
+                    trophy = 'Participation Award 🎖️';
+                }
+                document.getElementById('quiz-container').innerHTML = `<h1>Quiz Finished!</h1><p>Your final score: ${score} out of 50. Great job! ⚽</p><p>You earned the ${trophy}!</p>`;
+            }
+        }
+
+        // Start the quiz
+        loadQuestion();
+    </script>
+</body>
+</html>

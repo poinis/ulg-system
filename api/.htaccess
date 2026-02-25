@@ -1,0 +1,8 @@
+# ป้องกันการแสดงรายชื่อไฟล์ (Directory Listing)
+Options -Indexes
+
+# อนุญาตให้เข้าถึงเฉพาะไฟล์ .php และ .json (ถ้ามี)
+<FilesMatch "\.(php|json)$">
+    Order Allow,Deny
+    Allow from all
+</FilesMatch>

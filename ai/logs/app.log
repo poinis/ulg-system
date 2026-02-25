@@ -1,0 +1,101 @@
+[2025-12-09 17:29:56] Starting UGC video generation {"product":"DEUS EX MACHINA CANTER OVERSHIRT - BLACK","avatar_type":"preset","audio_type":"generate"}
+[2025-12-09 17:29:56] Avatar prepared {"url":"https:\/\/images.unsplash.com\/photo-1507003211169-0a1dd7228f2d?w=512"}
+[2025-12-09 17:30:01] Script generated {"script":"🎥✨ สวัสดีค่ะทุกคน! เคยรู้สึกไหมคะว่าเสื้อแจ็กเก็ตธรรมดาๆ มันไม่พอสำหร"}
+[2025-12-09 17:30:02] Process error {"error":"OpenAI TTS Error: HTTP 429","trace":"#0 \/home\/weedjai\/htdocs\/www.weedjai.com\/ai\/process.php(84): generateTTSAudio()\n#1 {main}"}
+[2025-12-09 17:55:33] Starting UGC video generation {"product":"DEUS EX MACHINA CANTER OVERSHIRT - BLACK","avatar_type":"preset","audio_type":"generate","voice_id":"th-TH-NiwatNeural"}
+[2025-12-09 17:55:33] Avatar prepared {"url":"https:\/\/images.unsplash.com\/photo-1507003211169-0a1dd7228f2d?w=512"}
+[2025-12-09 17:55:39] Script generated {"script":"[เสียงดนตรีเบาๆ เริ่มเล่น]\n\n🎤 \"คุณกำลังมองหาการแต่งตัวที่แตกต่างและมีสไ"}
+[2025-12-09 17:55:39] Generating iApp TTS {"text_length":1253,"voice_id":"th-TH-NiwatNeural"}
+[2025-12-09 17:55:40] iApp TTS response {"http_code":404,"curl_error":"","response_length":95}
+[2025-12-09 17:55:40] Process error {"error":"iApp TTS Error: HTTP 404 - Array","trace":"#0 \/home\/weedjai\/htdocs\/www.weedjai.com\/ai\/process.php(86): generateIAppTTSAudio()\n#1 {main}"}
+[2025-12-09 21:18:56] Starting UGC video generation {"product":"DEUS EX MACHINA CANTER OVERSHIRT - BLACK","avatar_type":"preset","audio_type":"generate","tts_voice":"cee"}
+[2025-12-09 21:18:56] Avatar prepared {"url":"https:\/\/images.unsplash.com\/photo-1507003211169-0a1dd7228f2d?w=512"}
+[2025-12-09 21:18:56] Process error {"error":"อัปโหลดรูปได้สูงสุด 5 รูป","trace":"#0 \/home\/weedjai\/htdocs\/www.weedjai.com\/ai\/process.php(67): validateMultipleImages()\n#1 {main}"}
+[2025-12-09 21:19:11] Starting UGC video generation {"product":"DEUS EX MACHINA CANTER OVERSHIRT - BLACK","avatar_type":"preset","audio_type":"generate","tts_voice":"cee"}
+[2025-12-09 21:19:11] Avatar prepared {"url":"https:\/\/images.unsplash.com\/photo-1507003211169-0a1dd7228f2d?w=512"}
+[2025-12-09 21:19:11] Process error {"error":"อัปโหลดรูปได้สูงสุด 5 รูป","trace":"#0 \/home\/weedjai\/htdocs\/www.weedjai.com\/ai\/process.php(67): validateMultipleImages()\n#1 {main}"}
+[2025-12-09 21:22:42] Starting UGC video generation {"product":"DEUS EX MACHINA CANTER OVERSHIRT - BLACK","avatar_type":"preset","audio_type":"generate","tts_voice":"v3"}
+[2025-12-09 21:22:42] Avatar prepared {"url":"https:\/\/images.unsplash.com\/photo-1507003211169-0a1dd7228f2d?w=512"}
+[2025-12-09 21:22:42] Product images uploaded {"count":5,"urls":["http:\/\/weedjai.com\/ai\/uploads\/product_0_693830b2cbb606.79989210.webp","http:\/\/weedjai.com\/ai\/uploads\/product_1_693830b2cbc810.96535653.webp","http:\/\/weedjai.com\/ai\/uploads\/product_2_693830b2cbcfa8.01982904.webp","http:\/\/weedjai.com\/ai\/uploads\/product_3_693830b2cbd0c7.54128251.webp","http:\/\/weedjai.com\/ai\/uploads\/product_4_693830b2cbd1c5.25102968.webp"]}
+[2025-12-09 21:22:48] Script generated 
+[2025-12-09 21:22:48] Generating iApp TTS {"voice":"v3","url":"https:\/\/api.iapp.co.th\/v3\/audio\/tts","method":"POST_JSON","text_length":470}
+[2025-12-09 21:22:53] iApp TTS response {"http_code":404,"content_type":"application\/json","response_size":22,"curl_error":""}
+[2025-12-09 21:22:53] Process error {"error":"iApp TTS Error: HTTP 404","trace":"#0 \/home\/weedjai\/htdocs\/www.weedjai.com\/ai\/process.php(109): generateIAppTTS()\n#1 {main}"}
+[2025-12-09 21:25:40] Starting UGC video generation {"product":"DEUS EX MACHINA CANTER OVERSHIRT - BLACK","avatar_type":"preset","audio_type":"generate","tts_voice":"v3"}
+[2025-12-09 21:25:40] Avatar prepared {"url":"https:\/\/images.unsplash.com\/photo-1507003211169-0a1dd7228f2d?w=512"}
+[2025-12-09 21:25:40] Product images uploaded {"count":5,"urls":["http:\/\/weedjai.com\/ai\/uploads\/product_0_6938316488c175.84199399.webp","http:\/\/weedjai.com\/ai\/uploads\/product_1_6938316488c5f8.99382016.webp","http:\/\/weedjai.com\/ai\/uploads\/product_2_6938316488d849.40644403.webp","http:\/\/weedjai.com\/ai\/uploads\/product_3_6938316488e198.29033258.webp","http:\/\/weedjai.com\/ai\/uploads\/product_4_6938316488e2d0.09519008.webp"]}
+[2025-12-09 21:25:45] Script generated 
+[2025-12-09 21:25:45] Generating iApp TTS {"voice":"cee","url":"https:\/\/api.iapp.co.th\/thai-tts-cee\/tts","method":"GET","text_length":420}
+[2025-12-09 21:25:53] iApp TTS response {"http_code":200,"content_type":"audio\/mpeg","response_size":99579,"curl_error":""}
+[2025-12-09 21:25:53] iApp TTS saved {"path":"\/home\/weedjai\/htdocs\/www.weedjai.com\/ai\/audio\/tts_cee_693831710c93a.mp3","size":99579}
+[2025-12-09 21:25:53] iApp TTS audio generated {"url":"http:\/\/weedjai.com\/ai\/audio\/tts_cee_693831710c93a.mp3","voice":"v3"}
+[2025-12-09 21:25:53] Starting OmniHuman generation {"image_url":"https:\/\/images.unsplash.com\/photo-1507003211169-0a1dd7228f2d?w=512","audio_url":"http:\/\/weedjai.com\/ai\/audio\/tts_cee_693831710c93a.mp3","model":"bytedance\/omni-human"}
+[2025-12-09 21:25:53] OmniHuman API response {"http_code":201,"response":"{\"id\":\"zjxw5ra2kdrme0cv0e0se3bh4c\",\"model\":\"bytedance\/omni-human\",\"version\":\"hidden\",\"input\":{\"audio\":\"http:\/\/weedjai.com\/ai\/audio\/tts_cee_693831710c93a.mp3\",\"image\":\"https:\/\/images.unsplash.com\/photo-1507003211169-0a1dd7228f2d?w=512\"},\"logs\":\"\",\"output\":null,\"data_removed\":false,\"error\":null,\"source\":\"api\",\"status\":\"starting\",\"created_at\":\"2025-12-09T14:26:01.499Z\",\"urls\":{\"cancel\":\"https:\/\/api.replicate.com\/v1\/predictions\/zjxw5ra2kdrme0cv0e0se3bh4c\/cancel\",\"get\":\"https:\/\/api.replicate.com\/v1\/p"}
+[2025-12-09 21:25:53] Polling OmniHuman {"url":"https:\/\/api.replicate.com\/v1\/predictions\/zjxw5ra2kdrme0cv0e0se3bh4c"}
+[2025-12-09 21:25:57] Poll attempt {"attempt":1,"status":"processing","elapsed":"3s"}
+[2025-12-09 21:26:01] Poll attempt {"attempt":2,"status":"processing","elapsed":"6s"}
+[2025-12-09 21:26:06] Poll attempt {"attempt":3,"status":"processing","elapsed":"9s"}
+[2025-12-09 21:26:09] Poll attempt {"attempt":4,"status":"processing","elapsed":"12s"}
+[2025-12-09 21:26:13] Poll attempt {"attempt":5,"status":"processing","elapsed":"15s"}
+[2025-12-09 21:26:16] Poll attempt {"attempt":6,"status":"processing","elapsed":"18s"}
+[2025-12-09 21:26:20] Poll attempt {"attempt":7,"status":"processing","elapsed":"21s"}
+[2025-12-09 21:26:24] Poll attempt {"attempt":8,"status":"processing","elapsed":"24s"}
+[2025-12-09 21:26:28] Poll attempt {"attempt":9,"status":"processing","elapsed":"27s"}
+[2025-12-09 21:26:31] Poll attempt {"attempt":10,"status":"processing","elapsed":"30s"}
+[2025-12-09 21:26:35] Poll attempt {"attempt":11,"status":"processing","elapsed":"33s"}
+[2025-12-09 21:26:39] Poll attempt {"attempt":12,"status":"processing","elapsed":"36s"}
+[2025-12-09 21:26:42] Poll attempt {"attempt":13,"status":"processing","elapsed":"39s"}
+[2025-12-09 21:26:47] Poll attempt {"attempt":14,"status":"processing","elapsed":"42s"}
+[2025-12-09 21:26:50] Poll attempt {"attempt":15,"status":"processing","elapsed":"45s"}
+[2025-12-09 21:26:55] Poll attempt {"attempt":16,"status":"processing","elapsed":"48s"}
+[2025-12-09 21:27:00] Poll attempt {"attempt":17,"status":"processing","elapsed":"51s"}
+[2025-12-09 21:27:03] Poll attempt {"attempt":18,"status":"processing","elapsed":"54s"}
+[2025-12-09 21:27:07] Poll attempt {"attempt":19,"status":"processing","elapsed":"57s"}
+[2025-12-09 21:27:11] Poll attempt {"attempt":20,"status":"processing","elapsed":"60s"}
+[2025-12-09 21:27:15] Poll attempt {"attempt":21,"status":"processing","elapsed":"63s"}
+[2025-12-09 21:27:18] Poll attempt {"attempt":22,"status":"processing","elapsed":"66s"}
+[2025-12-09 21:27:22] Poll attempt {"attempt":23,"status":"processing","elapsed":"69s"}
+[2025-12-09 21:27:25] Poll attempt {"attempt":24,"status":"processing","elapsed":"72s"}
+[2025-12-09 21:27:29] Poll attempt {"attempt":25,"status":"processing","elapsed":"75s"}
+[2025-12-09 21:27:33] Poll attempt {"attempt":26,"status":"processing","elapsed":"78s"}
+[2025-12-09 21:27:41] Poll attempt {"attempt":27,"status":"processing","elapsed":"81s"}
+[2025-12-09 21:27:45] Poll attempt {"attempt":28,"status":"processing","elapsed":"84s"}
+[2025-12-09 21:27:49] Poll attempt {"attempt":29,"status":"processing","elapsed":"87s"}
+[2025-12-09 21:27:54] Poll attempt {"attempt":30,"status":"processing","elapsed":"90s"}
+[2025-12-09 21:27:57] Poll attempt {"attempt":31,"status":"processing","elapsed":"93s"}
+[2025-12-09 21:28:03] Poll attempt {"attempt":32,"status":"processing","elapsed":"96s"}
+[2025-12-09 21:28:07] Poll attempt {"attempt":33,"status":"processing","elapsed":"99s"}
+[2025-12-09 21:28:11] Poll attempt {"attempt":34,"status":"processing","elapsed":"102s"}
+[2025-12-09 21:28:16] Poll attempt {"attempt":35,"status":"processing","elapsed":"105s"}
+[2025-12-09 21:28:19] Poll attempt {"attempt":36,"status":"processing","elapsed":"108s"}
+[2025-12-09 21:28:23] Poll attempt {"attempt":37,"status":"processing","elapsed":"111s"}
+[2025-12-09 21:28:27] Poll attempt {"attempt":38,"status":"processing","elapsed":"114s"}
+[2025-12-09 21:28:31] Poll attempt {"attempt":39,"status":"processing","elapsed":"117s"}
+[2025-12-09 21:28:36] Poll attempt {"attempt":40,"status":"processing","elapsed":"120s"}
+[2025-12-09 21:28:40] Poll attempt {"attempt":41,"status":"processing","elapsed":"123s"}
+[2025-12-09 21:28:46] Poll attempt {"attempt":42,"status":"processing","elapsed":"126s"}
+[2025-12-09 21:28:51] Poll attempt {"attempt":43,"status":"processing","elapsed":"129s"}
+[2025-12-09 21:28:56] Poll attempt {"attempt":44,"status":"processing","elapsed":"132s"}
+[2025-12-09 21:29:02] Poll attempt {"attempt":45,"status":"processing","elapsed":"135s"}
+[2025-12-09 21:29:11] Poll attempt {"attempt":46,"status":"processing","elapsed":"138s"}
+[2025-12-09 21:29:17] Poll attempt {"attempt":47,"status":"processing","elapsed":"141s"}
+[2025-12-09 21:29:23] Poll attempt {"attempt":48,"status":"processing","elapsed":"144s"}
+[2025-12-09 21:29:30] Poll attempt {"attempt":49,"status":"processing","elapsed":"147s"}
+[2025-12-09 21:29:34] Poll attempt {"attempt":50,"status":"processing","elapsed":"150s"}
+[2025-12-09 21:29:39] Poll attempt {"attempt":51,"status":"processing","elapsed":"153s"}
+[2025-12-09 21:29:45] Poll attempt {"attempt":52,"status":"processing","elapsed":"156s"}
+[2025-12-09 21:29:51] Poll attempt {"attempt":53,"status":"processing","elapsed":"159s"}
+[2025-12-09 21:29:57] Poll attempt {"attempt":54,"status":"processing","elapsed":"162s"}
+[2025-12-09 21:30:02] Poll attempt {"attempt":55,"status":"processing","elapsed":"165s"}
+[2025-12-09 21:30:08] Poll attempt {"attempt":56,"status":"processing","elapsed":"168s"}
+[2025-12-09 21:30:13] Poll attempt {"attempt":57,"status":"processing","elapsed":"171s"}
+[2025-12-09 21:30:18] Poll attempt {"attempt":58,"status":"processing","elapsed":"174s"}
+[2025-12-09 21:30:23] Poll attempt {"attempt":59,"status":"processing","elapsed":"177s"}
+[2025-12-09 21:30:29] Poll attempt {"attempt":60,"status":"processing","elapsed":"180s"}
+[2025-12-09 21:30:33] Poll attempt {"attempt":61,"status":"processing","elapsed":"183s"}
+[2025-12-09 21:30:39] Poll attempt {"attempt":62,"status":"processing","elapsed":"186s"}
+[2025-12-09 21:30:46] Poll attempt {"attempt":63,"status":"processing","elapsed":"189s"}
+[2025-12-09 21:30:51] Poll attempt {"attempt":64,"status":"processing","elapsed":"192s"}
+[2025-12-09 21:30:59] Poll attempt {"attempt":65,"status":"processing","elapsed":"195s"}
+[2025-12-09 21:31:07] Poll attempt {"attempt":66,"status":"succeeded","elapsed":"198s"}
+[2025-12-09 21:31:07] Video created successfully {"video_url":"https:\/\/replicate.delivery\/xezq\/b0ioVN8ofORxIKEJQHcBXIvf8OhqwDyEijheVjZtPWZbl8irA\/tmpx8_ycr8b.mp4"}

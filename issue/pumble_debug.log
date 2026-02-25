@@ -1,0 +1,42 @@
+[2025-11-03 21:18:33] Loaded 7 Pumble users
+[2025-11-03 21:18:33] Found 3 users with roles: admin, support
+[2025-11-03 21:18:33] Sending to May (admin)
+[2025-11-03 21:18:33] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-03 21:18:34] HTTP Code: 200
+[2025-11-03 21:18:34] SUCCESS: Message sent
+[2025-11-03 21:18:34] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-03 21:18:34] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-03 21:18:34] Sent to 1 out of 3 users
+[2025-11-03 21:18:34] Skipped (duplicates): Oat
+[2025-11-03 21:18:34] Failed users: May-hotel (no webhook)
+[2025-11-04 09:31:25] Loaded 7 Pumble users
+[2025-11-04 09:31:25] Found 3 users with roles: admin, support
+[2025-11-04 09:31:25] Sending to May (admin)
+[2025-11-04 09:31:25] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-04 09:31:25] HTTP Code: 200
+[2025-11-04 09:31:25] SUCCESS: Message sent
+[2025-11-04 09:31:25] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-04 09:31:25] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-04 09:31:25] Sent to 1 out of 3 users
+[2025-11-04 09:31:25] Skipped (duplicates): Oat
+[2025-11-04 09:31:25] Failed users: May-hotel (no webhook)
+[2025-11-14 10:12:38] Loaded 7 Pumble users
+[2025-11-14 10:12:38] Found 7 users with roles: admin, support
+[2025-11-14 10:12:38] Sending to May (admin)
+[2025-11-14 10:12:38] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-14 10:12:39] HTTP Code: 400
+[2025-11-14 10:12:39] FAILED: Message not sent
+[2025-11-14 10:12:39] Sending to Oat (admin)
+[2025-11-14 10:12:39] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-14 10:12:40] HTTP Code: 400
+[2025-11-14 10:12:40] FAILED: Message not sent
+[2025-11-14 10:12:40] Sending to Sunny (admin)
+[2025-11-14 10:12:40] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-14 10:12:40] HTTP Code: 400
+[2025-11-14 10:12:40] FAILED: Message not sent
+[2025-11-14 10:12:40] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-14 10:12:40] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-14 10:12:40] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-14 10:12:40] SKIPPED: No webhook configured for user it (it)
+[2025-11-14 10:12:40] Sent to 0 out of 7 users
+[2025-11-14 10:12:40] Failed users: May, Oat, Sunny, May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook)

@@ -1,0 +1,593 @@
+/* ========================================
+   Issue Detail Styles - Soft & Comfortable Design
+   เอาสีสบายตาแบบ Sale Report
+   ======================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Sarabun', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ========================================
+   Soft Header (สีฟ้า-ขาวเรียบง่าย)
+   ======================================== */
+.header {
+    background: white;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+    border-radius: 12px;
+    border-bottom: 3px solid #667eea;
+}
+
+.header-left h1 {
+    color: #667eea;
+    margin: 0 0 8px 0;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.user-info {
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.header-right {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* ========================================
+   Issue Detail Container
+   ======================================== */
+.issue-detail-container {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ========================================
+   Issue Header (สีนุ่มๆ)
+   ======================================== */
+.issue-header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 3px solid #667eea;
+    color: #2c3e50;
+    padding: 25px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.issue-number {
+    font-size: 22px;
+    font-weight: 600;
+    color: #667eea;
+}
+
+.issue-meta {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+/* ========================================
+   Soft Badges (สีพาสเทล สบายตา)
+   ======================================== */
+.badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.badge-warning {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.badge-info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+.badge-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.badge-secondary {
+    background: #e2e3e5;
+    color: #383d41;
+    border: 1px solid #d6d8db;
+}
+
+.urgency-badge {
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+    background: #f8f9fa;
+    color: #495057;
+    border: 1px solid #dee2e6;
+}
+
+/* ========================================
+   Info Cards
+   ======================================== */
+.info-card {
+    padding: 25px 30px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.2s ease;
+}
+
+.info-card:hover {
+    background-color: #fafbfc;
+}
+
+.info-card:last-child {
+    border-bottom: none;
+}
+
+.info-card h3 {
+    margin: 0 0 18px 0;
+    font-size: 18px;
+    color: #2c3e50;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.info-row {
+    display: flex;
+    padding: 12px 0;
+    border-bottom: 1px solid #f8f9fa;
+    align-items: center;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+}
+
+.info-label {
+    font-weight: 600;
+    color: #6c757d;
+    min-width: 140px;
+    font-size: 14px;
+}
+
+.info-value {
+    color: #495057;
+    flex: 1;
+    font-size: 14px;
+}
+
+/* ========================================
+   Category Tags (สีอ่อนๆ)
+   ======================================== */
+.category-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.category-tag {
+    padding: 8px 16px;
+    background: #f0f3ff;
+    border: 1px solid #d0d7ff;
+    border-radius: 20px;
+    font-size: 13px;
+    color: #667eea;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.category-tag:hover {
+    background: #e6ebff;
+    border-color: #667eea;
+    transform: translateY(-1px);
+}
+
+/* ========================================
+   Description Box
+   ======================================== */
+.description-box {
+    padding: 18px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    line-height: 1.7;
+    color: #495057;
+    font-size: 14px;
+}
+
+/* ========================================
+   Admin Section (สีอ่อนลง)
+   ======================================== */
+.admin-section {
+    background: #fffbf0;
+    border: 2px solid #ffeaa7;
+    border-radius: 0;
+}
+
+/* ========================================
+   Form Elements
+   ======================================== */
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    color: #495057;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.form-select,
+.form-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    background: white;
+}
+
+.form-select:focus,
+.form-textarea:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* ========================================
+   Soft Buttons (สีฟ้า-ขาว เรียบง่าย)
+   ======================================== */
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.12);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* ปุ่มหลัก - ใช้สีฟ้าหมด ยกเว้นออกจากระบบ */
+.btn-primary {
+    background: #667eea;
+    color: white;
+}
+
+.btn-primary:hover {
+    background: #5568d3;
+}
+
+.btn-info {
+    background: #667eea;
+    color: white;
+}
+
+.btn-info:hover {
+    background: #5568d3;
+}
+
+/* ปุ่มสีขาว สำหรับปุ่มทั่วไป */
+.btn-secondary {
+    background: white;
+    color: #667eea;
+    border: 2px solid #667eea;
+}
+
+.btn-secondary:hover {
+    background: #f8f9fa;
+}
+
+/* ปุ่มสำหรับสถานะต่างๆ - มีสีชัดเจน */
+.btn-success {
+    background: #48c78e;
+    color: white;
+}
+
+.btn-success:hover {
+    background: #3abb81;
+}
+
+.btn-warning {
+    background: #ffc107;
+    color: #212529;
+}
+
+.btn-warning:hover {
+    background: #e0a800;
+}
+
+/* ปุ่มออกจากระบบ - สีแดง */
+.btn-danger {
+    background: #f14668;
+    color: white;
+}
+
+.btn-danger:hover {
+    background: #ef2e55;
+}
+
+.btn-full {
+    width: 100%;
+}
+
+/* ========================================
+   Timeline (สีนุ่มๆ)
+   ======================================== */
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #dee2e6;
+}
+
+.timeline-item {
+    position: relative;
+    padding-bottom: 30px;
+}
+
+.timeline-item:last-child {
+    padding-bottom: 0;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -24px;
+    top: 6px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: white;
+    border: 3px solid #667eea;
+    z-index: 1;
+}
+
+.timeline-content {
+    background: #f8f9fa;
+    padding: 18px;
+    border-radius: 8px;
+    border-left: 3px solid #667eea;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: all 0.2s ease;
+}
+
+.timeline-content:hover {
+    transform: translateX(3px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.updater-name {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+.update-time {
+    color: #6c757d;
+    font-size: 13px;
+}
+
+.update-status-change {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    padding: 10px;
+    background: white;
+    border-radius: 6px;
+}
+
+.status-change-label {
+    font-weight: 600;
+    color: #495057;
+    font-size: 13px;
+}
+
+.update-comment {
+    padding: 12px;
+    background: white;
+    border-radius: 6px;
+    line-height: 1.6;
+    color: #495057;
+    font-size: 14px;
+}
+
+/* ========================================
+   Alerts (สีอ่อนสบายตา)
+   ======================================== */
+.alert {
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.no-data {
+    text-align: center;
+    color: #6c757d;
+    padding: 30px;
+    font-style: italic;
+    font-size: 14px;
+}
+
+/* ========================================
+   Responsive Design
+   ======================================== */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+        padding: 18px;
+    }
+    
+    .header-left h1 {
+        font-size: 20px;
+    }
+    
+    .header-right {
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .issue-header {
+        padding: 20px;
+    }
+    
+    .issue-number {
+        font-size: 20px;
+    }
+    
+    .info-card {
+        padding: 20px;
+    }
+    
+    .info-row {
+        flex-direction: column;
+        gap: 6px;
+        align-items: flex-start;
+    }
+    
+    .info-label {
+        min-width: auto;
+    }
+    
+    .timeline {
+        padding-left: 25px;
+    }
+    
+    .timeline::before {
+        left: 8px;
+    }
+    
+    .timeline-marker {
+        left: -21px;
+    }
+    
+    .btn {
+        padding: 10px 16px;
+        font-size: 13px;
+    }
+}
+
+/* ========================================
+   Extra Soft Touches
+   ======================================== */
+::selection {
+    background: #e6ebff;
+    color: #667eea;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f8f9fa;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #dee2e6;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ced4da;
+}

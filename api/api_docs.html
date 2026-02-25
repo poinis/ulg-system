@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weedjai API Documentation</title>
+    <style>
+        :root {
+            --primary-color: #0288d1;
+            --secondary-color: #f5f5f5;
+            --text-color: #333;
+            --code-bg: #2d2d2d;
+            --code-text: #f8f8f2;
+            --border-color: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: #fafafa;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+            min-height: 100vh;
+        }
+
+        header {
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+        }
+
+        h1 { color: var(--primary-color); margin: 0; font-size: 2.5em; }
+        h2 { color: #444; border-left: 5px solid var(--primary-color); padding-left: 15px; margin-top: 40px; }
+        h3 { color: #555; margin-top: 30px; }
+        
+        .meta-info { color: #666; font-size: 0.9em; margin-top: 10px; }
+        
+        .endpoint-box {
+            background: #f0f7ff;
+            border: 1px solid #cce3ff;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            font-size: 1.1em;
+            color: #0056b3;
+            margin: 10px 0;
+        }
+
+        .method {
+            background: #28a745;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.8em;
+            margin-right: 10px;
+            font-family: sans-serif;
+            font-weight: bold;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        tr:hover { background-color: #f9f9f9; }
+
+        code {
+            background-color: #f1f1f1;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, 'Courier New', monospace;
+            color: #d63384;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            color: var(--code-text);
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: Consolas, 'Courier New', monospace;
+            position: relative;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .badge-req { background: #ffebee; color: #c62828; }
+        .badge-opt { background: #e8f5e9; color: #2e7d32; }
+
+        .note {
+            background-color: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 5px 5px 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #888;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Weedjai API Documentation</h1>
+        <div class="meta-info">
+            <strong>เวอร์ชัน:</strong> 1.1 &nbsp;|&nbsp; 
+            <strong>อัปเดตล่าสุด:</strong> 27 มกราคม 2026 &nbsp;|&nbsp; 
+            <strong>Base URL:</strong> <code>https://www.weedjai.com/api/</code>
+        </div>
+    </header>
+
+    <section id="auth">
+        <h2>1. การยืนยันตัวตน (Authentication)</h2>
+        <p>ระบบใช้ <strong>API Key</strong> ในการรักษาความปลอดภัย ทุกการร้องขอ (Request) ต้องแนบ Parameter <code>api_key</code> เสมอ</p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Required</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>api_key</code></td>
+                    <td>String</td>
+                    <td><span class="badge badge-req">Yes</span></td>
+                    <td>รหัสผ่านสำหรับเชื่อมต่อ (ติดต่อ Admin เพื่อขอรับ Key)</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="endpoints">
+        <h2>2. รายละเอียด Endpoints</h2>
+
+        <div class="api-block">
+            <h3>2.1 ดึงสรุปยอดขายรายสาขา (Sales Summary)</h3>
+            <p>ดึงยอดขายรวม แยกตามสาขา ในช่วงวันที่กำหนด (เหมาะสำหรับ Dashboard)</p>
+            <div class="endpoint-box">
+                <span class="method">GET</span> /api_sales_summary.php
+            </div>
+            
+            <h4>Parameters:</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Required</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>api_key</code></td>
+                        <td><span class="badge badge-req">Yes</span></td>
+                        <td>-</td>
+                        <td>API Key</td>
+                    </tr>
+                    <tr>
+                        <td><code>date_from</code></td>
+                        <td><span class="badge badge-opt">No</span></td>
+                        <td>Today</td>
+                        <td>วันที่เริ่มต้น (YYYY-MM-DD)</td>
+                    </tr>
+                    <tr>
+                        <td><code>date_to</code></td>
+                        <td><span class="badge badge-opt">No</span></td>
+                        <td>Today</td>
+                        <td>วันที่สิ้นสุด (YYYY-MM-DD)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Example Response:</h4>
+<pre>
+{
+  "status": "success",
+  "period": { "from": "2026-01-01", "to": "2026-01-01" },
+  "count": 2,
+  "data": [
+    {
+      "store_code": "001",
+      "store_name": "สาขาหลัก",
+      "bill_count": 10,
+      "total_qty": 50,
+      "total_sales": 15000.00
+    },
+    {
+      "store_code": "002",
+      "store_name": "สาขาสยาม",
+      "bill_count": 5,
+      "total_qty": 12,
+      "total_sales": 8500.00
+    }
+  ]
+}
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="api-block">
+            <h3>2.2 ดึงรายละเอียดบิล (Transaction Detail)</h3>
+            <p>ตรวจสอบรายละเอียดบิล หรือดึงรายการบิลทั้งหมดใน 1 วัน</p>
+            <div class="endpoint-box">
+                <span class="method">GET</span> /api_transaction.php
+            </div>
+
+            <h4>Parameters:</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Required</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>api_key</code></td>
+                        <td><span class="badge badge-req">Yes</span></td>
+                        <td>API Key</td>
+                    </tr>
+                    <tr>
+                        <td><code>ref</code></td>
+                        <td><span class="badge badge-opt">Conditional</span></td>
+                        <td>เลขที่บิลที่ต้องการดูสินค้าภายใน (เช่น <code>SO-202601-001</code>)</td>
+                    </tr>
+                    <tr>
+                        <td><code>date</code></td>
+                        <td><span class="badge badge-opt">Conditional</span></td>
+                        <td>วันที่ต้องการดูรายชื่อบิลทั้งหมด (YYYY-MM-DD)</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="note"><strong>หมายเหตุ:</strong> ต้องระบุอย่างใดอย่างหนึ่งระหว่าง <code>ref</code> หรือ <code>date</code></div>
+
+            <h4>Example Response (By Ref):</h4>
+<pre>
+{
+  "status": "success",
+  "data": [
+    {
+      "internal_ref": "SO-202601-001",
+      "line_barcode": "885xxxx",
+      "item_description": "สินค้า A",
+      "qty": 2,
+      "base_price": 100.00,
+      "tax_incl_total": 200.00
+    }
+  ]
+}
+</pre>
+        </div>
+
+        <hr>
+
+        <div class="api-block">
+            <h3>2.3 ดึงข้อมูลดิบ (Raw Data Export)</h3>
+            <p>ดึงข้อมูลดิบทุก Transaction อย่างละเอียด (เหมาะสำหรับ Data Warehouse/Backup)</p>
+            <div class="endpoint-box">
+                <span class="method">GET</span> /api_daily_sales_raw.php
+            </div>
+
+            <h4>Parameters:</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Required</th>
+                        <th>Default</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>api_key</code></td>
+                        <td><span class="badge badge-req">Yes</span></td>
+                        <td>-</td>
+                        <td>API Key</td>
+                    </tr>
+                    <tr>
+                        <td><code>date_from</code></td>
+                        <td><span class="badge badge-opt">No</span></td>
+                        <td>Today</td>
+                        <td>วันที่เริ่มต้น</td>
+                    </tr>
+                    <tr>
+                        <td><code>page</code></td>
+                        <td><span class="badge badge-opt">No</span></td>
+                        <td>1</td>
+                        <td>หน้าของข้อมูล (ระบบแบ่งหน้าทีละ 1,000 รายการ)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>Example Response:</h4>
+<pre>
+{
+  "status": "success",
+  "pagination": {
+    "current_page": 1,
+    "per_page": 1000,
+    "total_pages": 5,
+    "total_records": 4500
+  },
+  "data": [
+    { "internal_ref": "SO-001", "sale_date": "2026-01-01", ... }
+  ]
+}
+</pre>
+        </div>
+    </section>
+
+    <section id="errors">
+        <h2>3. รหัสข้อผิดพลาด (Error Codes)</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Status Code</th>
+                    <th>Message</th>
+                    <th>ความหมาย/วิธีแก้ไข</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>401</strong></td>
+                    <td>API Key is required</td>
+                    <td>ไม่ได้ส่งค่า <code>api_key</code> มาใน Request</td>
+                </tr>
+                <tr>
+                    <td><strong>401</strong></td>
+                    <td>Invalid or Inactive API Key</td>
+                    <td>API Key ไม่ถูกต้อง หรือถูกระงับการใช้งาน</td>
+                </tr>
+                <tr>
+                    <td><strong>400</strong></td>
+                    <td>Please provide 'ref' or 'date'</td>
+                    <td>ส่ง Parameter ไม่ครบ (สำหรับ api_transaction)</td>
+                </tr>
+                <tr>
+                    <td><strong>500</strong></td>
+                    <td>Database Connection Failed</td>
+                    <td>ระบบฐานข้อมูลขัดข้อง</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section id="examples">
+        <h2>4. ตัวอย่าง Code การเชื่อมต่อ</h2>
+        
+        <h3>Python</h3>
+<pre>
+import requests
+
+url = "https://www.weedjai.com/api/api_sales_summary.php"
+params = {
+    "api_key": "YOUR_API_KEY",
+    "date_from": "2026-01-01",
+    "date_to": "2026-01-31"
+}
+
+try:
+    response = requests.get(url, params=params)
+    if response.status_code == 200:
+        data = response.json()
+        print(f"Total Records: {data['count']}")
+    else:
+        print("Error:", response.text)
+except Exception as e:
+    print("Connection failed:", e)
+</pre>
+
+        <h3>PHP (cURL)</h3>
+<pre>
+&lt;?php
+$url = "https://www.weedjai.com/api/api_daily_sales_raw.php?api_key=YOUR_KEY&page=1";
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$response = curl_exec($ch);
+curl_close($ch);
+
+$data = json_decode($response, true);
+print_r($data);
+?&gt;
+</pre>
+    </section>
+
+    <footer>
+        &copy; 2026 Weedjai System. All rights reserved.
+    </footer>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>รายงานเพจ Facebook (แบบพื้นฐาน)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Sarabun', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f0f2f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #1877f2;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .alert {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .alert-info {
+            background: #d1ecf1;
+            border-left-color: #0c5460;
+            color: #0c5460;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card h3 {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stat-card .value {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-card.blue {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .stat-card.green {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        
+        .stat-card.orange {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        
+        .stat-card.purple {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        
+        .posts-section {
+            margin-top: 40px;
+        }
+        
+        .posts-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1877f2;
+        }
+        
+        .post-card {
+            background: #f8f9fa;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #1877f2;
+        }
+        
+        .post-card .post-date {
+            color: #666;
+            font-size: 13px;
+            margin-bottom: 10px;
+        }
+        
+        .post-card .post-message {
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+        
+        .post-stats {
+            display: flex;
+            gap: 20px;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .post-stats span {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        button {
+            background: #1877f2;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 10px 5px;
+        }
+        
+        button:hover {
+            background: #166fe5;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 รายงานเพจ Facebook</h1>
+            <p id="pageName" style="color: #666;">Loading...</p>
+        </div>
+        
+        <div class="alert alert-info">
+            <strong>ℹ️ หมายเหตุ:</strong> เนื่องจากเพจยังไม่มีข้อมูล Insights จาก Facebook 
+            รายงานนี้จึงแสดงข้อมูลพื้นฐาน เช่น จำนวนแฟน จำนวนโพสต์ และ engagement ในแต่ละโพสต์
+        </div>
+        
+        <div id="content">
+            <div class="loading">กำลังโหลดข้อมูล...</div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="loadData()">🔄 โหลดข้อมูลใหม่</button>
+            <button onclick="window.print()">🖨️ พิมพ์รายงาน</button>
+        </div>
+    </div>
+
+    <script>
+        const ACCESS_TOKEN = 'EAATEt12ZCH1YBQMoGgzvWTb4gCuWI5DkeMGwipffwumMw2pZAcwpYSWH1xGpmJ1MzFDZCyOoHwVDl0rgBG7F7INCoDPd88lWLmN47enPEPEdiQR3e7oa1ZCmFHmzU1VvKtNcIcsJ3WUhfyyZCfKk80AdwZB2jxuZCjyypmrajCftG3XQvI5BuBntTNMaCh7eMUZAQwZDZD';
+        const PAGE_ID = '489861450880996';
+        
+        async function loadData() {
+            const contentDiv = document.getElementById('content');
+            contentDiv.innerHTML = '<div class="loading">กำลังโหลดข้อมูล...</div>';
+            
+            try {
+                // ดึงข้อมูลเพจ
+                const pageData = await fetchPageData();
+                
+                // ดึงโพสต์
+                const posts = await fetchPosts();
+                
+                // แสดงผล
+                renderReport(pageData, posts);
+                
+            } catch (error) {
+                contentDiv.innerHTML = `
+                    <div class="error">
+                        <strong>❌ เกิดข้อผิดพลาด:</strong> ${error.message}
+                    </div>
+                `;
+            }
+        }
+        
+        async function fetchPageData() {
+            const url = `https://graph.facebook.com/v21.0/${PAGE_ID}?fields=id,name,category,fan_count,followers_count,link&access_token=${ACCESS_TOKEN}`;
+            
+            const response = await fetch(url);
+            const data = await response.json();
+            
+            if (data.error) {
+                throw new Error(data.error.message);
+            }
+            
+            document.getElementById('pageName').textContent = data.name;
+            
+            return data;
+        }
+        
+        async function fetchPosts() {
+            const url = `https://graph.facebook.com/v21.0/${PAGE_ID}/posts?fields=id,message,created_time,likes.summary(true),comments.summary(true),shares&limit=20&access_token=${ACCESS_TOKEN}`;
+            
+            const response = await fetch(url);
+            const data = await response.json();
+            
+            if (data.error) {
+                throw new Error(data.error.message);
+            }
+            
+            return data.data || [];
+        }
+        
+        function renderReport(pageData, posts) {
+            // คำนวณสถิติจากโพสต์
+            let totalLikes = 0;
+            let totalComments = 0;
+            let totalShares = 0;
+            let totalEngagement = 0;
+            
+            posts.forEach(post => {
+                const likes = post.likes?.summary?.total_count || 0;
+                const comments = post.comments?.summary?.total_count || 0;
+                const shares = post.shares?.count || 0;
+                
+                totalLikes += likes;
+                totalComments += comments;
+                totalShares += shares;
+                totalEngagement += likes + comments + shares;
+            });
+            
+            const avgEngagement = posts.length > 0 ? Math.round(totalEngagement / posts.length) : 0;
+            
+            let html = `
+                <div class="stats-grid">
+                    <div class="stat-card blue">
+                        <h3>จำนวนแฟน</h3>
+                        <div class="value">${pageData.fan_count.toLocaleString()}</div>
+                        <div>ผู้ติดตาม</div>
+                    </div>
+                    
+                    <div class="stat-card green">
+                        <h3>Followers</h3>
+                        <div class="value">${pageData.followers_count.toLocaleString()}</div>
+                        <div>คน</div>
+                    </div>
+                    
+                    <div class="stat-card orange">
+                        <h3>จำนวนโพสต์</h3>
+                        <div class="value">${posts.length}</div>
+                        <div>โพสต์ล่าสุด</div>
+                    </div>
+                    
+                    <div class="stat-card purple">
+                        <h3>Engagement เฉลี่ย</h3>
+                        <div class="value">${avgEngagement}</div>
+                        <div>ต่อโพสต์</div>
+                    </div>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card blue">
+                        <h3>Likes รวม</h3>
+                        <div class="value">${totalLikes.toLocaleString()}</div>
+                        <div>จากโพสต์ทั้งหมด</div>
+                    </div>
+                    
+                    <div class="stat-card green">
+                        <h3>Comments รวม</h3>
+                        <div class="value">${totalComments.toLocaleString()}</div>
+                        <div>จากโพสต์ทั้งหมด</div>
+                    </div>
+                    
+                    <div class="stat-card orange">
+                        <h3>Shares รวม</h3>
+                        <div class="value">${totalShares.toLocaleString()}</div>
+                        <div>จากโพสต์ทั้งหมด</div>
+                    </div>
+                    
+                    <div class="stat-card purple">
+                        <h3>Engagement รวม</h3>
+                        <div class="value">${totalEngagement.toLocaleString()}</div>
+                        <div>Likes + Comments + Shares</div>
+                    </div>
+                </div>
+                
+                <div class="posts-section">
+                    <h2>📝 โพสต์ล่าสุด (${posts.length} โพสต์)</h2>
+            `;
+            
+            if (posts.length === 0) {
+                html += '<p style="color: #666; padding: 20px; text-align: center;">ไม่พบโพสต์</p>';
+            } else {
+                posts.forEach(post => {
+                    const likes = post.likes?.summary?.total_count || 0;
+                    const comments = post.comments?.summary?.total_count || 0;
+                    const shares = post.shares?.count || 0;
+                    const engagement = likes + comments + shares;
+                    
+                    const date = new Date(post.created_time);
+                    const dateStr = date.toLocaleDateString('th-TH', {
+                        year: 'numeric',
+                        month: 'long',
+                        day: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                    });
+                    
+                    const message = post.message || '(ไม่มีข้อความ)';
+                    const shortMessage = message.length > 200 ? message.substring(0, 200) + '...' : message;
+                    
+                    html += `
+                        <div class="post-card">
+                            <div class="post-date">📅 ${dateStr}</div>
+                            <div class="post-message">${escapeHtml(shortMessage)}</div>
+                            <div class="post-stats">
+                                <span>👍 ${likes.toLocaleString()} Likes</span>
+                                <span>💬 ${comments.toLocaleString()} Comments</span>
+                                <span>🔄 ${shares.toLocaleString()} Shares</span>
+                                <span><strong>📊 ${engagement.toLocaleString()} Engagement</strong></span>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            html += '</div>';
+            
+            document.getElementById('content').innerHTML = html;
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        // โหลดข้อมูลอัตโนมัติ
+        loadData();
+    </script>
+</body>
+</html>

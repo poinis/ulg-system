@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capsule Delivery Manager</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        
+        .hero-month {
+            background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+            color: white;
+        }
+        
+        .core-month {
+            background: #f9fafb;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .progress-bar {
+            transition: width 0.3s ease;
+        }
+        
+        .task-item {
+            transition: all 0.2s ease;
+        }
+        
+        .task-item:hover {
+            background-color: #f3f4f6;
+        }
+        
+        .completed {
+            text-decoration: line-through;
+            opacity: 0.6;
+        }
+        
+        .month-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        
+        .month-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .notification-banner {
+            animation: slideDown 0.5s ease;
+        }
+        
+        @keyframes slideDown {
+            from { transform: translateY(-100%); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        .icon-tee::before { content: "👕"; }
+        .icon-cap::before { content: "🧢"; }
+        .icon-tote::before { content: "👜"; }
+        .icon-hero::before { content: "🏆"; }
+    </style>
+</head>
+<body class="bg-white min-h-screen">
+    <!-- Header -->
+    <header class="bg-white border-b border-gray-200 px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div>
+                <h1 class="text-2xl font-bold text-gray-900">Capsule Delivery Manager</h1>
+                <p class="text-gray-600 text-sm">Design Team Dashboard</p>
+            </div>
+            <div class="text-right">
+                <div class="text-sm text-gray-500">Overall Progress</div>
+                <div class="text-2xl font-bold text-gray-900" id="overallProgress">0%</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Notification Banner -->
+    <div id="notificationBanner" class="hidden notification-banner bg-yellow-50 border-l-4 border-yellow-400 p-4">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex">
+                <div class="flex-shrink-0">
+                    <svg class="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="ml-3">
+                    <p class="text-sm text-yellow-700" id="notificationText"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        <!-- Calendar Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-8">
+            <!-- Month cards will be generated here -->
+        </div>
+    </main>
+
+    <!-- Month Detail Modal -->
+    <div id="monthModal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg shadow-xl max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-gray-200">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h2 id="modalTitle" class="text-2xl font-bold text-gray-900"></h2>
+                        <p id="modalSubtitle" class="text-gray-600"></p>
+                    </div>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="p-6">
+                <!-- Theme Section -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Theme/Notes</label>
+                    <textarea id="monthTheme" class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-transparent" rows="3" placeholder="Enter theme, moodboard links, or design notes..."></textarea>
+                </div>
+
+                <!-- Deliverables -->
+                <div class="mb-6">
+                    <h3 class="text-lg font-semibold text-gray-900 mb-4">Deliverables</h3>
+                    <div id="deliverablesList" class="space-y-4">
+                        <!-- Deliverables will be populated here -->
+                    </div>
+                </div>
+
+                <!-- Progress -->
+                <div class="mb-6">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium text-gray-700">Progress</span>
+                        <span id="modalProgress" class="text-sm text-gray-600">0 of 0 complete</span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-2">
+                        <div id="modalProgressBar" class="progress-bar bg-gray-900 h-2 rounded-full" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Data structure for months and deliverables (Oct 2025 - Oct 2026)
+        const months = [
+            'October 2025', 'November 2025', 'December 2025', 'January 2026', 'February 2026', 'March 2026',
+            'April 2026', 'May 2026', 'June 2026', 'July 2026', 'August 2026', 'September 2026', 'October 2026'
+        ];
+
+        const heroMonths = [0, 2, 4, 6, 8, 10, 12]; // Every other month starting with October 2025
+
+        const coreDeliverables = [
+            { name: 'T-Shirt #1', icon: 'tee', tasks: ['Design Started', 'First Draft', 'Revision Process', 'Final Design Approved'] },
+            { name: 'T-Shirt #2', icon: 'tee', tasks: ['Design Started', 'First Draft', 'Revision Process', 'Final Design Approved'] },
+            { name: 'T-Shirt #3', icon: 'tee', tasks: ['Design Started', 'First Draft', 'Revision Process', 'Final Design Approved'] },
+            { name: 'Cap', icon: 'cap', tasks: ['Design Started', 'First Draft', 'Revision Process', 'Final Design Approved'] },
+            { name: 'Tote Bag', icon: 'tote', tasks: ['Design Started', 'First Draft', 'Revision Process', 'Final Design Approved'] }
+        ];
+
+        const heroDeliverables = [
+            { name: 'T-Shirt #1', icon: 'tee', tasks: ['Design Started', 'First Draft', 'Revision Process', 'Final Design Approved'] },
+            { name: 'T-Shirt #2', icon: 'tee', tasks: ['Design Started', 'First Draft', 'Revision Process', 'Final Design Approved'] },
+            { name: 'T-Shirt #3', icon: 'tee', tasks: ['Design Started', 'First Draft', 'Revision Process', 'Final Design Approved'] },
+            { name: 'Cap', icon: 'cap', tasks: ['Design Started', 'First Draft', 'Revision Process', 'Final Design Approved'] },
+            { name: 'Tote Bag', icon: 'tote', tasks: ['Design Started', 'First Draft', 'Revision Process', 'Final Design Approved'] },
+            { name: 'Hero Item 1', icon: 'hero', tasks: ['Design Started', 'First Draft', 'Revision Process', 'Final Design Approved'] },
+            { name: 'Hero Item 2', icon: 'hero', tasks: ['Design Started', 'First Draft', 'Revision Process', 'Final Design Approved'] }
+        ];
+
+        // Load data from localStorage
+        function loadData() {
+            const saved = localStorage.getItem('capsuleData');
+            return saved ? JSON.parse(saved) : {};
+        }
+
+        // Save data to localStorage
+        function saveData(data) {
+            localStorage.setItem('capsuleData', JSON.stringify(data));
+        }
+
+        let capsuleData = loadData();
+
+        // Initialize month data if not exists
+        function initializeMonthData(monthIndex) {
+            if (!capsuleData[monthIndex]) {
+                const isHero = heroMonths.includes(monthIndex);
+                const deliverables = isHero ? heroDeliverables : coreDeliverables;
+                
+                capsuleData[monthIndex] = {
+                    theme: '',
+                    deliverables: deliverables.map(d => ({
+                        ...d,
+                        customName: '',
+                        notes: '',
+                        priceReceived: false,
+                        ordered: false,
+                        tasks: d.tasks.map(task => ({ name: task, completed: false }))
+                    }))
+                };
+                saveData(capsuleData);
+            }
+        }
+
+        // Calculate progress for a month
+        function calculateProgress(monthIndex) {
+            if (!capsuleData[monthIndex]) return { completed: 0, total: 0, percentage: 0 };
+            
+            let completed = 0;
+            let total = 0;
+            
+            capsuleData[monthIndex].deliverables.forEach(deliverable => {
+                // Count design tasks
+                deliverable.tasks.forEach(task => {
+                    total++;
+                    if (task.completed) completed++;
+                });
+                
+                // Count production tasks
+                total += 2; // priceReceived and ordered
+                if (deliverable.priceReceived) completed++;
+                if (deliverable.ordered) completed++;
+            });
+            
+            return {
+                completed,
+                total,
+                percentage: total > 0 ? Math.round((completed / total) * 100) : 0
+            };
+        }
+
+        // Generate calendar
+        function generateCalendar() {
+            const container = document.querySelector('.grid');
+            container.innerHTML = '';
+
+            months.forEach((month, index) => {
+                initializeMonthData(index);
+                const isHero = heroMonths.includes(index);
+                const progress = calculateProgress(index);
+                
+                const monthCard = document.createElement('div');
+                monthCard.className = `month-card p-6 rounded-lg cursor-pointer ${isHero ? 'hero-month' : 'core-month'}`;
+                monthCard.onclick = () => openMonthModal(index);
+                
+                monthCard.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-lg font-semibold ${isHero ? 'text-white' : 'text-gray-900'}">${month}</h3>
+                            <p class="text-sm ${isHero ? 'text-gray-300' : 'text-gray-600'}">${isHero ? 'Hero Month' : 'Core Month'}</p>
+                        </div>
+                        <div class="text-right">
+                            <div class="text-2xl font-bold ${isHero ? 'text-white' : 'text-gray-900'}">${progress.percentage}%</div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="flex space-x-2 mb-2">
+                            ${(isHero ? heroDeliverables : coreDeliverables).map(d => 
+                                `<span class="icon-${d.icon} text-lg"></span>`
+                            ).join('')}
+                        </div>
+                        <div class="w-full ${isHero ? 'bg-gray-600' : 'bg-gray-200'} rounded-full h-2">
+                            <div class="progress-bar ${isHero ? 'bg-white' : 'bg-gray-900'} h-2 rounded-full" style="width: ${progress.percentage}%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-sm ${isHero ? 'text-gray-300' : 'text-gray-600'}">
+                        ${progress.completed} of ${progress.total} tasks complete
+                    </div>
+                `;
+                
+                container.appendChild(monthCard);
+            });
+
+            updateOverallProgress();
+            checkUpcomingHeroMonths();
+        }
+
+        // Open month detail modal
+        function openMonthModal(monthIndex) {
+            const month = months[monthIndex];
+            const isHero = heroMonths.includes(monthIndex);
+            const progress = calculateProgress(monthIndex);
+            
+            document.getElementById('modalTitle').textContent = month;
+            document.getElementById('modalSubtitle').textContent = isHero ? 'Hero Month' : 'Core Month';
+            document.getElementById('monthTheme').value = capsuleData[monthIndex].theme || '';
+            document.getElementById('modalProgress').textContent = `${progress.completed} of ${progress.total} complete`;
+            document.getElementById('modalProgressBar').style.width = `${progress.percentage}%`;
+            
+            // Save theme on change
+            document.getElementById('monthTheme').onchange = () => {
+                capsuleData[monthIndex].theme = document.getElementById('monthTheme').value;
+                saveData(capsuleData);
+            };
+            
+            // Generate deliverables list
+            const deliverablesList = document.getElementById('deliverablesList');
+            deliverablesList.innerHTML = '';
+            
+            capsuleData[monthIndex].deliverables.forEach((deliverable, dIndex) => {
+                const deliverableDiv = document.createElement('div');
+                deliverableDiv.className = 'border border-gray-200 rounded-lg p-4';
+                
+                deliverableDiv.innerHTML = `
+                    <div class="flex items-center mb-3">
+                        <span class="icon-${deliverable.icon} text-xl mr-3"></span>
+                        <div class="flex-1">
+                            <h4 class="font-medium text-gray-900 mb-2">${deliverable.name}</h4>
+                            <input type="text" 
+                                   value="${deliverable.customName || ''}" 
+                                   placeholder="Enter custom name..."
+                                   onchange="updateItemName(${monthIndex}, ${dIndex}, this.value)"
+                                   class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-transparent">
+                        </div>
+                    </div>
+                    
+                    <!-- Design Tasks -->
+                    <div class="space-y-2 mb-4">
+                        ${deliverable.tasks.map((task, tIndex) => `
+                            <label class="task-item flex items-center p-2 rounded cursor-pointer">
+                                <input type="checkbox" ${task.completed ? 'checked' : ''} 
+                                       onchange="toggleTask(${monthIndex}, ${dIndex}, ${tIndex})"
+                                       class="mr-3 h-4 w-4 text-gray-900 focus:ring-gray-500 border-gray-300 rounded">
+                                <span class="${task.completed ? 'completed' : ''} text-sm text-gray-700">${task.name}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                    
+                    <!-- Production Checkboxes -->
+                    <div class="border-t border-gray-200 pt-3 mb-4">
+                        <div class="grid grid-cols-2 gap-3">
+                            <label class="task-item flex items-center p-2 rounded cursor-pointer">
+                                <input type="checkbox" ${deliverable.priceReceived ? 'checked' : ''} 
+                                       onchange="toggleProductionTask(${monthIndex}, ${dIndex}, 'priceReceived')"
+                                       class="mr-3 h-4 w-4 text-gray-900 focus:ring-gray-500 border-gray-300 rounded">
+                                <span class="${deliverable.priceReceived ? 'completed' : ''} text-sm text-gray-700">Price Received</span>
+                            </label>
+                            <label class="task-item flex items-center p-2 rounded cursor-pointer">
+                                <input type="checkbox" ${deliverable.ordered ? 'checked' : ''} 
+                                       onchange="toggleProductionTask(${monthIndex}, ${dIndex}, 'ordered')"
+                                       class="mr-3 h-4 w-4 text-gray-900 focus:ring-gray-500 border-gray-300 rounded">
+                                <span class="${deliverable.ordered ? 'completed' : ''} text-sm text-gray-700">Ordered</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Notes Section -->
+                    <div class="border-t border-gray-200 pt-3">
+                        <label class="block text-xs font-medium text-gray-700 mb-2">Notes & Links</label>
+                        <textarea 
+                            value="${deliverable.notes || ''}" 
+                            placeholder="Add pricing links, artwork files, supplier info, or other notes..."
+                            onchange="updateItemNotes(${monthIndex}, ${dIndex}, this.value)"
+                            class="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-2 focus:ring-gray-500 focus:border-transparent"
+                            rows="3">${deliverable.notes || ''}</textarea>
+                    </div>
+                `;
+                
+                deliverablesList.appendChild(deliverableDiv);
+            });
+            
+            document.getElementById('monthModal').classList.remove('hidden');
+        }
+
+        // Close modal
+        function closeModal() {
+            document.getElementById('monthModal').classList.add('hidden');
+        }
+
+        // Update item name
+        function updateItemName(monthIndex, deliverableIndex, newName) {
+            capsuleData[monthIndex].deliverables[deliverableIndex].customName = newName;
+            saveData(capsuleData);
+        }
+
+        // Update item notes
+        function updateItemNotes(monthIndex, deliverableIndex, newNotes) {
+            capsuleData[monthIndex].deliverables[deliverableIndex].notes = newNotes;
+            saveData(capsuleData);
+        }
+
+        // Toggle production task
+        function toggleProductionTask(monthIndex, deliverableIndex, taskType) {
+            capsuleData[monthIndex].deliverables[deliverableIndex][taskType] = 
+                !capsuleData[monthIndex].deliverables[deliverableIndex][taskType];
+            
+            saveData(capsuleData);
+            
+            // Update progress in modal
+            const progress = calculateProgress(monthIndex);
+            document.getElementById('modalProgress').textContent = `${progress.completed} of ${progress.total} complete`;
+            document.getElementById('modalProgressBar').style.width = `${progress.percentage}%`;
+            
+            // Regenerate calendar to update main view
+            generateCalendar();
+        }
+
+        // Toggle task completion
+        function toggleTask(monthIndex, deliverableIndex, taskIndex) {
+            capsuleData[monthIndex].deliverables[deliverableIndex].tasks[taskIndex].completed = 
+                !capsuleData[monthIndex].deliverables[deliverableIndex].tasks[taskIndex].completed;
+            
+            saveData(capsuleData);
+            
+            // Update progress in modal
+            const progress = calculateProgress(monthIndex);
+            document.getElementById('modalProgress').textContent = `${progress.completed} of ${progress.total} complete`;
+            document.getElementById('modalProgressBar').style.width = `${progress.percentage}%`;
+            
+            // Regenerate calendar to update main view
+            generateCalendar();
+        }
+
+        // Update overall progress
+        function updateOverallProgress() {
+            let totalCompleted = 0;
+            let totalTasks = 0;
+            
+            months.forEach((_, index) => {
+                const progress = calculateProgress(index);
+                totalCompleted += progress.completed;
+                totalTasks += progress.total;
+            });
+            
+            const overallPercentage = totalTasks > 0 ? Math.round((totalCompleted / totalTasks) * 100) : 0;
+            document.getElementById('overallProgress').textContent = `${overallPercentage}%`;
+        }
+
+        // Check for upcoming hero months
+        function checkUpcomingHeroMonths() {
+            const banner = document.getElementById('notificationBanner');
+            const text = document.getElementById('notificationText');
+            
+            // Find next hero month (simplified for demo - shows first hero month)
+            const nextHeroIndex = heroMonths.find(index => {
+                const progress = calculateProgress(index);
+                return progress.percentage < 100;
+            });
+            
+            if (nextHeroIndex !== undefined) {
+                const monthName = months[nextHeroIndex];
+                text.textContent = `Upcoming hero drop: ${monthName} - Start preparing deliverables!`;
+                banner.classList.remove('hidden');
+            }
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('monthModal').addEventListener('click', (e) => {
+            if (e.target.id === 'monthModal') {
+                closeModal();
+            }
+        });
+
+        // Initialize the app
+        generateCalendar();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'969c34aab0648813',t:'MTc1NDI5MTEyMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>

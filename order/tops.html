@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tops Diamond Club - สิทธิพิเศษสำหรับลูกค้าพิเศษ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Sarabun', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+            background: #000000;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(20px);
+            padding: 20px 60px;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 15px 60px;
+            background: rgba(0, 0, 0, 0.98);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .logo-subtext {
+            font-size: 14px;
+            color: #e63946;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #e63946;
+        }
+
+        .join-btn {
+            background: #e63946;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .join-btn:hover {
+            background: #d62839;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(230, 57, 70, 0.4);
+        }
+
+        /* Hero Section */
+        .hero-section {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 60px 60px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #000000 100%);
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 64px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+
+        .hero-text .diamond {
+            color: #e63946;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            line-height: 1.8;
+            color: #cccccc;
+            margin-bottom: 40px;
+        }
+
+        .hero-image {
+            position: relative;
+            text-align: center;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            filter: drop-shadow(0 20px 60px rgba(230, 57, 70, 0.3));
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* Features Section */
+        .features-section {
+            padding: 100px 60px;
+            background: #0a0a0a;
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 900px;
+            margin: 0 auto 80px;
+        }
+
+        .section-header h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: #999999;
+            line-height: 1.8;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: #1a1a1a;
+            padding: 50px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #e63946, #ff6b6b);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(230, 57, 70, 0.3);
+            box-shadow: 0 20px 60px rgba(230, 57, 70, 0.2);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #e63946, #ff6b6b);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 30px;
+            font-size: 36px;
+        }
+
+        .feature-card h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .feature-card p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: #999999;
+        }
+
+        /* Benefits Section */
+        .benefits-section {
+            padding: 100px 60px;
+            background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+        }
+
+        .benefits-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .benefits-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .benefits-text h2 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: #ffffff;
+        }
+
+        .benefit-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: rgba(230, 57, 70, 0.1);
+            border-radius: 15px;
+            border-left: 4px solid #e63946;
+        }
+
+        .benefit-number {
+            font-size: 32px;
+            font-weight: 700;
+            color: #e63946;
+            min-width: 50px;
+        }
+
+        .benefit-content h4 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+
+        .benefit-content p {
+            font-size: 15px;
+            color: #999999;
+            line-height: 1.6;
+        }
+
+        /* Membership Tiers */
+        .tiers-section {
+            padding: 100px 60px;
+            background: #0a0a0a;
+        }
+
+        .tiers-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+            max-width: 1000px;
+            margin: 80px auto 0;
+        }
+
+        .tier-card {
+            background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+            padding: 60px 40px;
+            border-radius: 20px;
+            text-align: center;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tier-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(230, 57, 70, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .tier-card:hover::before {
+            opacity: 1;
+        }
+
+        .tier-card:hover {
+            transform: translateY(-15px);
+            border-color: #e63946;
+            box-shadow: 0 30px 80px rgba(230, 57, 70, 0.3);
+        }
+
+        .tier-badge {
+            font-size: 72px;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 5px 15px rgba(230, 57, 70, 0.5));
+        }
+
+        .tier-name {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #ffffff;
+        }
+
+        .tier-amount {
+            font-size: 48px;
+            font-weight: 700;
+            color: #e63946;
+            margin-bottom: 20px;
+        }
+
+        .tier-description {
+            font-size: 15px;
+            color: #999999;
+            line-height: 1.6;
+        }
+
+        /* News Section */
+        .news-section {
+            padding: 100px 60px;
+            background: #000000;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1400px;
+            margin: 80px auto 0;
+        }
+
+        .news-card {
+            background: #1a1a1a;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .news-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(230, 57, 70, 0.5);
+            box-shadow: 0 20px 60px rgba(230, 57, 70, 0.2);
+        }
+
+        .news-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 30px;
+        }
+
+        .news-content h3 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+
+        .news-content p {
+            font-size: 14px;
+            color: #999999;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .read-more {
+            color: #e63946;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 100px 60px;
+            background: #0a0a0a;
+        }
+
+        .faq-container {
+            max-width: 1000px;
+            margin: 80px auto 0;
+        }
+
+        .faq-item {
+            background: #1a1a1a;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 20px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            border-color: rgba(230, 57, 70, 0.3);
+        }
+
+        .faq-question {
+            padding: 25px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .faq-question::after {
+            content: '+';
+            font-size: 28px;
+            color: #e63946;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 30px;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 300px;
+            padding: 0 30px 25px;
+        }
+
+        .faq-answer p {
+            color: #999999;
+            line-height: 1.8;
+            font-size: 15px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 60px;
+            background: linear-gradient(135deg, #e63946 0%, #ff6b6b 100%);
+            text-align: center;
+        }
+
+        .cta-section h2 {
+            font-size: 56px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #ffffff;
+        }
+
+        .cta-section p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button-primary {
+            background: #ffffff;
+            color: #e63946;
+            padding: 20px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button-secondary {
+            background: transparent;
+            color: #ffffff;
+            padding: 20px 50px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 700;
+            border: 2px solid #ffffff;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button-secondary:hover {
+            background: #ffffff;
+            color: #e63946;
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            background: #000000;
+            color: #999999;
+            padding: 80px 60px 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-section h4 {
+            font-size: 16px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+            color: #ffffff;
+            font-weight: 700;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            font-size: 14px;
+            color: #999999;
+            text-decoration: none;
+            line-height: 2.2;
+            display: block;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #e63946;
+        }
+
+        .footer-logo {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #ffffff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #666666;
+            font-size: 14px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .hero-content,
+            .benefits-content {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .features-grid,
+            .tiers-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .news-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            nav {
+                padding: 15px 25px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero-section {
+                padding: 100px 25px 60px;
+            }
+
+            .hero-text h1 {
+                font-size: 42px;
+            }
+
+            .section-header h2 {
+                font-size: 36px;
+            }
+
+            .features-section,
+            .benefits-section,
+            .tiers-section,
+            .news-section,
+            .faq-section {
+                padding: 60px 25px;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        .menu-icon {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+        }
+
+        .menu-icon span {
+            width: 25px;
+            height: 2px;
+            background: #ffffff;
+        }
+
+        @media (max-width: 768px) {
+            .menu-icon {
+                display: flex;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <div>
+                    <div class="logo-text">Tops</div>
+                    <div class="logo-subtext">DIAMOND CLUB</div>
+                </div>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">หน้าแรก</a></li>
+                <li><a href="#privileges">สิทธิพิเศษสมาชิก</a></li>
+                <li><a href="#tiers">ระดับสมาชิก</a></li>
+                <li><a href="#news">ข่าวสาร</a></li>
+                <li><a href="#faq">คำถามที่พบบ่อย</a></li>
+                <li><a href="#" class="join-btn">สมัครสมาชิก</a></li>
+            </ul>
+            <div class="menu-icon">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Tops <span class="diamond">DIAMOND</span> CLUB</h1>
+                <p>กลุ่มของลูกค้าพิเศษ...สำหรับลูกค้าที่มากด้วยคุณค่า</p>
+                <p>สิทธิประโยชน์พิเศษสำหรับลูกค้าระดับท็อป ที่ให้มากกว่าแค่การช้อปปิ้ง ด้วยความเอาใจใส่ในทุกรายละเอียด เพื่อตอบแทนความจงรักภักดีของคุณ พร้อมสิทธิพิเศษระดับพรีเมี่ยมและบริการที่ใส่ใจทุกรายละเอียด</p>
+                <div class="cta-buttons" style="justify-content: flex-start; margin-top: 40px;">
+                    <a href="#" class="cta-button-primary">สมัครเลย</a>
+                    <a href="#privileges" class="cta-button-secondary">ดูสิทธิประโยชน์</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1556740758-90de374c12ad?w=800&q=80" alt="Tops Diamond Club">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="privileges">
+        <div class="section-header">
+            <h2>กลุ่มของลูกค้าพิเศษ...สำหรับลูกค้าที่มากด้วยคุณค่า</h2>
+            <p>สิทธิประโยชน์พิเศษสำหรับลูกค้าระดับท็อป ที่ให้มากกว่าแค่การช้อปปิ้ง ด้วยความเอาใจใส่ในทุกรายละเอียด เพื่อตอบแทนความจงรักภักดีของคุณ พร้อมสิทธิพิเศษระดับพรีเมี่ยมและบริการที่ใส่ใจทุกรายละเอียด เพื่อให้เป็นที่สุดของความพิเศษทุกครั้งที่ช้อปปิ้ง</p>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎁</div>
+                <h3>การสะสมแต้มเพิ่มพิเศษ</h3>
+                <p>รับแต้มสะสม Tops Reward อัตราเพิ่มพิเศษทุกการช้อปปิ้ง พร้อมโปรโมชั่นสะสมแต้มเพิ่มสูงสุด 2-5 เท่า ยิ่งซื้อยิ่งได้ ยิ่งคุ้มยิ่งมาก</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🛒</div>
+                <h3>ส่วนลดและสิทธิพิเศษเฉพาะสมาชิก</h3>
+                <p>รับส่วนลดและโปรโมชั่นพิเศษก่อนใคร มากกว่าสมาชิกทั่วไป พร้อมช่วงเวลาช้อปปิ้งพิเศษสำหรับสมาชิก Diamond เท่านั้น</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎉</div>
+                <h3>การแลกซื้อสินค้าจัดชุด</h3>
+                <p>สิทธิพิเศษในการแลกซื้อสินค้าจัดชุดราคาพิเศษ ส่งตรงถึงบ้าน เลือกสรรสินค้าคุณภาพ จากความใส่ใจของทีม Tops</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🎪</div>
+                <h3>การส่งคูปองต่างๆ</h3>
+                <p>รับคูปองส่วนลดพิเศษและดีลเอกสิทธิ์ตลอดทั้งปี รวมถึงบัตรกำนัลวันเกิด และสิทธิพิเศษในวาระสำคัญต่างๆ</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Benefits Section with Image -->
+    <section class="benefits-section">
+        <div class="benefits-content">
+            <div class="benefits-image">
+                <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?w=800&q=80" alt="Shopping">
+            </div>
+            <div class="benefits-text">
+                <h2>คุ้มค่า ง่ายสะดวก<br>สมาชิกต้องมี!</h2>
+                
+                <div class="benefit-item">
+                    <div class="benefit-number">01</div>
+                    <div class="benefit-content">
+                        <h4>สะสมแต้มเพิ่มพิเศษ</h4>
+                        <p>รับแต้มสะสม Tops Reward เพิ่มทุกการช้อปปิ้ง สูงสุด 5 เท่า</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-number">02</div>
+                    <div class="benefit-content">
+                        <h4>ส่วนลดพิเศษตลอดปี</h4>
+                        <p>รับส่วนลดและโปรโมชั่นเฉพาะสมาชิก Diamond เท่านั้น</p>
+                    </div>
+                </div>
+
+                <div class="benefit-item">
+                    <div class="benefit-number">03</div>
+                    <div class="benefit-content">
+                        <h4>แลกของรางวัลพรีเมี่ยม</h4>
+                        <p>แลกแต้มเป็นของรางวัลหรูหราและคูปองส่วนลดมากมาย</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Membership Tiers -->
+    <section class="tiers-section" id="tiers">
+        <div class="section-header">
+            <h2>สิทธิพิเศษ 2 ระดับ ตามงบของคุณ</h2>
+            <p>เลือกระดับสมาชิกที่เหมาะสมกับคุณ ทุกระดับคุ้มค่า ทุกระดับพิเศษ</p>
+        </div>
+
+        <div class="tiers-grid">
+            <div class="tier-card">
+                <div class="tier-badge">💎</div>
+                <div class="tier-name">DIAMOND 500</div>
+                <div class="tier-amount">500฿</div>
+                <div class="tier-description">เติมสิทธิพิเศษด้วย 500 บาท<br>สะสมแต้ม 2 เท่า และส่วนลดพิเศษตลอดทั้งปี<br>คุ้มค่าสุดๆ สำหรับคนช้อปบ่อย</div>
+            </div>
+
+            <div class="tier-card">
+                <div class="tier-badge">💍</div>
+                <div class="tier-name">DIAMOND 260</div>
+                <div class="tier-amount">260฿</div>
+                <div class="tier-description">เริ่มต้นสิทธิพิเศษด้วย 260 บาท<br>สะสมแต้มพิเศษและโปรโมชั่นเฉพาะสมาชิก<br>เหมาะสำหรับคนที่เริ่มต้นเป็นสมาชิก</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-section" id="news">
+        <div class="section-header">
+            <h2>ข่าวสารและกิจกรรม</h2>
+            <p>ติดตามข่าวสาร โปรโมชั่น และกิจกรรมพิเศษสำหรับสมาชิก Tops Diamond Club</p>
+        </div>
+
+        <div class="news-grid">
+            <div class="news-card">
+                <img class="news-image" src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=800&q=80" alt="News 1">
+                <div class="news-content">
+                    <h3>Siriraj Hospital - Gift for Life</h3>
+                    <p>Tops Diamond Club ร่วมบริจาคเพื่อสนับสนุนโรงพยาบาลศิริราช ในโครงการ Gift for Life เพื่อช่วยเหลือผู้ป่วยที่ขาดแคลน</p>
+                    <a href="#" class="read-more">อ่านเพิ่มเติม →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <img class="news-image" src="https://images.unsplash.com/photo-1534723452862-4c874018d66d?w=800&q=80" alt="News 2">
+                <div class="news-content">
+                    <h3>Central Retail Reforms its Food Business</h3>
+                    <p>เซ็นทรัล รีเทล ปรับโฉมธุรกิจอาหาร เพื่อตอบสนองความต้องการของลูกค้ายุคใหม่ พร้อมสิทธิพิเศษสำหรับสมาชิก Diamond</p>
+                    <a href="#" class="read-more">อ่านเพิ่มเติม →</a>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <img class="news-image" src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&q=80" alt="News 3">
+                <div class="news-content">
+                    <h3>Tops Received Certificate of Accreditation</h3>
+                    <p>ท็อปส์ ได้รับการรับรองมาตรฐานห้องปฏิบัติการทดสอบ ISO/IEC 17025 เพื่อความมั่นใจในคุณภาพสินค้า</p>
+                    <a href="#" class="read-more">อ่านเพิ่มเติม →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section" id="faq">
+        <div class="section-header">
+            <h2>คำถามที่พบบ่อย</h2>
+            <p>ข้อมูลและคำตอบสำหรับคำถามที่พบบ่อยเกี่ยวกับ Tops Diamond Club</p>
+        </div>
+
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">ประโยชน์ที่จะได้รับเมื่อสมัคร Tops Diamond Club มีอะไรบ้าง?</div>
+                <div class="faq-answer">
+                    <p>สมาชิก Tops Diamond Club จะได้รับสิทธิพิเศษมากมาย เช่น การสะสมแต้ม Tops Reward อัตราเพิ่มพิเศษ 2-5 เท่า, ส่วนลดและโปรโมชั่นพิเศษเฉพาะสมาชิก, สิทธิ์แลกซื้อสินค้าจัดชุดราคาพิเศษ, คูปองส่วนลดตลอดทั้งปี และอื่นๆ อีกมากมาย</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">ต้องลงทะเบียนอย่างไรถึงจะได้รับสิทธิประโยชน์เมื่อสมัคร Tops Diamond Club ด้วยบัตร The 1?</div>
+                <div class="faq-answer">
+                    <p>สมาชิกสามารถสมัครได้ที่เคาน์เตอร์บริการลูกค้าของ Tops ทุกสาขา โดยใช้บัตร The 1 Card ที่มีอยู่แล้ว หรือสมัครผ่านแอปพลิเคชัน Tops ได้ทันที เพียงเลือกแพ็คเกจ Diamond 260 หรือ Diamond 500 ที่ต้องการ</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">หลังจากซื้อสิทธิสมาชิก 180,000 บาทแล้ว จะต้องทำอย่างไรต่อ? Tops Diamond Club จะหมดอายุเมื่อใด?</div>
+                <div class="faq-answer">
+                    <p>สิทธิ์สมาชิก Tops Diamond Club จะมีอายุ 1 ปี นับจากวันที่สมัคร เมื่อครบกำหนด 1 ปี สมาชิกสามารถต่ออายุสมาชิกได้ทันที เพื่อรับสิทธิพิเศษต่อเนื่อง แต้มสะสมที่ยังไม่ได้ใช้จะยังคงอยู่ในระบบตามเงื่อนไขของแต้ม Tops Reward</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">สามารถใช้ Tops Diamond Club ซื้อสินค้าได้ที่ใดบ้าง?</div>
+                <div class="faq-answer">
+                    <p>สมาชิก Tops Diamond Club สามารถใช้สิทธิพิเศษได้ที่ Tops Supermarket และ Tops Market ทุกสาขาทั่วประเทศ รวมถึงการช้อปปิ้งออนไลน์ผ่านแอปพลิเคชัน Tops และเว็บไซต์ Tops Online ได้ตลอด 24 ชั่วโมง</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>พร้อมเป็นส่วนหนึ่งของเราแล้วหรือยัง?</h2>
+        <p>สมัครสมาชิก Tops Diamond Club วันนี้ รับสิทธิพิเศษมากมายทันที</p>
+        <div class="cta-buttons">
+            <a href="#" class="cta-button-primary">สมัครสมาชิกเลย</a>
+            <a href="#" class="cta-button-secondary">ดูรายละเอียดเพิ่มเติม</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-logo">Tops<br>DIAMOND CLUB</div>
+                <p>โปรแกรมสมาชิกพิเศษจาก Tops Supermarket สำหรับลูกค้าที่มากด้วยคุณค่า พร้อมมอบสิทธิประโยชน์และความพิเศษในทุกการช้อปปิ้ง</p>
+            </div>
+
+            <div class="footer-section">
+                <h4>เกี่ยวกับเรา</h4>
+                <a href="#">เกี่ยวกับ Tops</a>
+                <a href="#">สาขาของเรา</a>
+                <a href="#">ร่วมงานกับเรา</a>
+                <a href="#">ข่าวสารและกิจกรรม</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>บริการลูกค้า</h4>
+                <a href="#">ติดต่อเรา</a>
+                <a href="#">คำถามที่พบบ่อย</a>
+                <a href="#">นโยบายความเป็นส่วนตัว</a>
+                <a href="#">เงื่อนไขการให้บริการ</a>
+            </div>
+
+            <div class="footer-section">
+                <h4>ติดต่อเรา</h4>
+                <p>Call Center: 02-123-4567</p>
+                <p>Email: customer@tops.co.th</p>
+                <p>LINE: @TopsThailand</p>
+                <br>
+                <h4>ติดตามเรา</h4>
+                <div style="display: flex; gap: 15px; margin-top: 15px;">
+                    <a href="#" style="display: inline-block; width: 40px; height: 40px; background: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid #333;">
+                        <span style="color: #fff;">f</span>
+                    </a>
+                    <a href="#" style="display: inline-block; width: 40px; height: 40px; background: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid #333;">
+                        <span style="color: #fff;">📷</span>
+                    </a>
+                    <a href="#" style="display: inline-block; width: 40px; height: 40px; background: #1a1a1a; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid #333;">
+                        <span style="color: #fff;">💬</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 Tops Diamond Club. All Rights Reserved. | นโยบายความเป็นส่วนตัว | เงื่อนไขการให้บริการ</p>
+        </div>
+    </footer>
+
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navHeight = navbar.offsetHeight;
+                    const targetPosition = target.offsetTop - navHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // FAQ Accordion
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const faqItem = question.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    item.classList.remove('active');
+                });
+                
+                // Toggle current item
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Animate elements
+        document.querySelectorAll('.feature-card, .news-card, .tier-card, .benefit-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Mobile menu
+        const menuIcon = document.querySelector('.menu-icon');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (menuIcon) {
+            menuIcon.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    if (navLinks.style.display === 'flex') {
+                        navLinks.style.display = 'none';
+                    } else {
+                        navLinks.style.display = 'flex';
+                        navLinks.style.flexDirection = 'column';
+                        navLinks.style.position = 'absolute';
+                        navLinks.style.top = '70px';
+                        navLinks.style.right = '0';
+                        navLinks.style.background = '#000';
+                        navLinks.style.padding = '20px';
+                        navLinks.style.width = '250px';
+                        navLinks.style.borderRadius = '10px';
+                        navLinks.style.border = '1px solid rgba(255,255,255,0.1)';
+                    }
+                }
+            });
+        }
+
+        // Page load animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = '1';
+            }, 100);
+        });
+
+        // Parallax effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const heroImage = document.querySelector('.hero-image img');
+            
+            if (heroImage && scrolled < window.innerHeight) {
+                heroImage.style.transform = `translateY(${scrolled * 0.1}px)`;
+            }
+        });
+    </script>
+</body>
+</html>

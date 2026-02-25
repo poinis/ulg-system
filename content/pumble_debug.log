@@ -1,0 +1,1673 @@
+[2025-10-19 21:49:40] notifyNewBrief called
+[2025-10-19 21:49:40] Attempting to send message to Pumble
+[2025-10-19 21:49:40] Message: 🆕 *มีบรีฟใหม่เข้าระบบ*
+
+📋 ชื่องาน: Test
+🏢
+[2025-10-19 21:49:40] HTTP Code: 200
+[2025-10-19 21:49:40] Response: ok
+[2025-10-19 21:49:40] SUCCESS: Message sent
+[2025-10-20 05:07:58] notifyNewBrief called
+[2025-10-20 05:07:58] Attempting to send message to Pumble
+[2025-10-20 05:07:58] Message: 🆕 *มีบรีฟใหม่เข้าระบบ*
+
+📋 ชื่องาน: Micky Oye
+[2025-10-20 05:07:59] HTTP Code: 200
+[2025-10-20 05:07:59] Response: ok
+[2025-10-20 05:07:59] SUCCESS: Message sent
+[2025-10-20 05:16:24] notifyStatusChange called
+[2025-10-20 05:16:24] Attempting to send message to Pumble
+[2025-10-20 05:16:24] Message: 🔄 *เปลี่ยนสถานะบรีฟ*
+
+📋 ชื่องาน: Test
+📊 ส�
+[2025-10-20 05:16:25] HTTP Code: 200
+[2025-10-20 05:16:25] Response: ok
+[2025-10-20 05:16:25] SUCCESS: Message sent
+[2025-10-20 05:19:51] notifyStatusChange called
+[2025-10-20 05:19:51] Attempting to send message to Pumble
+[2025-10-20 05:19:51] Message: 🔄 *เปลี่ยนสถานะบรีฟ*
+
+📋 ชื่องาน: ปก filson
+�
+[2025-10-20 05:19:52] HTTP Code: 200
+[2025-10-20 05:19:52] Response: ok
+[2025-10-20 05:19:52] SUCCESS: Message sent
+[2025-10-20 06:15:25] notifyStatusChange called
+[2025-10-20 06:15:25] Attempting to send message to Pumble
+[2025-10-20 06:15:25] Message: ✅ *เปลี่ยนสถานะบรีฟ*
+
+📋 ชื่องาน: Nudie
+📊 ส�
+[2025-10-20 06:15:25] HTTP Code: 200
+[2025-10-20 06:15:25] Response: ok
+[2025-10-20 06:15:25] SUCCESS: Message sent
+[2025-10-20 08:09:32] notifyStatusChange called
+[2025-10-20 08:09:32] Attempting to send message to Pumble
+[2025-10-20 08:09:32] Message: ❓ *เปลี่ยนสถานะบรีฟ*
+
+📋 ชื่องาน: Pumble
+📊 ส�
+[2025-10-20 08:09:33] HTTP Code: 200
+[2025-10-20 08:09:33] Response: ok
+[2025-10-20 08:09:33] SUCCESS: Message sent
+[2025-10-20 12:22:09] notifyStatusChange called
+[2025-10-20 12:22:09] Attempting to send message to Pumble
+[2025-10-20 12:22:09] Message: 🔄 *เปลี่ยนสถานะบรีฟ*
+
+📋 ชื่องาน: Micky Oye
+📊 
+[2025-10-20 12:22:10] HTTP Code: 200
+[2025-10-20 12:22:10] Response: ok
+[2025-10-20 12:22:10] SUCCESS: Message sent
+[2025-10-20 13:38:52] notifyNewBrief called
+[2025-10-20 13:38:52] Attempting to send message to Pumble
+[2025-10-20 13:38:52] Message: 🆕 *มีบรีฟใหม่เข้าระบบ*
+
+📋 ชื่องาน: Test bf
+�
+[2025-10-20 13:38:52] HTTP Code: 200
+[2025-10-20 13:38:52] Response: ok
+[2025-10-20 13:38:52] SUCCESS: Message sent
+[2025-10-20 14:24:27] notifyNewBrief called
+[2025-10-20 14:24:27] Attempting to send message to Pumble
+[2025-10-20 14:24:27] Message: 🆕 *มีบรีฟใหม่เข้าระบบ*
+
+📋 ชื่องาน: Test BF2
+
+[2025-10-20 14:24:28] HTTP Code: 200
+[2025-10-20 14:24:28] Response: ok
+[2025-10-20 14:24:28] SUCCESS: Message sent
+[2025-10-20 14:42:17] notifyStatusChange called
+[2025-10-20 14:42:17] Attempting to send message to Pumble
+[2025-10-20 14:42:17] Message: ❓ *เปลี่ยนสถานะบรีฟ*
+
+📋 ชื่องาน: Test bf
+📊 ส
+[2025-10-20 14:42:18] HTTP Code: 200
+[2025-10-20 14:42:18] Response: ok
+[2025-10-20 14:42:18] SUCCESS: Message sent
+[2025-10-20 14:49:08] notifyStatusChange called
+[2025-10-20 14:49:08] Attempting to send message to Pumble
+[2025-10-20 14:49:08] Message: ✅ *เปลี่ยนสถานะบรีฟ*
+
+📋 ชื่องาน: Test
+📊 สถ
+[2025-10-20 14:49:09] HTTP Code: 200
+[2025-10-20 14:49:09] Response: ok
+[2025-10-20 14:49:09] SUCCESS: Message sent
+[2025-10-20 15:07:30] notifyStatusChange called
+[2025-10-20 15:07:30] Attempting to send message to Pumble
+[2025-10-20 15:07:30] Message: 🔄 *เปลี่ยนสถานะบรีฟ*
+
+📋 ชื่องาน: Test BF2
+📊 �
+[2025-10-20 15:07:31] HTTP Code: 200
+[2025-10-20 15:07:31] Response: ok
+[2025-10-20 15:07:31] SUCCESS: Message sent
+[2025-10-20 15:25:34] notifyNewBrief called
+[2025-10-20 15:25:34] Attempting to send message to Pumble
+[2025-10-20 15:25:34] Message: 🆕 *มีบรีฟใหม่เข้าระบบ*
+
+📋 ชื่องาน: Pumble
+�
+[2025-10-20 15:25:35] HTTP Code: 200
+[2025-10-20 15:25:35] Response: ok
+[2025-10-20 15:25:35] SUCCESS: Message sent
+[2025-10-20 15:28:46] notifyStatusChange called
+[2025-10-20 15:28:46] Attempting to send message to Pumble
+[2025-10-20 15:28:46] Message: ✅ *เปลี่ยนสถานะบรีฟ*
+
+📋 ชื่องาน: Test BF2
+📊 �
+[2025-10-20 15:28:46] HTTP Code: 200
+[2025-10-20 15:28:46] Response: ok
+[2025-10-20 15:28:46] SUCCESS: Message sent
+[2025-10-20 15:42:07] notifyNewBrief called
+[2025-10-20 15:42:07] Attempting to send message to Pumble
+[2025-10-20 15:42:07] Message: 🆕 *มีบรีฟใหม่เข้าระบบ*
+
+📋 ชื่องาน: test
+🏢
+[2025-10-20 15:42:08] HTTP Code: 200
+[2025-10-20 15:42:08] Response: ok
+[2025-10-20 15:42:08] SUCCESS: Message sent
+[2025-10-21 10:43:12] notifyStatusChange called
+[2025-10-21 10:43:12] Attempting to send message to Pumble
+[2025-10-21 10:43:12] Message: ⏳ *เปลี่ยนสถานะบรีฟ*
+
+📋 ชื่องาน: Micky Oye ป้
+[2025-10-21 10:43:13] HTTP Code: 200
+[2025-10-21 10:43:13] Response: ok
+[2025-10-21 10:43:13] SUCCESS: Message sent
+[2025-10-21 11:05:43] Loaded 3 Pumble users
+[2025-10-21 11:05:43] notifyStatusChange called: pending -> in_progress
+[2025-10-21 11:05:43] Sending to roles: admin
+[2025-10-21 11:05:43] Found 2 users with roles: admin
+[2025-10-21 11:05:43] Sending to May (admin) - Pumble ID: 68f5c1802ae923627618ef6e
+[2025-10-21 11:05:43] Attempting to send message to user 68f5c1802ae923627618ef6e
+[2025-10-21 11:05:43] Message: 🔄 *เปลี่ยนสถานะบรีฟ*
+
+📋 ชื่องาน: Test bf
+📊 �
+[2025-10-21 11:05:44] HTTP Code: 200
+[2025-10-21 11:05:44] Response: ok
+[2025-10-21 11:05:44] SUCCESS: Message sent
+[2025-10-21 11:05:44] Sending to Oat (admin) - Pumble ID: 68ac2aeee026f6941010344a
+[2025-10-21 11:05:44] Attempting to send message to user 68ac2aeee026f6941010344a
+[2025-10-21 11:05:44] Message: 🔄 *เปลี่ยนสถานะบรีฟ*
+
+📋 ชื่องาน: Test bf
+📊 �
+[2025-10-21 11:05:45] HTTP Code: 200
+[2025-10-21 11:05:45] Response: ok
+[2025-10-21 11:05:45] SUCCESS: Message sent
+[2025-10-21 11:05:45] Sent to 2 out of 2 users
+[2025-10-21 12:43:54] Loaded 7 Pumble users
+[2025-10-21 12:43:54] notifyStatusChange called: completed -> approved
+[2025-10-21 12:43:54] Sending to roles: admin, brand, marketing
+[2025-10-21 12:43:54] Found 6 users with roles: admin, brand, marketing
+[2025-10-21 12:43:54] Sending to May (admin)
+[2025-10-21 12:43:54] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-21 12:43:55] HTTP Code: 200
+[2025-10-21 12:43:55] SUCCESS: Message sent
+[2025-10-21 12:43:55] Sending to brand (brand)
+[2025-10-21 12:43:55] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-10-21 12:43:56] HTTP Code: 200
+[2025-10-21 12:43:56] SUCCESS: Message sent
+[2025-10-21 12:43:56] Sending to MIw (marketing)
+[2025-10-21 12:43:56] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-10-21 12:43:56] HTTP Code: 200
+[2025-10-21 12:43:56] SUCCESS: Message sent
+[2025-10-21 12:43:56] Sending to Jeaw (brand)
+[2025-10-21 12:43:56] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-10-21 12:43:57] HTTP Code: 200
+[2025-10-21 12:43:57] SUCCESS: Message sent
+[2025-10-21 12:43:57] Sending to Peach (brand)
+[2025-10-21 12:43:57] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-10-21 12:43:58] HTTP Code: 200
+[2025-10-21 12:43:58] SUCCESS: Message sent
+[2025-10-21 12:43:58] Sending to Oat (admin)
+[2025-10-21 12:43:58] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-21 12:43:59] HTTP Code: 200
+[2025-10-21 12:43:59] SUCCESS: Message sent
+[2025-10-21 12:43:59] Sent to 6 out of 6 users
+[2025-10-21 12:44:39] Loaded 7 Pumble users
+[2025-10-21 12:44:39] notifyStatusChange called: pending -> in_progress
+[2025-10-21 12:44:39] Sending to roles: admin
+[2025-10-21 12:44:39] Found 2 users with roles: admin
+[2025-10-21 12:44:39] Sending to May (admin)
+[2025-10-21 12:44:39] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-21 12:44:39] HTTP Code: 200
+[2025-10-21 12:44:39] SUCCESS: Message sent
+[2025-10-21 12:44:39] Sending to Oat (admin)
+[2025-10-21 12:44:39] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-21 12:44:40] HTTP Code: 200
+[2025-10-21 12:44:40] SUCCESS: Message sent
+[2025-10-21 12:44:40] Sent to 2 out of 2 users
+[2025-10-21 12:45:33] Loaded 7 Pumble users
+[2025-10-21 12:45:33] notifyStatusChange called: in_progress -> pending
+[2025-10-21 12:45:33] Sending to roles: admin
+[2025-10-21 12:45:33] Found 2 users with roles: admin
+[2025-10-21 12:45:33] Sending to May (admin)
+[2025-10-21 12:45:33] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-21 12:45:34] HTTP Code: 200
+[2025-10-21 12:45:34] SUCCESS: Message sent
+[2025-10-21 12:45:34] Sending to Oat (admin)
+[2025-10-21 12:45:34] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-21 12:45:35] HTTP Code: 200
+[2025-10-21 12:45:35] SUCCESS: Message sent
+[2025-10-21 12:45:35] Sent to 2 out of 2 users
+[2025-10-21 12:48:43] Loaded 7 Pumble users
+[TEST] 2025-10-21 12:48:43 Test write
+[2025-10-21 13:04:35] Loaded 7 Pumble users
+[2025-10-21 13:04:35] notifyNewBrief called
+[2025-10-21 13:04:35] Found 2 users with roles: admin
+[2025-10-21 13:04:35] Sending to May (admin)
+[2025-10-21 13:04:35] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-21 13:04:36] HTTP Code: 200
+[2025-10-21 13:04:36] SUCCESS: Message sent
+[2025-10-21 13:04:36] Sending to Oat (admin)
+[2025-10-21 13:04:36] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-21 13:04:36] HTTP Code: 200
+[2025-10-21 13:04:36] SUCCESS: Message sent
+[2025-10-21 13:04:36] Sent to 2 out of 2 users
+[2025-10-21 13:05:53] Loaded 7 Pumble users
+[2025-10-21 13:05:53] notifyStatusChange called: pending -> pending
+[2025-10-21 13:05:53] Sending to roles: admin
+[2025-10-21 13:05:53] Found 2 users with roles: admin
+[2025-10-21 13:05:53] Sending to May (admin)
+[2025-10-21 13:05:53] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-21 13:05:54] HTTP Code: 200
+[2025-10-21 13:05:54] SUCCESS: Message sent
+[2025-10-21 13:05:54] Sending to Oat (admin)
+[2025-10-21 13:05:54] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-21 13:05:54] HTTP Code: 200
+[2025-10-21 13:05:54] SUCCESS: Message sent
+[2025-10-21 13:05:54] Sent to 2 out of 2 users
+[2025-10-21 13:11:45] Loaded 7 Pumble users
+[2025-10-21 13:11:45] notifyStatusChange called: pending -> in_progress
+[2025-10-21 13:11:45] Sending to roles: admin
+[2025-10-21 13:11:45] Found 2 unique users with roles: admin
+[2025-10-21 13:11:45] Sending to May (admin)
+[2025-10-21 13:11:45] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-21 13:11:46] HTTP Code: 200
+[2025-10-21 13:11:46] SUCCESS: Message sent
+[2025-10-21 13:11:46] SKIPPED: Already sent to this webhook for Oat
+[2025-10-21 13:11:46] Sent to 1 out of 2 users
+[2025-10-21 13:13:19] Loaded 7 Pumble users
+[2025-10-21 13:13:19] notifyStatusChange called: in_progress -> completed
+[2025-10-21 13:13:19] Sending to roles: admin, brand, marketing, approve
+[2025-10-21 13:13:19] Found 7 unique users with roles: admin, brand, marketing, approve
+[2025-10-21 13:13:19] Sending to May (admin)
+[2025-10-21 13:13:19] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-21 13:13:20] HTTP Code: 200
+[2025-10-21 13:13:20] SUCCESS: Message sent
+[2025-10-21 13:13:20] Sending to brand (brand)
+[2025-10-21 13:13:20] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-10-21 13:13:20] HTTP Code: 200
+[2025-10-21 13:13:20] SUCCESS: Message sent
+[2025-10-21 13:13:20] Sending to MIw (marketing)
+[2025-10-21 13:13:20] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-10-21 13:13:21] HTTP Code: 200
+[2025-10-21 13:13:21] SUCCESS: Message sent
+[2025-10-21 13:13:21] SKIPPED: Already sent to this webhook for Jeaw
+[2025-10-21 13:13:21] SKIPPED: Already sent to this webhook for Peach
+[2025-10-21 13:13:21] SKIPPED: Already sent to this webhook for Oat
+[2025-10-21 13:13:21] Sending to Sunny (approve)
+[2025-10-21 13:13:21] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-10-21 13:13:22] HTTP Code: 200
+[2025-10-21 13:13:22] SUCCESS: Message sent
+[2025-10-21 13:13:22] Sent to 4 out of 7 users
+[2025-10-21 16:46:45] Loaded 7 Pumble users
+[2025-10-21 16:46:45] notifyStatusChange called: pending -> need_info
+[2025-10-21 16:46:45] Sending to roles: admin
+[2025-10-21 16:46:45] Found 2 unique users with roles: admin
+[2025-10-21 16:46:45] Sending to May (admin)
+[2025-10-21 16:46:45] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-21 16:46:45] HTTP Code: 200
+[2025-10-21 16:46:45] SUCCESS: Message sent
+[2025-10-21 16:46:45] SKIPPED: Already sent to this webhook for Oat
+[2025-10-21 16:46:45] Sent to 1 out of 2 users
+[2025-10-22 23:04:01] Loaded 7 Pumble users
+[2025-10-22 23:04:01] notifyStatusChange called: in_progress -> completed
+[2025-10-22 23:04:01] Sending to roles: admin, brand, marketing, approve
+[2025-10-22 23:04:01] Found 7 unique users with roles: admin, brand, marketing, approve
+[2025-10-22 23:04:01] Sending to May (admin)
+[2025-10-22 23:04:01] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-22 23:04:02] HTTP Code: 200
+[2025-10-22 23:04:02] SUCCESS: Message sent
+[2025-10-22 23:04:02] Sending to brand (brand)
+[2025-10-22 23:04:02] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-10-22 23:04:03] HTTP Code: 200
+[2025-10-22 23:04:03] SUCCESS: Message sent
+[2025-10-22 23:04:03] Sending to MIw (marketing)
+[2025-10-22 23:04:03] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-10-22 23:04:03] HTTP Code: 200
+[2025-10-22 23:04:03] SUCCESS: Message sent
+[2025-10-22 23:04:03] SKIPPED: Already sent to this webhook for Jeaw
+[2025-10-22 23:04:03] SKIPPED: Already sent to this webhook for Peach
+[2025-10-22 23:04:03] SKIPPED: Already sent to this webhook for Oat
+[2025-10-22 23:04:03] Sending to Sunny (approve)
+[2025-10-22 23:04:03] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-10-22 23:04:04] HTTP Code: 200
+[2025-10-22 23:04:04] SUCCESS: Message sent
+[2025-10-22 23:04:04] Sent to 4 out of 7 users
+[2025-10-30 11:50:21] Loaded 7 Pumble users
+[2025-10-30 11:50:21] notifyStatusChange called: completed -> approved
+[2025-10-30 11:50:21] Sending to roles: admin, brand, marketing
+[2025-10-30 11:50:21] Found 6 users with roles: admin, brand, marketing
+[2025-10-30 11:50:21] Sending to May (admin)
+[2025-10-30 11:50:21] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 11:50:22] HTTP Code: 200
+[2025-10-30 11:50:22] SUCCESS: Message sent
+[2025-10-30 11:50:22] Sending to brand (brand)
+[2025-10-30 11:50:22] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-10-30 11:50:23] HTTP Code: 200
+[2025-10-30 11:50:23] SUCCESS: Message sent
+[2025-10-30 11:50:23] Sending to MIw (marketing)
+[2025-10-30 11:50:23] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-10-30 11:50:24] HTTP Code: 200
+[2025-10-30 11:50:24] SUCCESS: Message sent
+[2025-10-30 11:50:24] Sending to Jeaw (brand)
+[2025-10-30 11:50:24] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-10-30 11:50:24] HTTP Code: 200
+[2025-10-30 11:50:24] SUCCESS: Message sent
+[2025-10-30 11:50:24] Sending to Peach (brand)
+[2025-10-30 11:50:24] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-10-30 11:50:25] HTTP Code: 200
+[2025-10-30 11:50:25] SUCCESS: Message sent
+[2025-10-30 11:50:25] Sending to Oat (admin)
+[2025-10-30 11:50:25] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 11:50:26] HTTP Code: 200
+[2025-10-30 11:50:26] SUCCESS: Message sent
+[2025-10-30 11:50:26] Sent to 6 out of 6 users
+[2025-10-30 12:04:32] Loaded 7 Pumble users
+[2025-10-30 12:04:32] notifyStatusChange called: completed -> need_update
+[2025-10-30 12:04:32] Sending to roles: admin
+[2025-10-30 12:04:32] Found 2 users with roles: admin
+[2025-10-30 12:04:32] Sending to May (admin)
+[2025-10-30 12:04:32] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 12:04:33] HTTP Code: 200
+[2025-10-30 12:04:33] SUCCESS: Message sent
+[2025-10-30 12:04:33] Sending to Oat (admin)
+[2025-10-30 12:04:33] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 12:04:34] HTTP Code: 200
+[2025-10-30 12:04:34] SUCCESS: Message sent
+[2025-10-30 12:04:34] Sent to 2 out of 2 users
+[2025-10-30 12:36:18] Loaded 7 Pumble users
+[2025-10-30 12:36:18] notifyStatusChange called: in_progress -> pending
+[2025-10-30 12:36:18] Sending to roles: admin
+[2025-10-30 12:36:18] Found 2 users with roles: admin
+[2025-10-30 12:36:18] Sending to May (admin)
+[2025-10-30 12:36:18] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 12:36:18] HTTP Code: 200
+[2025-10-30 12:36:18] SUCCESS: Message sent
+[2025-10-30 12:36:18] Sending to Oat (admin)
+[2025-10-30 12:36:18] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 12:36:19] HTTP Code: 200
+[2025-10-30 12:36:19] SUCCESS: Message sent
+[2025-10-30 12:36:19] Sent to 2 out of 2 users
+[2025-10-30 12:38:34] Loaded 7 Pumble users
+[2025-10-30 12:38:34] notifyStatusChange called: pending -> in_progress
+[2025-10-30 12:38:34] Sending to roles: admin
+[2025-10-30 12:38:34] Found 2 users with roles: admin
+[2025-10-30 12:38:34] Sending to May (admin)
+[2025-10-30 12:38:34] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 12:38:35] HTTP Code: 200
+[2025-10-30 12:38:35] SUCCESS: Message sent
+[2025-10-30 12:38:35] Sending to Oat (admin)
+[2025-10-30 12:38:35] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 12:38:36] HTTP Code: 200
+[2025-10-30 12:38:36] SUCCESS: Message sent
+[2025-10-30 12:38:36] Sent to 2 out of 2 users
+[2025-10-30 12:50:18] Loaded 7 Pumble users
+[2025-10-30 12:50:18] notifyStatusChange called: in_progress -> pending
+[2025-10-30 12:50:18] Sending to roles: admin
+[2025-10-30 12:50:18] Found 2 users with roles: admin
+[2025-10-30 12:50:18] Sending to May (admin)
+[2025-10-30 12:50:18] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 12:50:18] HTTP Code: 200
+[2025-10-30 12:50:18] SUCCESS: Message sent
+[2025-10-30 12:50:18] Sending to Oat (admin)
+[2025-10-30 12:50:18] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 12:50:19] HTTP Code: 200
+[2025-10-30 12:50:19] SUCCESS: Message sent
+[2025-10-30 12:50:19] Sent to 2 out of 2 users
+[2025-10-30 12:54:55] Loaded 7 Pumble users
+[2025-10-30 12:54:55] === notifyStatusChange called: in_progress -> pending ===
+[2025-10-30 12:54:55] Target roles: admin
+[2025-10-30 12:54:55] Found 2 users with roles: admin
+[2025-10-30 12:54:55] Sending to May (admin)
+[2025-10-30 12:54:55] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 12:54:56] HTTP Code: 200
+[2025-10-30 12:54:56] SUCCESS: Message sent
+[2025-10-30 12:54:56] SKIPPED: Already sent to Oat (duplicate)
+[2025-10-30 12:54:56] Sent to 1 out of 2 users
+[2025-10-30 12:54:56] Skipped (duplicates): Oat
+[2025-10-30 12:54:56] === notifyStatusChange completed ===
+[2025-10-30 13:16:19] Loaded 7 Pumble users
+[2025-10-30 13:16:19] === notifyStatusChange called: pending -> pending ===
+[2025-10-30 13:16:19] Target roles: admin
+[2025-10-30 13:16:19] Found 3 users with roles: admin
+[2025-10-30 13:16:19] Sending to May (admin)
+[2025-10-30 13:16:19] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 13:16:19] HTTP Code: 200
+[2025-10-30 13:16:19] SUCCESS: Message sent
+[2025-10-30 13:16:19] SKIPPED: Already sent to Oat (duplicate)
+[2025-10-30 13:16:19] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-10-30 13:16:19] Sent to 1 out of 3 users
+[2025-10-30 13:16:19] Skipped (duplicates): Oat
+[2025-10-30 13:16:19] Failed users: May-hotel (no webhook)
+[2025-10-30 13:16:19] === notifyStatusChange completed ===
+[2025-10-30 15:22:59] Loaded 7 Pumble users
+[2025-10-30 15:22:59] === notifyNewBrief called ===
+[2025-10-30 15:22:59] Found 3 users with roles: admin
+[2025-10-30 15:22:59] Sending to May (admin)
+[2025-10-30 15:22:59] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 15:23:00] HTTP Code: 200
+[2025-10-30 15:23:00] SUCCESS: Message sent
+[2025-10-30 15:23:00] SKIPPED: Already sent to Oat (duplicate)
+[2025-10-30 15:23:00] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-10-30 15:23:00] Sent to 1 out of 3 users
+[2025-10-30 15:23:00] Skipped (duplicates): Oat
+[2025-10-30 15:23:00] Failed users: May-hotel (no webhook)
+[2025-10-30 15:23:00] === notifyNewBrief completed ===
+[2025-10-30 15:35:26] Loaded 7 Pumble users
+[2025-10-30 15:35:26] === notifyNewBrief called ===
+[2025-10-30 15:35:26] Found 3 users with roles: admin
+[2025-10-30 15:35:26] Sending to May (admin)
+[2025-10-30 15:35:26] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 15:35:27] HTTP Code: 200
+[2025-10-30 15:35:27] SUCCESS: Message sent
+[2025-10-30 15:35:27] SKIPPED: Already sent to Oat (duplicate)
+[2025-10-30 15:35:27] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-10-30 15:35:27] Sent to 1 out of 3 users
+[2025-10-30 15:35:27] Skipped (duplicates): Oat
+[2025-10-30 15:35:27] Failed users: May-hotel (no webhook)
+[2025-10-30 15:35:27] === notifyNewBrief completed ===
+[2025-10-30 15:45:18] Loaded 7 Pumble users
+[2025-10-30 15:45:18] === notifyNewBrief called ===
+[2025-10-30 15:45:18] Found 3 users with roles: admin
+[2025-10-30 15:45:18] Sending to May (admin)
+[2025-10-30 15:45:18] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 15:45:19] HTTP Code: 200
+[2025-10-30 15:45:19] SUCCESS: Message sent
+[2025-10-30 15:45:19] SKIPPED: Already sent to Oat (duplicate)
+[2025-10-30 15:45:19] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-10-30 15:45:19] Sent to 1 out of 3 users
+[2025-10-30 15:45:19] Skipped (duplicates): Oat
+[2025-10-30 15:45:19] Failed users: May-hotel (no webhook)
+[2025-10-30 15:45:19] === notifyNewBrief completed ===
+[2025-10-30 15:46:16] Loaded 7 Pumble users
+[2025-10-30 15:46:16] === notifyStatusChange called: pending -> pending ===
+[2025-10-30 15:46:16] Target roles: admin
+[2025-10-30 15:46:16] Found 3 users with roles: admin
+[2025-10-30 15:46:16] Sending to May (admin)
+[2025-10-30 15:46:16] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 15:46:17] HTTP Code: 200
+[2025-10-30 15:46:17] SUCCESS: Message sent
+[2025-10-30 15:46:17] SKIPPED: Already sent to Oat (duplicate)
+[2025-10-30 15:46:17] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-10-30 15:46:17] Sent to 1 out of 3 users
+[2025-10-30 15:46:17] Skipped (duplicates): Oat
+[2025-10-30 15:46:17] Failed users: May-hotel (no webhook)
+[2025-10-30 15:46:17] === notifyStatusChange completed ===
+[2025-10-30 15:47:09] Loaded 7 Pumble users
+[2025-10-30 15:47:09] === notifyNewBrief called ===
+[2025-10-30 15:47:09] Found 3 users with roles: admin
+[2025-10-30 15:47:09] Sending to May (admin)
+[2025-10-30 15:47:09] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 15:47:10] HTTP Code: 200
+[2025-10-30 15:47:10] SUCCESS: Message sent
+[2025-10-30 15:47:10] SKIPPED: Already sent to Oat (duplicate)
+[2025-10-30 15:47:10] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-10-30 15:47:10] Sent to 1 out of 3 users
+[2025-10-30 15:47:10] Skipped (duplicates): Oat
+[2025-10-30 15:47:10] Failed users: May-hotel (no webhook)
+[2025-10-30 15:47:10] === notifyNewBrief completed ===
+[2025-10-30 16:23:15] Loaded 7 Pumble users
+[2025-10-30 16:23:15] === notifyNewBrief called ===
+[2025-10-30 16:23:15] Found 3 users with roles: admin
+[2025-10-30 16:23:15] Sending to May (admin)
+[2025-10-30 16:23:15] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 16:23:16] HTTP Code: 200
+[2025-10-30 16:23:16] SUCCESS: Message sent
+[2025-10-30 16:23:16] SKIPPED: Already sent to Oat (duplicate)
+[2025-10-30 16:23:16] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-10-30 16:23:16] Sent to 1 out of 3 users
+[2025-10-30 16:23:16] Skipped (duplicates): Oat
+[2025-10-30 16:23:16] Failed users: May-hotel (no webhook)
+[2025-10-30 16:23:16] === notifyNewBrief completed ===
+[2025-10-30 16:39:28] Loaded 7 Pumble users
+[2025-10-30 16:39:28] === notifyStatusChange called: pending -> in_progress ===
+[2025-10-30 16:39:28] Target roles: admin
+[2025-10-30 16:39:28] Found 3 users with roles: admin
+[2025-10-30 16:39:28] Sending to May (admin)
+[2025-10-30 16:39:28] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-30 16:39:29] HTTP Code: 200
+[2025-10-30 16:39:29] SUCCESS: Message sent
+[2025-10-30 16:39:29] SKIPPED: Already sent to Oat (duplicate)
+[2025-10-30 16:39:29] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-10-30 16:39:29] Sent to 1 out of 3 users
+[2025-10-30 16:39:29] Skipped (duplicates): Oat
+[2025-10-30 16:39:29] Failed users: May-hotel (no webhook)
+[2025-10-30 16:39:29] === notifyStatusChange completed ===
+[2025-10-31 14:40:14] Loaded 7 Pumble users
+[2025-10-31 14:51:32] Loaded 7 Pumble users
+[2025-10-31 15:13:33] Loaded 7 Pumble users
+[2025-10-31 15:14:31] Loaded 7 Pumble users
+[2025-10-31 16:45:51] Loaded 7 Pumble users
+[2025-10-31 16:46:15] Loaded 7 Pumble users
+[2025-10-31 16:48:54] Loaded 7 Pumble users
+[2025-10-31 17:10:22] Loaded 7 Pumble users
+[2025-10-31 17:11:50] Loaded 7 Pumble users
+[2025-10-31 17:12:45] Loaded 7 Pumble users
+[2025-10-31 17:42:15] Loaded 7 Pumble users
+[2025-10-31 17:55:56] Loaded 7 Pumble users
+[2025-10-31 19:19:10] Loaded 7 Pumble users
+[2025-10-31 19:19:10] Found 4 users with roles: admin, marketing
+[2025-10-31 19:19:10] Sending to May (admin)
+[2025-10-31 19:19:10] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-31 19:19:11] HTTP Code: 200
+[2025-10-31 19:19:11] SUCCESS: Message sent
+[2025-10-31 19:19:11] Sending to MIw (marketing)
+[2025-10-31 19:19:11] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-10-31 19:19:12] HTTP Code: 200
+[2025-10-31 19:19:12] SUCCESS: Message sent
+[2025-10-31 19:19:12] SKIPPED: Already sent to Oat (duplicate)
+[2025-10-31 19:19:12] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-10-31 19:19:12] Sent to 2 out of 4 users
+[2025-10-31 19:19:12] Skipped (duplicates): Oat
+[2025-10-31 19:19:12] Failed users: May-hotel (no webhook)
+[2025-10-31 19:45:11] Loaded 7 Pumble users
+[2025-10-31 19:45:11] Found 4 users with roles: admin, marketing
+[2025-10-31 19:45:11] Sending to May (admin)
+[2025-10-31 19:45:11] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-31 19:45:12] HTTP Code: 200
+[2025-10-31 19:45:12] SUCCESS: Message sent
+[2025-10-31 19:45:12] Sending to MIw (marketing)
+[2025-10-31 19:45:12] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-10-31 19:45:13] HTTP Code: 200
+[2025-10-31 19:45:13] SUCCESS: Message sent
+[2025-10-31 19:45:13] SKIPPED: Already sent to Oat (duplicate)
+[2025-10-31 19:45:13] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-10-31 19:45:13] Sent to 2 out of 4 users
+[2025-10-31 19:45:13] Skipped (duplicates): Oat
+[2025-10-31 19:45:13] Failed users: May-hotel (no webhook)
+[2025-10-31 19:47:27] Loaded 7 Pumble users
+[2025-10-31 19:47:27] Found 4 users with roles: admin, marketing
+[2025-10-31 19:47:27] Sending to May (admin)
+[2025-10-31 19:47:27] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-31 19:47:28] HTTP Code: 200
+[2025-10-31 19:47:28] SUCCESS: Message sent
+[2025-10-31 19:47:28] Sending to MIw (marketing)
+[2025-10-31 19:47:28] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-10-31 19:47:28] HTTP Code: 200
+[2025-10-31 19:47:28] SUCCESS: Message sent
+[2025-10-31 19:47:28] SKIPPED: Already sent to Oat (duplicate)
+[2025-10-31 19:47:28] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-10-31 19:47:28] Sent to 2 out of 4 users
+[2025-10-31 19:47:28] Skipped (duplicates): Oat
+[2025-10-31 19:47:28] Failed users: May-hotel (no webhook)
+[2025-10-31 21:24:26] Loaded 7 Pumble users
+[2025-10-31 21:24:26] Found 4 users with roles: admin, marketing
+[2025-10-31 21:24:26] Sending to May (admin)
+[2025-10-31 21:24:26] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-10-31 21:24:27] HTTP Code: 200
+[2025-10-31 21:24:27] SUCCESS: Message sent
+[2025-10-31 21:24:27] Sending to MIw (marketing)
+[2025-10-31 21:24:27] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-10-31 21:24:27] HTTP Code: 200
+[2025-10-31 21:24:27] SUCCESS: Message sent
+[2025-10-31 21:24:27] SKIPPED: Already sent to Oat (duplicate)
+[2025-10-31 21:24:27] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-10-31 21:24:27] Sent to 2 out of 4 users
+[2025-10-31 21:24:27] Skipped (duplicates): Oat
+[2025-10-31 21:24:27] Failed users: May-hotel (no webhook)
+[2025-11-01 08:24:53] Loaded 7 Pumble users
+[2025-11-01 08:24:53] Found 4 users with roles: admin, marketing
+[2025-11-01 08:24:53] Sending to May (admin)
+[2025-11-01 08:24:53] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-01 08:24:53] HTTP Code: 200
+[2025-11-01 08:24:53] SUCCESS: Message sent
+[2025-11-01 08:24:53] Sending to MIw (marketing)
+[2025-11-01 08:24:53] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-01 08:24:54] HTTP Code: 200
+[2025-11-01 08:24:54] SUCCESS: Message sent
+[2025-11-01 08:24:54] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-01 08:24:54] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-01 08:24:54] Sent to 2 out of 4 users
+[2025-11-01 08:24:54] Skipped (duplicates): Oat
+[2025-11-01 08:24:54] Failed users: May-hotel (no webhook)
+[2025-11-01 08:30:14] Loaded 7 Pumble users
+[2025-11-01 08:30:14] Found 3 users with roles: admin
+[2025-11-01 08:30:14] Sending to May (admin)
+[2025-11-01 08:30:14] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-01 08:30:14] HTTP Code: 200
+[2025-11-01 08:30:14] SUCCESS: Message sent
+[2025-11-01 08:30:14] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-01 08:30:14] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-01 08:30:14] Sent to 1 out of 3 users
+[2025-11-01 08:30:14] Skipped (duplicates): Oat
+[2025-11-01 08:30:14] Failed users: May-hotel (no webhook)
+[2025-11-01 08:30:40] Loaded 7 Pumble users
+[2025-11-01 08:30:40] Found 3 users with roles: admin
+[2025-11-01 08:30:40] Sending to May (admin)
+[2025-11-01 08:30:40] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-01 08:30:41] HTTP Code: 200
+[2025-11-01 08:30:41] SUCCESS: Message sent
+[2025-11-01 08:30:41] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-01 08:30:41] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-01 08:30:41] Sent to 1 out of 3 users
+[2025-11-01 08:30:41] Skipped (duplicates): Oat
+[2025-11-01 08:30:41] Failed users: May-hotel (no webhook)
+[2025-11-01 08:32:17] Loaded 7 Pumble users
+[2025-11-01 08:32:17] Found 4 users with roles: admin, marketing
+[2025-11-01 08:32:17] Sending to May (admin)
+[2025-11-01 08:32:17] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-01 08:32:18] HTTP Code: 200
+[2025-11-01 08:32:18] SUCCESS: Message sent
+[2025-11-01 08:32:18] Sending to MIw (marketing)
+[2025-11-01 08:32:18] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-01 08:32:19] HTTP Code: 200
+[2025-11-01 08:32:19] SUCCESS: Message sent
+[2025-11-01 08:32:19] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-01 08:32:19] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-01 08:32:19] Sent to 2 out of 4 users
+[2025-11-01 08:32:19] Skipped (duplicates): Oat
+[2025-11-01 08:32:19] Failed users: May-hotel (no webhook)
+[2025-11-01 18:57:41] Loaded 7 Pumble users
+[2025-11-01 18:57:41] === notifyNewBrief called ===
+[2025-11-01 18:57:41] Found 3 users with roles: admin
+[2025-11-01 18:57:41] Sending to May (admin)
+[2025-11-01 18:57:41] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-01 18:57:42] HTTP Code: 200
+[2025-11-01 18:57:42] SUCCESS: Message sent
+[2025-11-01 18:57:42] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-01 18:57:42] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-01 18:57:42] Sent to 1 out of 3 users
+[2025-11-01 18:57:42] Skipped (duplicates): Oat
+[2025-11-01 18:57:42] Failed users: May-hotel (no webhook)
+[2025-11-01 18:57:42] === notifyNewBrief completed ===
+[2025-11-01 18:58:04] Loaded 7 Pumble users
+[2025-11-01 18:58:04] === notifyStatusChange called: pending -> in_progress ===
+[2025-11-01 18:58:04] Target roles: admin
+[2025-11-01 18:58:04] Found 3 users with roles: admin
+[2025-11-01 18:58:04] Sending to May (admin)
+[2025-11-01 18:58:04] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-01 18:58:04] HTTP Code: 200
+[2025-11-01 18:58:04] SUCCESS: Message sent
+[2025-11-01 18:58:04] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-01 18:58:04] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-01 18:58:04] Sent to 1 out of 3 users
+[2025-11-01 18:58:04] Skipped (duplicates): Oat
+[2025-11-01 18:58:04] Failed users: May-hotel (no webhook)
+[2025-11-01 18:58:04] === notifyStatusChange completed ===
+[2025-11-01 18:58:43] Loaded 7 Pumble users
+[2025-11-01 18:58:43] === notifyStatusChange called: need_update -> completed ===
+[2025-11-01 18:58:43] Target roles: admin, brand, marketing, approve
+[2025-11-01 18:58:43] Found 8 users with roles: admin, brand, marketing, approve
+[2025-11-01 18:58:43] Sending to May (admin)
+[2025-11-01 18:58:43] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-01 18:58:44] HTTP Code: 200
+[2025-11-01 18:58:44] SUCCESS: Message sent
+[2025-11-01 18:58:44] Sending to brand (brand)
+[2025-11-01 18:58:44] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-01 18:58:44] HTTP Code: 200
+[2025-11-01 18:58:44] SUCCESS: Message sent
+[2025-11-01 18:58:44] Sending to MIw (marketing)
+[2025-11-01 18:58:44] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-01 18:58:45] HTTP Code: 200
+[2025-11-01 18:58:45] SUCCESS: Message sent
+[2025-11-01 18:58:45] SKIPPED: Already sent to Jeaw (duplicate)
+[2025-11-01 18:58:45] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-01 18:58:45] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-01 18:58:45] Sending to Sunny (approve)
+[2025-11-01 18:58:45] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-01 18:58:46] HTTP Code: 200
+[2025-11-01 18:58:46] SUCCESS: Message sent
+[2025-11-01 18:58:46] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-01 18:58:46] Sent to 4 out of 8 users
+[2025-11-01 18:58:46] Skipped (duplicates): Jeaw, Peach, Oat
+[2025-11-01 18:58:46] Failed users: May-hotel (no webhook)
+[2025-11-01 18:58:46] === notifyStatusChange completed ===
+[2025-11-01 18:59:07] Loaded 7 Pumble users
+[2025-11-01 18:59:07] === notifyStatusChange called: completed -> approved ===
+[2025-11-01 18:59:07] Target roles: admin, brand, marketing
+[2025-11-01 18:59:07] Found 7 users with roles: admin, brand, marketing
+[2025-11-01 18:59:07] Sending to May (admin)
+[2025-11-01 18:59:07] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-01 18:59:08] HTTP Code: 200
+[2025-11-01 18:59:08] SUCCESS: Message sent
+[2025-11-01 18:59:08] Sending to brand (brand)
+[2025-11-01 18:59:08] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-01 18:59:09] HTTP Code: 200
+[2025-11-01 18:59:09] SUCCESS: Message sent
+[2025-11-01 18:59:09] Sending to MIw (marketing)
+[2025-11-01 18:59:09] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-01 18:59:09] HTTP Code: 200
+[2025-11-01 18:59:09] SUCCESS: Message sent
+[2025-11-01 18:59:09] SKIPPED: Already sent to Jeaw (duplicate)
+[2025-11-01 18:59:09] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-01 18:59:09] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-01 18:59:09] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-01 18:59:09] Sent to 3 out of 7 users
+[2025-11-01 18:59:09] Skipped (duplicates): Jeaw, Peach, Oat
+[2025-11-01 18:59:09] Failed users: May-hotel (no webhook)
+[2025-11-01 18:59:09] === notifyStatusChange completed ===
+[2025-11-01 18:59:38] Loaded 7 Pumble users
+[2025-11-01 18:59:38] === notifyStatusChange called: completed -> approved ===
+[2025-11-01 18:59:38] Target roles: admin, brand, marketing
+[2025-11-01 18:59:38] Found 7 users with roles: admin, brand, marketing
+[2025-11-01 18:59:38] Sending to May (admin)
+[2025-11-01 18:59:38] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-01 18:59:38] HTTP Code: 200
+[2025-11-01 18:59:38] SUCCESS: Message sent
+[2025-11-01 18:59:38] Sending to brand (brand)
+[2025-11-01 18:59:38] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-01 18:59:39] HTTP Code: 200
+[2025-11-01 18:59:39] SUCCESS: Message sent
+[2025-11-01 18:59:39] Sending to MIw (marketing)
+[2025-11-01 18:59:39] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-01 18:59:40] HTTP Code: 200
+[2025-11-01 18:59:40] SUCCESS: Message sent
+[2025-11-01 18:59:40] SKIPPED: Already sent to Jeaw (duplicate)
+[2025-11-01 18:59:40] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-01 18:59:40] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-01 18:59:40] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-01 18:59:40] Sent to 3 out of 7 users
+[2025-11-01 18:59:40] Skipped (duplicates): Jeaw, Peach, Oat
+[2025-11-01 18:59:40] Failed users: May-hotel (no webhook)
+[2025-11-01 18:59:40] === notifyStatusChange completed ===
+[2025-11-02 00:43:52] Loaded 7 Pumble users
+[2025-11-02 00:43:52] Found 4 users with roles: admin, marketing
+[2025-11-02 00:43:52] Sending to May (admin)
+[2025-11-02 00:43:52] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-02 00:43:53] HTTP Code: 200
+[2025-11-02 00:43:53] SUCCESS: Message sent
+[2025-11-02 00:43:53] Sending to MIw (marketing)
+[2025-11-02 00:43:53] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-02 00:43:54] HTTP Code: 200
+[2025-11-02 00:43:54] SUCCESS: Message sent
+[2025-11-02 00:43:54] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-02 00:43:54] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-02 00:43:54] Sent to 2 out of 4 users
+[2025-11-02 00:43:54] Skipped (duplicates): Oat
+[2025-11-02 00:43:54] Failed users: May-hotel (no webhook)
+[2025-11-10 12:14:20] Loaded 7 Pumble users
+[2025-11-10 12:14:20] === notifyNewBrief called ===
+[2025-11-10 12:14:20] Found 4 users with roles: admin
+[2025-11-10 12:14:20] Sending to May (admin)
+[2025-11-10 12:14:20] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-10 12:14:21] HTTP Code: 200
+[2025-11-10 12:14:21] SUCCESS: Message sent
+[2025-11-10 12:14:21] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-10 12:14:21] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-10 12:14:21] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-10 12:14:21] Sent to 1 out of 4 users
+[2025-11-10 12:14:21] Skipped (duplicates): Oat
+[2025-11-10 12:14:21] Failed users: May-hotel (no webhook), hr (no webhook)
+[2025-11-10 12:14:21] === notifyNewBrief completed ===
+[2025-11-17 13:44:18] Loaded 7 Pumble users
+[2025-11-17 13:44:18] === notifyNewBrief called ===
+[2025-11-17 13:44:18] Found 11 users with roles: admin
+[2025-11-17 13:44:18] Sending to May (admin)
+[2025-11-17 13:44:18] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 13:44:19] HTTP Code: 200
+[2025-11-17 13:44:19] SUCCESS: Message sent
+[2025-11-17 13:44:19] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 13:44:19] Sending to Sunny (admin)
+[2025-11-17 13:44:19] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 13:44:19] HTTP Code: 200
+[2025-11-17 13:44:19] SUCCESS: Message sent
+[2025-11-17 13:44:19] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 13:44:19] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 13:44:19] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 13:44:19] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 13:44:19] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 13:44:19] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 13:44:19] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 13:44:19] SKIPPED: No webhook configured for user บุษบา (แดนประเเทือง)
+[2025-11-17 13:44:19] Sent to 2 out of 11 users
+[2025-11-17 13:44:19] Skipped (duplicates): Oat
+[2025-11-17 13:44:19] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), แดนประเเทือง (no webhook)
+[2025-11-17 13:44:19] === notifyNewBrief completed ===
+[2025-11-17 13:44:48] Loaded 7 Pumble users
+[2025-11-17 13:44:48] === notifyNewBrief called ===
+[2025-11-17 13:44:48] Found 11 users with roles: admin
+[2025-11-17 13:44:48] Sending to May (admin)
+[2025-11-17 13:44:48] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 13:44:49] HTTP Code: 200
+[2025-11-17 13:44:49] SUCCESS: Message sent
+[2025-11-17 13:44:49] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 13:44:49] Sending to Sunny (admin)
+[2025-11-17 13:44:49] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 13:44:50] HTTP Code: 200
+[2025-11-17 13:44:50] SUCCESS: Message sent
+[2025-11-17 13:44:50] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 13:44:50] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 13:44:50] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 13:44:50] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 13:44:50] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 13:44:50] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 13:44:50] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 13:44:50] SKIPPED: No webhook configured for user บุษบา (แดนประเเทือง)
+[2025-11-17 13:44:50] Sent to 2 out of 11 users
+[2025-11-17 13:44:50] Skipped (duplicates): Oat
+[2025-11-17 13:44:50] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), แดนประเเทือง (no webhook)
+[2025-11-17 13:44:50] === notifyNewBrief completed ===
+[2025-11-17 13:45:56] Loaded 7 Pumble users
+[2025-11-17 13:45:56] === notifyStatusChange called: pending -> in_progress ===
+[2025-11-17 13:45:56] Target roles: admin
+[2025-11-17 13:45:56] Found 11 users with roles: admin
+[2025-11-17 13:45:56] Sending to May (admin)
+[2025-11-17 13:45:56] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 13:45:57] HTTP Code: 200
+[2025-11-17 13:45:57] SUCCESS: Message sent
+[2025-11-17 13:45:57] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 13:45:57] Sending to Sunny (admin)
+[2025-11-17 13:45:57] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 13:45:58] HTTP Code: 200
+[2025-11-17 13:45:58] SUCCESS: Message sent
+[2025-11-17 13:45:58] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 13:45:58] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 13:45:58] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 13:45:58] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 13:45:58] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 13:45:58] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 13:45:58] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 13:45:58] SKIPPED: No webhook configured for user บุษบา (แดนประเเทือง)
+[2025-11-17 13:45:58] Sent to 2 out of 11 users
+[2025-11-17 13:45:58] Skipped (duplicates): Oat
+[2025-11-17 13:45:58] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), แดนประเเทือง (no webhook)
+[2025-11-17 13:45:58] === notifyStatusChange completed ===
+[2025-11-17 13:46:41] Loaded 7 Pumble users
+[2025-11-17 13:46:41] === notifyStatusChange called: pending -> in_progress ===
+[2025-11-17 13:46:41] Target roles: admin
+[2025-11-17 13:46:41] Found 11 users with roles: admin
+[2025-11-17 13:46:41] Sending to May (admin)
+[2025-11-17 13:46:41] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 13:46:42] HTTP Code: 200
+[2025-11-17 13:46:42] SUCCESS: Message sent
+[2025-11-17 13:46:42] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 13:46:42] Sending to Sunny (admin)
+[2025-11-17 13:46:42] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 13:46:42] HTTP Code: 200
+[2025-11-17 13:46:42] SUCCESS: Message sent
+[2025-11-17 13:46:42] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 13:46:42] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 13:46:42] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 13:46:42] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 13:46:42] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 13:46:42] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 13:46:42] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 13:46:42] SKIPPED: No webhook configured for user บุษบา (แดนประเเทือง)
+[2025-11-17 13:46:42] Sent to 2 out of 11 users
+[2025-11-17 13:46:42] Skipped (duplicates): Oat
+[2025-11-17 13:46:42] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), แดนประเเทือง (no webhook)
+[2025-11-17 13:46:42] === notifyStatusChange completed ===
+[2025-11-17 13:49:21] Loaded 7 Pumble users
+[2025-11-17 13:49:21] === notifyStatusChange called: in_progress -> completed ===
+[2025-11-17 13:49:21] Target roles: admin, brand, marketing, approve
+[2025-11-17 13:49:21] Found 16 users with roles: admin, brand, marketing, approve
+[2025-11-17 13:49:21] Sending to May (admin)
+[2025-11-17 13:49:21] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 13:49:22] HTTP Code: 200
+[2025-11-17 13:49:22] SUCCESS: Message sent
+[2025-11-17 13:49:22] Sending to brand (brand)
+[2025-11-17 13:49:22] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-17 13:49:22] Loaded 7 Pumble users
+[2025-11-17 13:49:22] === notifyStatusChange called: completed -> completed ===
+[2025-11-17 13:49:22] Target roles: admin, brand, marketing, approve
+[2025-11-17 13:49:22] Found 16 users with roles: admin, brand, marketing, approve
+[2025-11-17 13:49:22] Sending to May (admin)
+[2025-11-17 13:49:22] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 13:49:23] HTTP Code: 200
+[2025-11-17 13:49:23] SUCCESS: Message sent
+[2025-11-17 13:49:23] Sending to MIw (marketing)
+[2025-11-17 13:49:23] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-17 13:49:23] HTTP Code: 200
+[2025-11-17 13:49:23] SUCCESS: Message sent
+[2025-11-17 13:49:23] Sending to brand (brand)
+[2025-11-17 13:49:23] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-17 13:49:23] HTTP Code: 200
+[2025-11-17 13:49:23] SUCCESS: Message sent
+[2025-11-17 13:49:23] SKIPPED: Already sent to Jeaw (duplicate)
+[2025-11-17 13:49:23] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-17 13:49:23] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 13:49:23] Sending to Sunny (admin)
+[2025-11-17 13:49:23] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 13:49:24] HTTP Code: 200
+[2025-11-17 13:49:24] SUCCESS: Message sent
+[2025-11-17 13:49:24] Sending to MIw (marketing)
+[2025-11-17 13:49:24] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-17 13:49:24] HTTP Code: 200
+[2025-11-17 13:49:24] SUCCESS: Message sent
+[2025-11-17 13:49:24] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 13:49:24] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 13:49:24] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 13:49:24] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 13:49:24] SKIPPED: No webhook configured for user approve (approve)
+[2025-11-17 13:49:24] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 13:49:24] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 13:49:24] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 13:49:24] SKIPPED: No webhook configured for user บุษบา (แดนประเเทือง)
+[2025-11-17 13:49:24] Sent to 4 out of 16 users
+[2025-11-17 13:49:24] Skipped (duplicates): Jeaw, Peach, Oat
+[2025-11-17 13:49:24] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), approve (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), แดนประเเทือง (no webhook)
+[2025-11-17 13:49:24] === notifyStatusChange completed ===
+[2025-11-17 13:49:24] HTTP Code: 200
+[2025-11-17 13:49:24] SUCCESS: Message sent
+[2025-11-17 13:49:24] SKIPPED: Already sent to Jeaw (duplicate)
+[2025-11-17 13:49:24] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-17 13:49:24] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 13:49:24] Sending to Sunny (admin)
+[2025-11-17 13:49:24] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 13:49:25] HTTP Code: 200
+[2025-11-17 13:49:25] SUCCESS: Message sent
+[2025-11-17 13:49:25] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 13:49:25] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 13:49:25] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 13:49:25] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 13:49:25] SKIPPED: No webhook configured for user approve (approve)
+[2025-11-17 13:49:25] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 13:49:25] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 13:49:25] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 13:49:25] SKIPPED: No webhook configured for user บุษบา (แดนประเเทือง)
+[2025-11-17 13:49:25] Sent to 4 out of 16 users
+[2025-11-17 13:49:25] Skipped (duplicates): Jeaw, Peach, Oat
+[2025-11-17 13:49:25] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), approve (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), แดนประเเทือง (no webhook)
+[2025-11-17 13:49:25] === notifyStatusChange completed ===
+[2025-11-17 13:49:28] Loaded 7 Pumble users
+[2025-11-17 13:49:28] === notifyStatusChange called: completed -> completed ===
+[2025-11-17 13:49:28] Target roles: admin, brand, marketing, approve
+[2025-11-17 13:49:28] Found 16 users with roles: admin, brand, marketing, approve
+[2025-11-17 13:49:28] Sending to May (admin)
+[2025-11-17 13:49:28] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 13:49:29] HTTP Code: 200
+[2025-11-17 13:49:29] SUCCESS: Message sent
+[2025-11-17 13:49:29] Sending to brand (brand)
+[2025-11-17 13:49:29] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-17 13:49:30] HTTP Code: 200
+[2025-11-17 13:49:30] SUCCESS: Message sent
+[2025-11-17 13:49:30] Sending to MIw (marketing)
+[2025-11-17 13:49:30] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-17 13:49:30] HTTP Code: 200
+[2025-11-17 13:49:30] SUCCESS: Message sent
+[2025-11-17 13:49:30] SKIPPED: Already sent to Jeaw (duplicate)
+[2025-11-17 13:49:30] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-17 13:49:30] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 13:49:30] Sending to Sunny (admin)
+[2025-11-17 13:49:30] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 13:49:31] HTTP Code: 200
+[2025-11-17 13:49:31] SUCCESS: Message sent
+[2025-11-17 13:49:31] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 13:49:31] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 13:49:31] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 13:49:31] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 13:49:31] SKIPPED: No webhook configured for user approve (approve)
+[2025-11-17 13:49:31] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 13:49:31] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 13:49:31] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 13:49:31] SKIPPED: No webhook configured for user บุษบา (แดนประเเทือง)
+[2025-11-17 13:49:31] Sent to 4 out of 16 users
+[2025-11-17 13:49:31] Skipped (duplicates): Jeaw, Peach, Oat
+[2025-11-17 13:49:31] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), approve (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), แดนประเเทือง (no webhook)
+[2025-11-17 13:49:31] === notifyStatusChange completed ===
+[2025-11-17 13:49:34] Loaded 7 Pumble users
+[2025-11-17 13:49:34] === notifyStatusChange called: completed -> completed ===
+[2025-11-17 13:49:34] Target roles: admin, brand, marketing, approve
+[2025-11-17 13:49:34] Found 16 users with roles: admin, brand, marketing, approve
+[2025-11-17 13:49:34] Sending to May (admin)
+[2025-11-17 13:49:34] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 13:49:35] HTTP Code: 200
+[2025-11-17 13:49:35] SUCCESS: Message sent
+[2025-11-17 13:49:35] Sending to brand (brand)
+[2025-11-17 13:49:35] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-17 13:49:35] HTTP Code: 200
+[2025-11-17 13:49:35] SUCCESS: Message sent
+[2025-11-17 13:49:35] Sending to MIw (marketing)
+[2025-11-17 13:49:35] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-17 13:49:36] HTTP Code: 200
+[2025-11-17 13:49:36] SUCCESS: Message sent
+[2025-11-17 13:49:36] SKIPPED: Already sent to Jeaw (duplicate)
+[2025-11-17 13:49:36] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-17 13:49:36] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 13:49:36] Sending to Sunny (admin)
+[2025-11-17 13:49:36] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 13:49:37] HTTP Code: 200
+[2025-11-17 13:49:37] SUCCESS: Message sent
+[2025-11-17 13:49:37] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 13:49:37] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 13:49:37] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 13:49:37] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 13:49:37] SKIPPED: No webhook configured for user approve (approve)
+[2025-11-17 13:49:37] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 13:49:37] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 13:49:37] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 13:49:37] SKIPPED: No webhook configured for user บุษบา (แดนประเเทือง)
+[2025-11-17 13:49:37] Sent to 4 out of 16 users
+[2025-11-17 13:49:37] Skipped (duplicates): Jeaw, Peach, Oat
+[2025-11-17 13:49:37] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), approve (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), แดนประเเทือง (no webhook)
+[2025-11-17 13:49:37] === notifyStatusChange completed ===
+[2025-11-17 13:49:42] Loaded 7 Pumble users
+[2025-11-17 13:49:42] === notifyStatusChange called: completed -> approved ===
+[2025-11-17 13:49:42] Target roles: admin, brand, marketing
+[2025-11-17 13:49:42] Found 15 users with roles: admin, brand, marketing
+[2025-11-17 13:49:42] Sending to May (admin)
+[2025-11-17 13:49:42] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 13:49:43] HTTP Code: 200
+[2025-11-17 13:49:43] SUCCESS: Message sent
+[2025-11-17 13:49:43] Sending to brand (brand)
+[2025-11-17 13:49:43] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-17 13:49:43] HTTP Code: 200
+[2025-11-17 13:49:43] SUCCESS: Message sent
+[2025-11-17 13:49:43] Sending to MIw (marketing)
+[2025-11-17 13:49:43] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-17 13:49:44] HTTP Code: 200
+[2025-11-17 13:49:44] SUCCESS: Message sent
+[2025-11-17 13:49:44] SKIPPED: Already sent to Jeaw (duplicate)
+[2025-11-17 13:49:44] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-17 13:49:44] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 13:49:44] Sending to Sunny (admin)
+[2025-11-17 13:49:44] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 13:49:45] HTTP Code: 200
+[2025-11-17 13:49:45] SUCCESS: Message sent
+[2025-11-17 13:49:45] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 13:49:45] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 13:49:45] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 13:49:45] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 13:49:45] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 13:49:45] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 13:49:45] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 13:49:45] SKIPPED: No webhook configured for user บุษบา (แดนประเเทือง)
+[2025-11-17 13:49:45] Sent to 4 out of 15 users
+[2025-11-17 13:49:45] Skipped (duplicates): Jeaw, Peach, Oat
+[2025-11-17 13:49:45] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), แดนประเเทือง (no webhook)
+[2025-11-17 13:49:45] === notifyStatusChange completed ===
+[2025-11-17 13:49:53] Loaded 7 Pumble users
+[2025-11-17 13:49:53] === notifyStatusChange called: approved -> completed ===
+[2025-11-17 13:49:53] Target roles: admin, brand, marketing, approve
+[2025-11-17 13:49:53] Found 16 users with roles: admin, brand, marketing, approve
+[2025-11-17 13:49:53] Sending to May (admin)
+[2025-11-17 13:49:53] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 13:49:53] HTTP Code: 200
+[2025-11-17 13:49:53] SUCCESS: Message sent
+[2025-11-17 13:49:53] Sending to brand (brand)
+[2025-11-17 13:49:53] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-17 13:49:54] HTTP Code: 200
+[2025-11-17 13:49:54] SUCCESS: Message sent
+[2025-11-17 13:49:54] Sending to MIw (marketing)
+[2025-11-17 13:49:54] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-17 13:49:55] HTTP Code: 200
+[2025-11-17 13:49:55] SUCCESS: Message sent
+[2025-11-17 13:49:55] SKIPPED: Already sent to Jeaw (duplicate)
+[2025-11-17 13:49:55] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-17 13:49:55] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 13:49:55] Sending to Sunny (admin)
+[2025-11-17 13:49:55] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 13:49:56] HTTP Code: 200
+[2025-11-17 13:49:56] SUCCESS: Message sent
+[2025-11-17 13:49:56] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 13:49:56] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 13:49:56] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 13:49:56] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 13:49:56] SKIPPED: No webhook configured for user approve (approve)
+[2025-11-17 13:49:56] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 13:49:56] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 13:49:56] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 13:49:56] SKIPPED: No webhook configured for user บุษบา (แดนประเเทือง)
+[2025-11-17 13:49:56] Sent to 4 out of 16 users
+[2025-11-17 13:49:56] Skipped (duplicates): Jeaw, Peach, Oat
+[2025-11-17 13:49:56] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), approve (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), แดนประเเทือง (no webhook)
+[2025-11-17 13:49:56] === notifyStatusChange completed ===
+[2025-11-17 13:50:41] Loaded 7 Pumble users
+[2025-11-17 13:50:41] === notifyStatusChange called: completed -> approved ===
+[2025-11-17 13:50:41] Target roles: admin, brand, marketing
+[2025-11-17 13:50:41] Found 15 users with roles: admin, brand, marketing
+[2025-11-17 13:50:41] Sending to May (admin)
+[2025-11-17 13:50:41] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 13:50:41] HTTP Code: 200
+[2025-11-17 13:50:41] SUCCESS: Message sent
+[2025-11-17 13:50:41] Sending to brand (brand)
+[2025-11-17 13:50:41] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-17 13:50:42] HTTP Code: 200
+[2025-11-17 13:50:42] SUCCESS: Message sent
+[2025-11-17 13:50:42] Sending to MIw (marketing)
+[2025-11-17 13:50:42] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-17 13:50:43] HTTP Code: 200
+[2025-11-17 13:50:43] SUCCESS: Message sent
+[2025-11-17 13:50:43] SKIPPED: Already sent to Jeaw (duplicate)
+[2025-11-17 13:50:43] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-17 13:50:43] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 13:50:43] Sending to Sunny (admin)
+[2025-11-17 13:50:43] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 13:50:44] HTTP Code: 200
+[2025-11-17 13:50:44] SUCCESS: Message sent
+[2025-11-17 13:50:44] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 13:50:44] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 13:50:44] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 13:50:44] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 13:50:44] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 13:50:44] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 13:50:44] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 13:50:44] SKIPPED: No webhook configured for user บุษบา (แดนประเเทือง)
+[2025-11-17 13:50:44] Sent to 4 out of 15 users
+[2025-11-17 13:50:44] Skipped (duplicates): Jeaw, Peach, Oat
+[2025-11-17 13:50:44] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), แดนประเเทือง (no webhook)
+[2025-11-17 13:50:44] === notifyStatusChange completed ===
+[2025-11-17 13:57:10] Loaded 7 Pumble users
+[2025-11-17 13:57:10] Found 12 users with roles: admin, marketing
+[2025-11-17 13:57:10] Sending to May (admin)
+[2025-11-17 13:57:10] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 13:57:10] HTTP Code: 200
+[2025-11-17 13:57:10] SUCCESS: Message sent
+[2025-11-17 13:57:10] Sending to MIw (marketing)
+[2025-11-17 13:57:10] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-17 13:57:11] HTTP Code: 200
+[2025-11-17 13:57:11] SUCCESS: Message sent
+[2025-11-17 13:57:11] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 13:57:11] Sending to Sunny (admin)
+[2025-11-17 13:57:11] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 13:57:12] HTTP Code: 200
+[2025-11-17 13:57:12] SUCCESS: Message sent
+[2025-11-17 13:57:12] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 13:57:12] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 13:57:12] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 13:57:12] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 13:57:12] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 13:57:12] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 13:57:12] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 13:57:12] SKIPPED: No webhook configured for user บุษบา (แดนประเเทือง)
+[2025-11-17 13:57:12] Sent to 3 out of 12 users
+[2025-11-17 13:57:12] Skipped (duplicates): Oat
+[2025-11-17 13:57:12] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), แดนประเเทือง (no webhook)
+[2025-11-17 14:04:08] Loaded 7 Pumble users
+[2025-11-17 14:04:08] Found 11 users with roles: admin
+[2025-11-17 14:04:08] Sending to May (admin)
+[2025-11-17 14:04:08] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 14:04:09] HTTP Code: 200
+[2025-11-17 14:04:09] SUCCESS: Message sent
+[2025-11-17 14:04:09] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 14:04:09] Sending to Sunny (admin)
+[2025-11-17 14:04:09] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 14:04:09] HTTP Code: 200
+[2025-11-17 14:04:09] SUCCESS: Message sent
+[2025-11-17 14:04:09] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 14:04:09] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 14:04:09] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 14:04:09] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 14:04:09] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 14:04:09] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 14:04:09] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 14:04:09] SKIPPED: No webhook configured for user บุษบา (แดนประเเทือง)
+[2025-11-17 14:04:09] Sent to 2 out of 11 users
+[2025-11-17 14:04:09] Skipped (duplicates): Oat
+[2025-11-17 14:04:09] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), แดนประเเทือง (no webhook)
+[2025-11-17 14:56:41] Loaded 7 Pumble users
+[2025-11-17 14:56:41] Found 12 users with roles: admin, marketing
+[2025-11-17 14:56:41] Sending to May (admin)
+[2025-11-17 14:56:41] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 14:56:42] HTTP Code: 200
+[2025-11-17 14:56:42] SUCCESS: Message sent
+[2025-11-17 14:56:42] Sending to MIw (marketing)
+[2025-11-17 14:56:42] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-17 14:56:43] HTTP Code: 200
+[2025-11-17 14:56:43] SUCCESS: Message sent
+[2025-11-17 14:56:43] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 14:56:43] Sending to Sunny (admin)
+[2025-11-17 14:56:43] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 14:56:44] HTTP Code: 200
+[2025-11-17 14:56:44] SUCCESS: Message sent
+[2025-11-17 14:56:44] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 14:56:44] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 14:56:44] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 14:56:44] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 14:56:44] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 14:56:44] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 14:56:44] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 14:56:44] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-17 14:56:44] Sent to 3 out of 12 users
+[2025-11-17 14:56:44] Skipped (duplicates): Oat
+[2025-11-17 14:56:44] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-17 14:57:42] Loaded 7 Pumble users
+[2025-11-17 14:57:42] Found 12 users with roles: admin, marketing
+[2025-11-17 14:57:42] Sending to May (admin)
+[2025-11-17 14:57:42] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 14:57:43] HTTP Code: 200
+[2025-11-17 14:57:43] SUCCESS: Message sent
+[2025-11-17 14:57:43] Sending to MIw (marketing)
+[2025-11-17 14:57:43] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-17 14:57:44] HTTP Code: 200
+[2025-11-17 14:57:44] SUCCESS: Message sent
+[2025-11-17 14:57:44] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 14:57:44] Sending to Sunny (admin)
+[2025-11-17 14:57:44] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 14:57:45] HTTP Code: 200
+[2025-11-17 14:57:45] SUCCESS: Message sent
+[2025-11-17 14:57:45] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 14:57:45] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 14:57:45] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 14:57:45] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 14:57:45] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 14:57:45] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 14:57:45] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 14:57:45] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-17 14:57:45] Sent to 3 out of 12 users
+[2025-11-17 14:57:45] Skipped (duplicates): Oat
+[2025-11-17 14:57:45] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-17 14:58:37] Loaded 7 Pumble users
+[2025-11-17 14:58:37] Found 12 users with roles: admin, marketing
+[2025-11-17 14:58:37] Sending to May (admin)
+[2025-11-17 14:58:37] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 14:58:38] HTTP Code: 200
+[2025-11-17 14:58:38] SUCCESS: Message sent
+[2025-11-17 14:58:38] Sending to MIw (marketing)
+[2025-11-17 14:58:38] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-17 14:58:39] HTTP Code: 200
+[2025-11-17 14:58:39] SUCCESS: Message sent
+[2025-11-17 14:58:39] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 14:58:39] Sending to Sunny (admin)
+[2025-11-17 14:58:39] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 14:58:40] HTTP Code: 200
+[2025-11-17 14:58:40] SUCCESS: Message sent
+[2025-11-17 14:58:40] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 14:58:40] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 14:58:40] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 14:58:40] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 14:58:40] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 14:58:40] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 14:58:40] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 14:58:40] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-17 14:58:40] Sent to 3 out of 12 users
+[2025-11-17 14:58:40] Skipped (duplicates): Oat
+[2025-11-17 14:58:40] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-17 18:59:21] Loaded 7 Pumble users
+[2025-11-17 18:59:21] === notifyNewBrief called ===
+[2025-11-17 18:59:21] Found 13 users with roles: admin
+[2025-11-17 18:59:21] Sending to May (admin)
+[2025-11-17 18:59:21] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-17 18:59:22] HTTP Code: 200
+[2025-11-17 18:59:22] SUCCESS: Message sent
+[2025-11-17 18:59:22] Sending to Jeew (admin)
+[2025-11-17 18:59:22] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-17 18:59:23] HTTP Code: 200
+[2025-11-17 18:59:23] SUCCESS: Message sent
+[2025-11-17 18:59:23] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-17 18:59:23] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-17 18:59:23] Sending to Sunny (admin)
+[2025-11-17 18:59:23] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-17 18:59:24] HTTP Code: 200
+[2025-11-17 18:59:24] SUCCESS: Message sent
+[2025-11-17 18:59:24] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-17 18:59:24] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-17 18:59:24] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-17 18:59:24] SKIPPED: No webhook configured for user it (it)
+[2025-11-17 18:59:24] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-17 18:59:24] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-17 18:59:24] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-17 18:59:24] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-17 18:59:24] Sent to 3 out of 13 users
+[2025-11-17 18:59:24] Skipped (duplicates): Peach, Oat
+[2025-11-17 18:59:24] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-17 18:59:24] === notifyNewBrief completed ===
+[2025-11-19 09:42:19] Loaded 7 Pumble users
+[2025-11-19 09:42:19] Found 14 users with roles: admin, marketing
+[2025-11-19 09:42:19] Sending to May (admin)
+[2025-11-19 09:42:19] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-19 09:42:20] HTTP Code: 200
+[2025-11-19 09:42:20] SUCCESS: Message sent
+[2025-11-19 09:42:20] Sending to MIw (marketing)
+[2025-11-19 09:42:20] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-19 09:42:21] HTTP Code: 200
+[2025-11-19 09:42:21] SUCCESS: Message sent
+[2025-11-19 09:42:21] Sending to Jeew (admin)
+[2025-11-19 09:42:21] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-19 09:42:22] HTTP Code: 200
+[2025-11-19 09:42:22] SUCCESS: Message sent
+[2025-11-19 09:42:22] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-19 09:42:22] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-19 09:42:22] Sending to Sunny (admin)
+[2025-11-19 09:42:22] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-19 09:42:22] HTTP Code: 200
+[2025-11-19 09:42:22] SUCCESS: Message sent
+[2025-11-19 09:42:22] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-19 09:42:22] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-19 09:42:22] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-19 09:42:22] SKIPPED: No webhook configured for user it (it)
+[2025-11-19 09:42:22] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-19 09:42:22] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-19 09:42:22] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-19 09:42:22] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-19 09:42:22] Sent to 4 out of 14 users
+[2025-11-19 09:42:22] Skipped (duplicates): Peach, Oat
+[2025-11-19 09:42:22] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-19 09:43:33] Loaded 7 Pumble users
+[2025-11-19 09:43:33] Found 14 users with roles: admin, marketing
+[2025-11-19 09:43:33] Sending to May (admin)
+[2025-11-19 09:43:33] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-19 09:43:34] HTTP Code: 200
+[2025-11-19 09:43:34] SUCCESS: Message sent
+[2025-11-19 09:43:34] Sending to MIw (marketing)
+[2025-11-19 09:43:34] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-19 09:43:34] HTTP Code: 200
+[2025-11-19 09:43:34] SUCCESS: Message sent
+[2025-11-19 09:43:34] Sending to Jeew (admin)
+[2025-11-19 09:43:34] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-19 09:43:35] HTTP Code: 200
+[2025-11-19 09:43:35] SUCCESS: Message sent
+[2025-11-19 09:43:35] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-19 09:43:35] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-19 09:43:35] Sending to Sunny (admin)
+[2025-11-19 09:43:35] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-19 09:43:36] HTTP Code: 200
+[2025-11-19 09:43:36] SUCCESS: Message sent
+[2025-11-19 09:43:36] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-19 09:43:36] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-19 09:43:36] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-19 09:43:36] SKIPPED: No webhook configured for user it (it)
+[2025-11-19 09:43:36] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-19 09:43:36] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-19 09:43:36] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-19 09:43:36] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-19 09:43:36] Sent to 4 out of 14 users
+[2025-11-19 09:43:36] Skipped (duplicates): Peach, Oat
+[2025-11-19 09:43:36] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-19 12:33:41] Loaded 7 Pumble users
+[2025-11-19 12:33:41] Found 13 users with roles: admin
+[2025-11-19 12:33:41] Sending to May (admin)
+[2025-11-19 12:33:41] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-19 12:33:42] HTTP Code: 200
+[2025-11-19 12:33:42] SUCCESS: Message sent
+[2025-11-19 12:33:42] Sending to Jeew (admin)
+[2025-11-19 12:33:42] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-19 12:33:42] HTTP Code: 200
+[2025-11-19 12:33:42] SUCCESS: Message sent
+[2025-11-19 12:33:42] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-19 12:33:42] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-19 12:33:42] Sending to Sunny (admin)
+[2025-11-19 12:33:42] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-19 12:33:43] HTTP Code: 200
+[2025-11-19 12:33:43] SUCCESS: Message sent
+[2025-11-19 12:33:43] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-19 12:33:43] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-19 12:33:43] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-19 12:33:43] SKIPPED: No webhook configured for user it (it)
+[2025-11-19 12:33:43] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-19 12:33:43] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-19 12:33:43] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-19 12:33:43] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-19 12:33:43] Sent to 3 out of 13 users
+[2025-11-19 12:33:43] Skipped (duplicates): Peach, Oat
+[2025-11-19 12:33:43] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-19 14:03:37] Loaded 7 Pumble users
+[2025-11-19 14:03:37] Found 14 users with roles: admin, marketing
+[2025-11-19 14:03:37] Sending to May (admin)
+[2025-11-19 14:03:37] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-19 14:03:38] HTTP Code: 200
+[2025-11-19 14:03:38] SUCCESS: Message sent
+[2025-11-19 14:03:38] Sending to MIw (marketing)
+[2025-11-19 14:03:38] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-19 14:03:39] HTTP Code: 200
+[2025-11-19 14:03:39] SUCCESS: Message sent
+[2025-11-19 14:03:39] Sending to Jeew (admin)
+[2025-11-19 14:03:39] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-19 14:03:39] HTTP Code: 200
+[2025-11-19 14:03:39] SUCCESS: Message sent
+[2025-11-19 14:03:39] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-19 14:03:39] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-19 14:03:39] Sending to Sunny (admin)
+[2025-11-19 14:03:39] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-19 14:03:40] HTTP Code: 200
+[2025-11-19 14:03:40] SUCCESS: Message sent
+[2025-11-19 14:03:40] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-19 14:03:40] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-19 14:03:40] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-19 14:03:40] SKIPPED: No webhook configured for user it (it)
+[2025-11-19 14:03:40] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-19 14:03:40] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-19 14:03:40] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-19 14:03:40] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-19 14:03:40] Sent to 4 out of 14 users
+[2025-11-19 14:03:40] Skipped (duplicates): Peach, Oat
+[2025-11-19 14:03:40] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-19 14:03:40] Loaded 7 Pumble users
+[2025-11-19 14:03:40] Found 14 users with roles: admin, marketing
+[2025-11-19 14:03:40] Sending to May (admin)
+[2025-11-19 14:03:40] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-19 14:03:41] HTTP Code: 200
+[2025-11-19 14:03:41] SUCCESS: Message sent
+[2025-11-19 14:03:41] Sending to MIw (marketing)
+[2025-11-19 14:03:41] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-19 14:03:42] HTTP Code: 200
+[2025-11-19 14:03:42] SUCCESS: Message sent
+[2025-11-19 14:03:42] Sending to Jeew (admin)
+[2025-11-19 14:03:42] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-19 14:03:42] HTTP Code: 200
+[2025-11-19 14:03:42] SUCCESS: Message sent
+[2025-11-19 14:03:42] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-19 14:03:42] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-19 14:03:42] Sending to Sunny (admin)
+[2025-11-19 14:03:42] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-19 14:03:43] HTTP Code: 200
+[2025-11-19 14:03:43] SUCCESS: Message sent
+[2025-11-19 14:03:43] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-19 14:03:43] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-19 14:03:43] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-19 14:03:43] SKIPPED: No webhook configured for user it (it)
+[2025-11-19 14:03:43] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-19 14:03:43] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-19 14:03:43] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-19 14:03:43] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-19 14:03:43] Sent to 4 out of 14 users
+[2025-11-19 14:03:43] Skipped (duplicates): Peach, Oat
+[2025-11-19 14:03:43] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-19 14:04:59] Loaded 7 Pumble users
+[2025-11-19 14:04:59] Found 14 users with roles: admin, marketing
+[2025-11-19 14:04:59] Sending to May (admin)
+[2025-11-19 14:04:59] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-19 14:04:59] HTTP Code: 200
+[2025-11-19 14:04:59] SUCCESS: Message sent
+[2025-11-19 14:04:59] Sending to MIw (marketing)
+[2025-11-19 14:04:59] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-19 14:05:00] HTTP Code: 200
+[2025-11-19 14:05:00] SUCCESS: Message sent
+[2025-11-19 14:05:00] Sending to Jeew (admin)
+[2025-11-19 14:05:00] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-19 14:05:01] HTTP Code: 200
+[2025-11-19 14:05:01] SUCCESS: Message sent
+[2025-11-19 14:05:01] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-19 14:05:01] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-19 14:05:01] Sending to Sunny (admin)
+[2025-11-19 14:05:01] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-19 14:05:01] HTTP Code: 200
+[2025-11-19 14:05:01] SUCCESS: Message sent
+[2025-11-19 14:05:01] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-19 14:05:01] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-19 14:05:01] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-19 14:05:01] SKIPPED: No webhook configured for user it (it)
+[2025-11-19 14:05:01] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-19 14:05:01] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-19 14:05:01] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-19 14:05:01] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-19 14:05:01] Sent to 4 out of 14 users
+[2025-11-19 14:05:01] Skipped (duplicates): Peach, Oat
+[2025-11-19 14:05:01] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-19 14:05:30] Loaded 7 Pumble users
+[2025-11-19 14:05:30] Found 14 users with roles: admin, marketing
+[2025-11-19 14:05:30] Sending to May (admin)
+[2025-11-19 14:05:30] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-19 14:05:30] HTTP Code: 200
+[2025-11-19 14:05:30] SUCCESS: Message sent
+[2025-11-19 14:05:30] Sending to MIw (marketing)
+[2025-11-19 14:05:30] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-19 14:05:31] HTTP Code: 200
+[2025-11-19 14:05:31] SUCCESS: Message sent
+[2025-11-19 14:05:31] Sending to Jeew (admin)
+[2025-11-19 14:05:31] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-19 14:05:32] HTTP Code: 200
+[2025-11-19 14:05:32] SUCCESS: Message sent
+[2025-11-19 14:05:32] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-19 14:05:32] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-19 14:05:32] Sending to Sunny (admin)
+[2025-11-19 14:05:32] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-19 14:05:32] HTTP Code: 200
+[2025-11-19 14:05:32] SUCCESS: Message sent
+[2025-11-19 14:05:32] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-19 14:05:32] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-19 14:05:32] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-19 14:05:32] SKIPPED: No webhook configured for user it (it)
+[2025-11-19 14:05:32] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-19 14:05:32] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-19 14:05:32] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-19 14:05:32] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-19 14:05:32] Sent to 4 out of 14 users
+[2025-11-19 14:05:32] Skipped (duplicates): Peach, Oat
+[2025-11-19 14:05:32] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-19 14:05:33] Loaded 7 Pumble users
+[2025-11-19 14:05:33] Found 14 users with roles: admin, marketing
+[2025-11-19 14:05:33] Sending to May (admin)
+[2025-11-19 14:05:33] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-19 14:05:33] HTTP Code: 200
+[2025-11-19 14:05:33] SUCCESS: Message sent
+[2025-11-19 14:05:33] Sending to MIw (marketing)
+[2025-11-19 14:05:33] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-19 14:05:34] HTTP Code: 200
+[2025-11-19 14:05:34] SUCCESS: Message sent
+[2025-11-19 14:05:34] Sending to Jeew (admin)
+[2025-11-19 14:05:34] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-19 14:05:35] HTTP Code: 200
+[2025-11-19 14:05:35] SUCCESS: Message sent
+[2025-11-19 14:05:35] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-19 14:05:35] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-19 14:05:35] Sending to Sunny (admin)
+[2025-11-19 14:05:35] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-19 14:05:35] HTTP Code: 200
+[2025-11-19 14:05:35] SUCCESS: Message sent
+[2025-11-19 14:05:35] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-19 14:05:35] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-19 14:05:35] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-19 14:05:35] SKIPPED: No webhook configured for user it (it)
+[2025-11-19 14:05:35] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-19 14:05:35] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-19 14:05:35] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-19 14:05:35] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-19 14:05:35] Sent to 4 out of 14 users
+[2025-11-19 14:05:35] Skipped (duplicates): Peach, Oat
+[2025-11-19 14:05:35] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-19 16:26:55] Loaded 7 Pumble users
+[2025-11-19 16:26:55] Found 14 users with roles: admin, marketing
+[2025-11-19 16:26:55] Sending to May (admin)
+[2025-11-19 16:26:55] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-19 16:26:56] HTTP Code: 200
+[2025-11-19 16:26:56] SUCCESS: Message sent
+[2025-11-19 16:26:56] Sending to MIw (marketing)
+[2025-11-19 16:26:56] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-19 16:26:57] HTTP Code: 200
+[2025-11-19 16:26:57] SUCCESS: Message sent
+[2025-11-19 16:26:57] Sending to Jeew (admin)
+[2025-11-19 16:26:57] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-19 16:26:58] HTTP Code: 200
+[2025-11-19 16:26:58] SUCCESS: Message sent
+[2025-11-19 16:26:58] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-19 16:26:58] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-19 16:26:58] Sending to Sunny (admin)
+[2025-11-19 16:26:58] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-19 16:26:59] HTTP Code: 200
+[2025-11-19 16:26:59] SUCCESS: Message sent
+[2025-11-19 16:26:59] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-19 16:26:59] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-19 16:26:59] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-19 16:26:59] SKIPPED: No webhook configured for user it (it)
+[2025-11-19 16:26:59] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-19 16:26:59] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-19 16:26:59] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-19 16:26:59] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-19 16:26:59] Sent to 4 out of 14 users
+[2025-11-19 16:26:59] Skipped (duplicates): Peach, Oat
+[2025-11-19 16:26:59] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-19 16:26:59] Loaded 7 Pumble users
+[2025-11-19 16:26:59] Found 14 users with roles: admin, marketing
+[2025-11-19 16:26:59] Sending to May (admin)
+[2025-11-19 16:26:59] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-19 16:26:59] HTTP Code: 200
+[2025-11-19 16:26:59] SUCCESS: Message sent
+[2025-11-19 16:26:59] Sending to MIw (marketing)
+[2025-11-19 16:26:59] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-19 16:27:00] HTTP Code: 200
+[2025-11-19 16:27:00] SUCCESS: Message sent
+[2025-11-19 16:27:00] Sending to Jeew (admin)
+[2025-11-19 16:27:00] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-19 16:27:01] HTTP Code: 200
+[2025-11-19 16:27:01] SUCCESS: Message sent
+[2025-11-19 16:27:01] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-19 16:27:01] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-19 16:27:01] Sending to Sunny (admin)
+[2025-11-19 16:27:01] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-19 16:27:02] HTTP Code: 200
+[2025-11-19 16:27:02] SUCCESS: Message sent
+[2025-11-19 16:27:02] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-19 16:27:02] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-19 16:27:02] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-19 16:27:02] SKIPPED: No webhook configured for user it (it)
+[2025-11-19 16:27:02] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-19 16:27:02] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-19 16:27:02] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-19 16:27:02] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-19 16:27:02] Sent to 4 out of 14 users
+[2025-11-19 16:27:02] Skipped (duplicates): Peach, Oat
+[2025-11-19 16:27:02] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-19 16:33:02] Loaded 7 Pumble users
+[2025-11-19 16:33:02] Found 14 users with roles: admin, marketing
+[2025-11-19 16:33:02] Sending to May (admin)
+[2025-11-19 16:33:02] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-19 16:33:02] HTTP Code: 200
+[2025-11-19 16:33:02] SUCCESS: Message sent
+[2025-11-19 16:33:02] Sending to MIw (marketing)
+[2025-11-19 16:33:02] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-19 16:33:03] HTTP Code: 200
+[2025-11-19 16:33:03] SUCCESS: Message sent
+[2025-11-19 16:33:03] Sending to Jeew (admin)
+[2025-11-19 16:33:03] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-19 16:33:04] HTTP Code: 200
+[2025-11-19 16:33:04] SUCCESS: Message sent
+[2025-11-19 16:33:04] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-19 16:33:04] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-19 16:33:04] Sending to Sunny (admin)
+[2025-11-19 16:33:04] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-19 16:33:04] HTTP Code: 200
+[2025-11-19 16:33:04] SUCCESS: Message sent
+[2025-11-19 16:33:04] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-19 16:33:04] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-19 16:33:04] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-19 16:33:04] SKIPPED: No webhook configured for user it (it)
+[2025-11-19 16:33:04] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-19 16:33:04] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-19 16:33:04] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-19 16:33:04] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-19 16:33:04] Sent to 4 out of 14 users
+[2025-11-19 16:33:04] Skipped (duplicates): Peach, Oat
+[2025-11-19 16:33:04] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-19 16:35:15] Loaded 7 Pumble users
+[2025-11-19 16:35:15] Found 14 users with roles: admin, marketing
+[2025-11-19 16:35:15] Sending to May (admin)
+[2025-11-19 16:35:15] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-19 16:35:16] HTTP Code: 200
+[2025-11-19 16:35:16] SUCCESS: Message sent
+[2025-11-19 16:35:16] Sending to MIw (marketing)
+[2025-11-19 16:35:16] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-19 16:35:16] HTTP Code: 200
+[2025-11-19 16:35:16] SUCCESS: Message sent
+[2025-11-19 16:35:16] Sending to Jeew (admin)
+[2025-11-19 16:35:16] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-19 16:35:17] HTTP Code: 200
+[2025-11-19 16:35:17] SUCCESS: Message sent
+[2025-11-19 16:35:17] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-19 16:35:17] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-19 16:35:17] Sending to Sunny (admin)
+[2025-11-19 16:35:17] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-19 16:35:18] HTTP Code: 200
+[2025-11-19 16:35:18] SUCCESS: Message sent
+[2025-11-19 16:35:18] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-19 16:35:18] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-19 16:35:18] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-19 16:35:18] SKIPPED: No webhook configured for user it (it)
+[2025-11-19 16:35:18] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-19 16:35:18] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-19 16:35:18] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-19 16:35:18] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-19 16:35:18] Sent to 4 out of 14 users
+[2025-11-19 16:35:18] Skipped (duplicates): Peach, Oat
+[2025-11-19 16:35:18] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)
+[2025-11-19 16:39:44] Loaded 7 Pumble users
+[2025-11-19 16:39:44] Found 14 users with roles: admin, marketing
+[2025-11-19 16:39:44] Sending to May (admin)
+[2025-11-19 16:39:44] Sending message to: bHrtRawHtIFXBJ2iJsk4
+[2025-11-19 16:39:44] HTTP Code: 200
+[2025-11-19 16:39:44] SUCCESS: Message sent
+[2025-11-19 16:39:44] Sending to MIw (marketing)
+[2025-11-19 16:39:44] Sending message to: sBGaQ6nqyBx5cL1976rq
+[2025-11-19 16:39:45] HTTP Code: 200
+[2025-11-19 16:39:45] SUCCESS: Message sent
+[2025-11-19 16:39:45] Sending to Jeew (admin)
+[2025-11-19 16:39:45] Sending message to: Vv8TQx9j4kPTtZKYSj8N
+[2025-11-19 16:39:46] HTTP Code: 200
+[2025-11-19 16:39:46] SUCCESS: Message sent
+[2025-11-19 16:39:46] SKIPPED: Already sent to Peach (duplicate)
+[2025-11-19 16:39:46] SKIPPED: Already sent to Oat (duplicate)
+[2025-11-19 16:39:46] Sending to Sunny (admin)
+[2025-11-19 16:39:46] Sending message to: Ed5TM7yQaw1C86cUXRHh
+[2025-11-19 16:39:46] HTTP Code: 200
+[2025-11-19 16:39:46] SUCCESS: Message sent
+[2025-11-19 16:39:46] SKIPPED: No webhook configured for user may (May-hotel)
+[2025-11-19 16:39:46] SKIPPED: No webhook configured for user hr (hr)
+[2025-11-19 16:39:46] SKIPPED: No webhook configured for user fos (fos)
+[2025-11-19 16:39:46] SKIPPED: No webhook configured for user it (it)
+[2025-11-19 16:39:46] SKIPPED: No webhook configured for user Kelly (Kelly)
+[2025-11-19 16:39:46] SKIPPED: No webhook configured for user paul (paul)
+[2025-11-19 16:39:46] SKIPPED: No webhook configured for user nijjaree (nijjaree koonkoey)
+[2025-11-19 16:39:46] SKIPPED: No webhook configured for user budsaba (Budsaba)
+[2025-11-19 16:39:46] Sent to 4 out of 14 users
+[2025-11-19 16:39:46] Skipped (duplicates): Peach, Oat
+[2025-11-19 16:39:46] Failed users: May-hotel (no webhook), hr (no webhook), fos (no webhook), it (no webhook), Kelly (no webhook), paul (no webhook), nijjaree koonkoey (no webhook), Budsaba (no webhook)

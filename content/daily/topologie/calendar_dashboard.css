@@ -1,0 +1,488 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f5f7fa;
+    color: #333;
+}
+
+/* Header */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 15px 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+    max-width: 1800px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.header h1 {
+    font-size: 1.5em;
+    font-weight: 600;
+}
+
+/* Navigation */
+.nav {
+    background: white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    padding: 10px 15px;
+    margin-bottom: 15px;
+}
+
+.nav-content {
+    max-width: 1800px;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.nav a {
+    padding: 8px 15px;
+    background: #667eea;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9em;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+
+.nav a:hover {
+    background: #5568d3;
+    transform: translateY(-2px);
+}
+
+.nav a.secondary {
+    background: #95a5a6;
+}
+
+/* Container */
+.container {
+    max-width: 1800px;
+    margin: 0 auto;
+    padding: 0 15px 30px;
+}
+
+/* Stats Cards */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.stat-card {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.stat-card h3 {
+    color: #667eea;
+    font-size: 1.5em;
+    margin-bottom: 5px;
+}
+
+.stat-card p {
+    font-size: 0.85em;
+}
+
+.stat-card.pk h3 {
+    color: #dc3545;
+}
+
+.stat-card.promo h3 {
+    color: #ffc107;
+}
+
+.stat-card.lifestyle h3 {
+    color: #9c27b0;
+}
+
+/* Month Selector */
+.month-selector {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.month-selector h2 {
+    font-size: 1.3em;
+}
+
+.month-selector input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+}
+
+/* Calendar Table */
+.calendar-wrapper {
+    background: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    min-width: 1400px;
+}
+
+/* กำหนดความกว้างคอลัมน์แรก (Folder/Time) แบบตายตัว */
+.calendar-table col:first-child {
+    width: 100px;
+}
+
+/* กำหนดความกว้างคอลัมน์วันทั้ง 7 วันเท่ากันทุกคอลัมน์ */
+.calendar-table col:not(:first-child) {
+    width: 14.28%; /* 100% / 7 = 14.285714% */
+}
+
+.calendar-table th,
+.calendar-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    vertical-align: top;
+}
+
+/* Header Styles */
+.calendar-table thead th {
+    font-weight: 600;
+    padding: 10px 6px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.calendar-table thead th.folder-header {
+    background: #FFC107;
+    color: #333;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.calendar-table thead th.folder-header:hover {
+    background: #FFB300;
+}
+
+/* ส่วนชื่อวัน */
+.header-day {
+    background: #7c4dff !important;
+    color: white !important;
+    font-size: 0.9em;
+    font-weight: 600;
+    text-align: center;
+    padding: 12px 8px;
+}
+
+.calendar-table tbody th {
+    font-weight: 600;
+    background: white;
+    color: #333;
+    font-size: 0.85em;
+    text-align: center;
+}
+
+.time-slot-header {
+    background: white;
+    color: #333;
+    font-weight: 600;
+}
+
+.engage-slot {
+    background: #00D4FF !important;
+    color: #333 !important;
+    font-weight: 600;
+}
+
+/* Event Cell */
+.event-cell {
+    min-height: 70px;
+    padding: 3px;
+    cursor: pointer;
+    background: white;
+    transition: background 0.2s;
+}
+
+.event-cell:hover {
+    background: #f0f8ff !important;
+}
+
+.event-cell.empty {
+    background: #f8f9fa;
+}
+
+.event-cell.weekend {
+    background: #fff9e6;
+}
+
+/* Event Item */
+.event-item {
+    font-size: 0.7em;
+    padding: 5px 6px;
+    margin: 2px 0;
+    border-radius: 4px;
+    cursor: pointer;
+    display: block;
+    text-decoration: none;
+    color: #333;
+    background: white;
+    border: 1px solid #ddd;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.event-item:hover {
+    transform: scale(1.02);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+}
+
+/* Category Badge บนหัวงาน */
+.event-category-badge {
+    display: inline-block;
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 0.75em;
+    font-weight: 700;
+    margin-bottom: 2px;
+    color: white;
+}
+
+.badge-pk {
+    background: #dc3545;
+}
+
+.badge-promo {
+    background: #FFC107;
+    color: #333;
+}
+
+.badge-lifestyle {
+    background: #9c27b0;
+}
+
+/* สีพื้นหลังตามสถานะงาน */
+.status-planned {
+    background: #f8f9fa;
+    border-left: 3px solid #6c757d;
+}
+
+.status-in_progress {
+    background: #fff3cd;
+    border-left: 3px solid #ffc107;
+}
+
+.status-posted {
+    background: #d1ecf1;
+    border-left: 3px solid #17a2b8;
+}
+
+.status-completed {
+    background: #d4edda;
+    border-left: 3px solid #28a745;
+}
+
+.status-cancelled {
+    background: #f8d7da;
+    border-left: 3px solid #dc3545;
+}
+
+.event-title {
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-bottom: 2px;
+    font-size: 0.95em;
+}
+
+.event-assignee {
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.8em;
+    display: inline-block;
+    color: white;
+    font-weight: 600;
+}
+
+/* Date Header */
+.date-header {
+    font-weight: bold;
+    padding: 5px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    font-size: 1em;
+}
+
+.date-header.today {
+    background: #ffeb3b;
+    color: #333;
+}
+
+/* Engage Item */
+.engage-item {
+    font-size: 0.7em;
+    color: #333;
+    padding: 4px 5px;
+    margin: 2px 0;
+    background: #00D4FF;
+    border: 1px solid #00B8D4;
+    border-radius: 3px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.engage-item:hover {
+    background: #00B8D4;
+}
+
+.engage-item.completed {
+    background: #4caf50;
+    border-color: #388e3c;
+    color: white;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 1.2em;
+    }
+
+    .header-content {
+        text-align: center;
+    }
+
+    .nav a {
+        font-size: 0.8em;
+        padding: 6px 10px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .stat-card {
+        padding: 10px;
+    }
+
+    .stat-card h3 {
+        font-size: 1.2em;
+    }
+
+    .stat-card p {
+        font-size: 0.75em;
+    }
+
+    .month-selector {
+        padding: 12px;
+    }
+
+    .month-selector h2 {
+        font-size: 1.1em;
+        width: 100%;
+        text-align: center;
+    }
+
+    .month-selector input {
+        width: 100%;
+    }
+
+    .calendar-wrapper {
+        padding: 10px;
+    }
+
+    .calendar-table {
+        min-width: 900px;
+        font-size: 0.75em;
+    }
+
+    .event-item {
+        font-size: 0.65em;
+        padding: 4px 5px;
+    }
+
+    .event-category-badge {
+        font-size: 0.7em;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 10px 15px;
+    }
+
+    .header h1 {
+        font-size: 1em;
+    }
+
+    .nav a {
+        font-size: 0.75em;
+        padding: 5px 8px;
+    }
+
+    .stat-card h3 {
+        font-size: 1em;
+    }
+
+    .calendar-table {
+        min-width: 800px;
+        font-size: 0.7em;
+    }
+
+    .calendar-table th,
+    .calendar-table td {
+        padding: 4px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .nav,
+    .month-selector,
+    .stats-grid {
+        display: none;
+    }
+
+    .calendar-table {
+        font-size: 0.7em;
+    }
+
+    .event-item:hover {
+        transform: none;
+        box-shadow: none;
+    }
+}

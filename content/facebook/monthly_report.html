@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ภาพรวมผล Facebook ULG - รายงานรายเดือน</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Sarabun', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            margin-bottom: 30px;
+        }
+        
+        .header h1 {
+            color: #1877f2;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .header .date-info {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .controls label {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .controls select,
+        .controls input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+        
+        .controls button {
+            padding: 10px 25px;
+            background: #1877f2;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+        
+        .controls button:hover {
+            background: #166fe5;
+        }
+        
+        .controls button:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .report-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 14px;
+        }
+        
+        .report-table thead {
+            background: #f8f9fa;
+        }
+        
+        .report-table th {
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            color: #333;
+            border: 1px solid #dee2e6;
+        }
+        
+        .report-table th:first-child {
+            background: #e9ecef;
+            font-weight: 700;
+        }
+        
+        .report-table td {
+            padding: 12px 15px;
+            border: 1px solid #dee2e6;
+        }
+        
+        .report-table td:first-child {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .report-table tbody tr:hover {
+            background: #f1f3f5;
+        }
+        
+        .month-header {
+            background: #e7f3ff !important;
+            text-align: center !important;
+            font-weight: 700 !important;
+            color: #0066cc !important;
+        }
+        
+        .positive-change {
+            background: #d4edda !important;
+            color: #155724;
+            font-weight: 600;
+        }
+        
+        .negative-change {
+            background: #f8d7da !important;
+            color: #721c24;
+            font-weight: 600;
+        }
+        
+        .neutral {
+            text-align: center;
+            color: #666;
+        }
+        
+        .number {
+            text-align: right;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+        
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .success {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 20px 0;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .export-buttons {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+        
+        .export-buttons button {
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        
+        .export-buttons button:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 ภาพรวมผล Facebook ULG</h1>
+            <div class="date-info">ข้อมูล ณ <span id="currentDate"></span></div>
+        </div>
+        
+        <div class="controls">
+            <label>เลือกเดือนที่ต้องการเปรียบเทียบ:</label>
+            <select id="month1">
+                <!-- จะถูกเติมด้วย JavaScript -->
+            </select>
+            <select id="month2">
+                <!-- จะถูกเติมด้วย JavaScript -->
+            </select>
+            <select id="month3">
+                <!-- จะถูกเติมด้วย JavaScript -->
+            </select>
+            <button onclick="loadReport()" id="loadBtn">โหลดรายงาน</button>
+            <button onclick="testConnection()" id="testBtn">ทดสอบการเชื่อมต่อ</button>
+        </div>
+        
+        <div id="message"></div>
+        <div id="reportContent">
+            <div class="loading">กำลังโหลดข้อมูล</div>
+        </div>
+        
+        <div class="export-buttons" id="exportButtons" style="display: none;">
+            <button onclick="exportToExcel()">📥 Export เป็น Excel</button>
+            <button onclick="printReport()">🖨️ พิมพ์รายงาน</button>
+        </div>
+    </div>
+
+    <script>
+        // กำหนด API URL (แก้ไขตาม path ของคุณ)
+        // ถ้าไฟล์อยู่โฟลเดอร์เดียวกัน ใช้แบบนี้
+        const API_URL = './api_improved.php';
+        
+        // System User Access Token (ไม่หมดอายุ - มี pages_read_engagement)
+        const PAGE_TOKEN = 'EAATEt12ZCH1YBQMoGgzvWTb4gCuWI5DkeMGwipffwumMw2pZAcwpYSWH1xGpmJ1MzFDZCyOoHwVDl0rgBG7F7INCoDPd88lWLmN47enPEPEdiQR3e7oa1ZCmFHmzU1VvKtNcIcsJ3WUhfyyZCfKk80AdwZB2jxuZCjyypmrajCftG3XQvI5BuBntTNMaCh7eMUZAQwZDZD';
+        
+        // ถ้าอยู่คนละโฟลเดอร์ เปลี่ยนเป็น
+        // const API_URL = 'http://your-domain.com/path/to/api_improved.php';
+        
+        // ตั้งค่าวันที่ปัจจุบัน
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('th-TH', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+        
+        // สร้างตัวเลือกเดือน
+        function populateMonthSelectors() {
+            const selects = ['month1', 'month2', 'month3'];
+            const months = [];
+            
+            // สร้างรายการเดือนย้อนหลัง 12 เดือน
+            for (let i = 0; i < 12; i++) {
+                const d = new Date();
+                d.setMonth(d.getMonth() - i);
+                const year = d.getFullYear();
+                const month = String(d.getMonth() + 1).padStart(2, '0');
+                const monthValue = `${year}-${month}`;
+                const monthText = d.toLocaleDateString('th-TH', { year: 'numeric', month: 'long' });
+                
+                months.push({ value: monthValue, text: monthText });
+            }
+            
+            selects.forEach((selectId, index) => {
+                const select = document.getElementById(selectId);
+                months.forEach(month => {
+                    const option = document.createElement('option');
+                    option.value = month.value;
+                    option.textContent = month.text;
+                    if (index < 3 && months[index * 1]) {
+                        if (month.value === months[2 - index].value) {
+                            option.selected = true;
+                        }
+                    }
+                    select.appendChild(option);
+                });
+            });
+        }
+        
+        // ทดสอบการเชื่อมต่อ
+        async function testConnection() {
+            const btn = document.getElementById('testBtn');
+            btn.disabled = true;
+            btn.textContent = 'กำลังทดสอบ...';
+            
+            try {
+                const response = await fetch(`${API_URL}?action=testConnection`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    showMessage(`เชื่อมต่อสำเร็จ! เพจ: ${data.page_name} (${data.fan_count} ผู้ติดตาม)`, 'success');
+                } else {
+                    showMessage(`เชื่อมต่อล้มเหลว: ${data.error}`, 'error');
+                }
+            } catch (error) {
+                showMessage(`เกิดข้อผิดพลาด: ${error.message}`, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'ทดสอบการเชื่อมต่อ';
+            }
+        }
+        
+        // โหลดรายงาน
+        async function loadReport() {
+            const month1 = document.getElementById('month1').value;
+            const month2 = document.getElementById('month2').value;
+            const month3 = document.getElementById('month3').value;
+            
+            const btn = document.getElementById('loadBtn');
+            btn.disabled = true;
+            btn.textContent = 'กำลังโหลด...';
+            
+            document.getElementById('reportContent').innerHTML = '<div class="loading">กำลังดึงข้อมูลจาก Facebook</div>';
+            
+            try {
+                const response = await fetch(`${API_URL}?action=getMonthlyComparison&months=${month1},${month2},${month3}`);
+                const data = await response.json();
+                
+                if (data.success) {
+                    renderReport(data.monthly_data);
+                    document.getElementById('exportButtons').style.display = 'flex';
+                    showMessage('โหลดข้อมูลสำเร็จ!', 'success');
+                } else {
+                    showMessage(`เกิดข้อผิดพลาด: ${data.error}`, 'error');
+                    document.getElementById('reportContent').innerHTML = '';
+                }
+            } catch (error) {
+                showMessage(`ไม่สามารถเชื่อมต่อ API ได้: ${error.message}`, 'error');
+                document.getElementById('reportContent').innerHTML = '';
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'โหลดรายงาน';
+            }
+        }
+        
+        // แสดงรายงานในรูปแบบตาราง
+        function renderReport(monthlyData) {
+            const months = Object.keys(monthlyData).sort();
+            
+            // ตรวจสอบว่ามี error หรือไม่
+            let hasError = false;
+            months.forEach(month => {
+                if (monthlyData[month].error) {
+                    hasError = true;
+                    showMessage(`ไม่สามารถดึงข้อมูลเดือน ${month}: ${monthlyData[month].error}`, 'error');
+                }
+            });
+            
+            const monthNames = months.map(m => {
+                const [year, month] = m.split('-');
+                const d = new Date(parseInt(year), parseInt(month) - 1, 1);
+                return d.toLocaleDateString('th-TH', { year: 'numeric', month: 'short' });
+            });
+            
+            // คำนวณการเปลี่ยนแปลง
+            const changes = [];
+            for (let i = 1; i < months.length; i++) {
+                const prevMonth = monthlyData[months[i-1]];
+                const currMonth = monthlyData[months[i]];
+                
+                if (!prevMonth.error && !currMonth.error) {
+                    changes.push({
+                        reach: calculatePercentChange(prevMonth.total_reach, currMonth.total_reach),
+                        engagement_link: calculatePercentChange(prevMonth.conversion_engagement_link, currMonth.conversion_engagement_link),
+                        engagement_profile: calculatePercentChange(prevMonth.conversion_engagement_profile, currMonth.conversion_engagement_profile),
+                        followers: calculatePercentChange(prevMonth.net_new_followers, currMonth.net_new_followers),
+                        unfollows: calculatePercentChange(prevMonth.unfollows, currMonth.unfollows)
+                    });
+                }
+            }
+            
+            let html = `
+                <table class="report-table">
+                    <thead>
+                        <tr>
+                            <th>Month</th>
+                            ${months.map((m, i) => `<th class="month-header">${monthNames[i]}</th>`).join('')}
+                            ${changes.length > 0 ? `<th class="month-header">การเปลี่ยนแปลงเมื่อเทียบกับ ${monthNames[0]} %</th>` : ''}
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+            
+            // Total Reach (Viewers)
+            html += '<tr>';
+            html += '<td>Total Reach (Viewers)</td>';
+            months.forEach(month => {
+                const data = monthlyData[month];
+                html += `<td class="number">${data.error ? 'N/A' : formatNumber(data.total_reach)}</td>`;
+            });
+            if (changes.length > 0) {
+                html += `<td class="number ${getChangeClass(changes[changes.length - 1].reach)}">${formatPercent(changes[changes.length - 1].reach)}</td>`;
+            }
+            html += '</tr>';
+            
+            // Engagement Rate
+            html += '<tr>';
+            html += '<td>Engagement Rate</td>';
+            months.forEach(month => {
+                const data = monthlyData[month];
+                html += `<td class="number">${data.error ? 'N/A' : formatNumber(data.engagement_rate)}</td>`;
+            });
+            if (changes.length > 0) {
+                html += `<td class="neutral">-</td>`;
+            }
+            html += '</tr>';
+            
+            // Conversion Engagement (Linkclick)
+            html += '<tr>';
+            html += '<td>Conversion Engagement (Linkclick)</td>';
+            months.forEach(month => {
+                const data = monthlyData[month];
+                html += `<td class="number">${data.error ? 'N/A' : formatNumber(data.conversion_engagement_link)}</td>`;
+            });
+            if (changes.length > 0) {
+                html += `<td class="number ${getChangeClass(changes[changes.length - 1].engagement_link)}">${formatPercent(changes[changes.length - 1].engagement_link)}</td>`;
+            }
+            html += '</tr>';
+            
+            // Conversion Engagement (Profile visit)
+            html += '<tr>';
+            html += '<td>Conversion Engagement (Profile visit)</td>';
+            months.forEach(month => {
+                const data = monthlyData[month];
+                html += `<td class="number">${data.error ? 'N/A' : formatNumber(data.conversion_engagement_profile)}</td>`;
+            });
+            if (changes.length > 0) {
+                html += `<td class="number ${getChangeClass(changes[changes.length - 1].engagement_profile)}">${formatPercent(changes[changes.length - 1].engagement_profile)}</td>`;
+            }
+            html += '</tr>';
+            
+            // Net New Followers
+            html += '<tr>';
+            html += '<td>Net New Followers</td>';
+            months.forEach(month => {
+                const data = monthlyData[month];
+                html += `<td class="number">${data.error ? 'N/A' : formatNumber(data.net_new_followers)}</td>`;
+            });
+            if (changes.length > 0) {
+                html += `<td class="number ${getChangeClass(changes[changes.length - 1].followers)}">${formatPercent(changes[changes.length - 1].followers)}</td>`;
+            }
+            html += '</tr>';
+            
+            // Unfollows
+            html += '<tr>';
+            html += '<td>Unfollows</td>';
+            months.forEach(month => {
+                const data = monthlyData[month];
+                html += `<td class="number">${data.error ? 'N/A' : formatNumber(data.unfollows)}</td>`;
+            });
+            if (changes.length > 0) {
+                const changeValue = changes[changes.length - 1].unfollows;
+                // สำหรับ unfollows, การเพิ่มขึ้นคือไม่ดี ดังนั้นกลับสี
+                html += `<td class="number ${changeValue > 0 ? 'negative-change' : 'positive-change'}">${formatPercent(changeValue)}</td>`;
+            }
+            html += '</tr>';
+            
+            html += '</tbody></table>';
+            
+            document.getElementById('reportContent').innerHTML = html;
+        }
+        
+        // ฟังก์ชันช่วยเหลือ
+        function calculatePercentChange(oldVal, newVal) {
+            if (oldVal === 0) return newVal > 0 ? 100 : 0;
+            return ((newVal - oldVal) / oldVal) * 100;
+        }
+        
+        function formatNumber(num) {
+            if (typeof num === 'undefined' || num === null) return '0';
+            return num.toLocaleString('en-US');
+        }
+        
+        function formatPercent(num) {
+            if (typeof num === 'undefined' || num === null) return '0%';
+            return num.toFixed(1) + '%';
+        }
+        
+        function getChangeClass(change) {
+            if (change > 0) return 'positive-change';
+            if (change < 0) return 'negative-change';
+            return '';
+        }
+        
+        function showMessage(message, type) {
+            const messageDiv = document.getElementById('message');
+            messageDiv.className = type;
+            messageDiv.textContent = message;
+            messageDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 5000);
+        }
+        
+        // Export เป็น Excel
+        function exportToExcel() {
+            const table = document.querySelector('.report-table');
+            const html = table.outerHTML;
+            const blob = new Blob([html], { type: 'application/vnd.ms-excel' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Facebook_Report_${new Date().toISOString().split('T')[0]}.xls`;
+            a.click();
+        }
+        
+        // พิมพ์รายงาน
+        function printReport() {
+            window.print();
+        }
+        
+        // เริ่มต้น
+        populateMonthSelectors();
+        
+        // โหลดข้อมูลอัตโนมัติเมื่อเปิดหน้า
+        // loadReport();
+    </script>
+</body>
+</html>
