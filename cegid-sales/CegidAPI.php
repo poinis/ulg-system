@@ -128,7 +128,8 @@ class CegidAPI {
         $endpoints = [
             ['endpoint' => 'sales-external-report2', 'params' => ['startDate' => $dateFrom, 'endDate' => $dateTo]],
             ['endpoint' => 'sales-external/v1', 'params' => ['dateFrom' => $dateFrom, 'dateTo' => $dateTo]],
-            ['endpoint' => 'receipts/v2', 'params' => ['startDate' => $dateFrom, 'endDate' => $dateTo, 'includeLines' => true]],
+            // Note: receipts/v2 with includeLines doesn't actually return line data,
+            // so we removed it to avoid inserting incomplete transaction records
         ];
         
         foreach ($endpoints as $config) {
