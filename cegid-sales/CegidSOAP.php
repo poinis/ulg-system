@@ -14,7 +14,9 @@ class CegidSOAP {
     private $arraysNs = 'http://schemas.microsoft.com/2003/10/Serialization/Arrays';
     
     public function __construct() {
-        $this->endpoint = CEGID_BASE_URL . '/Doc/WebService/SaleDocument.svc';
+        // WSDL specifies endpoint at /Y2/SaleDocumentService.svc (not under folder)
+        $baseHost = 'https://90643827-retail-ondemand.cegid.cloud';
+        $this->endpoint = $baseHost . '/Y2/SaleDocumentService.svc';
         $this->username = CEGID_USERNAME;
         $this->password = CEGID_PASSWORD;
         $this->databaseId = CEGID_FOLDER_ID;
@@ -127,7 +129,7 @@ class CegidSOAP {
         <tns:DocumentTypes>
           <tns:SaleDocumentType>Receipt</tns:SaleDocumentType>
         </tns:DocumentTypes>
-        <tns:EndDate>' . $dateTo . 'T23:59:59</tns:EndDate>
+        <tns:EndDate>' . $dateTo . 'T00:00:00</tns:EndDate>
         <tns:Pager>
           <tns:PageIndex>' . $pageIndex . '</tns:PageIndex>
           <tns:PageSize>' . $pageSize . '</tns:PageSize>

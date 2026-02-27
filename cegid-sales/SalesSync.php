@@ -5,14 +5,17 @@
  */
 
 require_once 'CegidAPI.php';
+require_once 'CegidSOAP.php';
 
 class SalesSync {
     private $db;
     private $api;
+    private $soap;
     
     public function __construct() {
         $this->db = Database::getInstance()->getConnection();
         $this->api = new CegidAPI();
+        $this->soap = new CegidSOAP();
     }
     
     /**
@@ -114,31 +117,16 @@ class SalesSync {
     }
     
     /**
-     * Sync Transaction data
+     * Sync Transaction data via SOAP API (SaleDocument GetByKey)
      */
     private function syncTransactions($date, $storeCode = null) {
         $result = ['total' => 0, 'success' => 0, 'failed' => 0];
         
         try {
-            // Get data from API
-            $data = $this->api->getSalesTransactions($date, $date, $storeCode);
+            // Step 1: Get headers via SOAP
+            $headers = $this->soap->getHeaderList($date, $date, $storeCode);
             
-            if (empty($data)) {
-                // If no separate transaction endpoint, try to get from receipts lines
-                $receipts = $this->api->getReceipts($date, $date, $storeCode);
-                
-                if (!empty($receipts)) {
-                    foreach ($receipts as $receipt) {
-                        if (!empty($receipt['lines'])) {
-                            foreach ($receipt['lines'] as $line) {
-                                $data[] = array_merge(['receipt' => $receipt['header']], $line);
-                            }
-                        }
-                    }
-                }
-            }
-            
-            if (empty($data)) {
+            if (empty($headers)) {
                 return $result;
             }
             
@@ -159,20 +147,40 @@ class SalesSync {
                     ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
                     ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
                 )
+                ON DUPLICATE KEY UPDATE
+                    quantity = VALUES(quantity),
+                    price_ttc = VALUES(price_ttc),
+                    total_ttc = VALUES(total_ttc),
+                    updated_at = CURRENT_TIMESTAMP
             ");
             
-            // Process each record
-            foreach ($data as $record) {
-                $result['total']++;
+            // Step 2: For each header, get full document via GetByKey
+            foreach ($headers as $header) {
+                $key = $header['Key'];
                 
                 try {
-                    $mapped = $this->mapTransactionData($record, $date);
-                    $stmt->execute($mapped);
-                    $result['success']++;
+                    $doc = $this->soap->getByKey($key['Type'], $key['Stump'], $key['Number']);
+                    if (!$doc || empty($doc['Lines'])) continue;
+                    
+                    $docHeader = $doc['Header'];
+                    
+                    foreach ($doc['Lines'] as $lineNum => $line) {
+                        $result['total']++;
+                        
+                        try {
+                            $mapped = $this->mapSOAPTransactionData($docHeader, $line, $lineNum + 1, $date);
+                            $stmt->execute($mapped);
+                            $result['success']++;
+                        } catch (Exception $e) {
+                            $result['failed']++;
+                            error_log("Transaction line sync failed [{$docHeader['InternalReference']}#$lineNum]: " . $e->getMessage());
+                        }
+                    }
                 } catch (Exception $e) {
-                    $result['failed']++;
-                    error_log("Transaction sync failed: " . $e->getMessage());
+                    error_log("GetByKey failed for {$key['Stump']}/{$key['Number']}: " . $e->getMessage());
                 }
+                
+                usleep(100000); // 100ms delay between requests
             }
             
         } catch (Exception $e) {
@@ -239,7 +247,68 @@ class SalesSync {
     }
     
     /**
-     * Map API transaction data to database format
+     * Map SOAP transaction line data to database format
+     */
+    private function mapSOAPTransactionData($header, $line, $lineNum, $syncDate) {
+        $documentDate = null;
+        if (!empty($header['Date'])) {
+            $documentDate = date('Y-m-d', strtotime($header['Date']));
+        }
+        
+        $quantity = $line['Quantity'] ?? 0;
+        $priceTTC = $line['TaxIncludedUnitPrice'] ?? 0;
+        $priceHT = $line['TaxExcludedUnitPrice'] ?? 0;
+        $netPriceTTC = $line['TaxIncludedNetUnitPrice'] ?? 0;
+        $netPriceHT = $line['TaxExcludedNetUnitPrice'] ?? 0;
+        $discountAmount = ($priceTTC - $netPriceTTC) * $quantity;
+        $totalTTC = $netPriceTTC * $quantity;
+        $totalHT = $netPriceHT * $quantity;
+        
+        return [
+            'FFO',                                          // nature_piece
+            $header['Key']['Stump'] ?? '',                  // souche
+            $documentDate ?? $syncDate,                     // date_piece
+            $header['StoreId'] ?? '',                       // store_code
+            $header['Key']['Stump'] ?? '',                  // caisse
+            $header['Key']['Number'] ?? null,               // numero
+            $header['InternalReference'] ?? '',             // payment_ref_interne
+            $lineNum,                                       // num_ligne
+            $line['Rank'] ?? '',                            // indice
+            $line['ItemCode'] ?? '',                        // article_code
+            $line['ItemId'] ?? '',                          // article_internal_code
+            $line['ItemReference'] ?? '',                   // barcode
+            $line['Label'] ?? '',                           // product_title
+            $line['ComplementaryDescription'] ?? '',        // product_description
+            '',                                             // brand
+            '',                                             // category
+            '',                                             // sub_category
+            '',                                             // dimension1
+            '',                                             // dimension2
+            '',                                             // libdim1
+            '',                                             // libdim2
+            $header['CustomerId'] ?? '',                    // customer_code
+            '',                                             // customer_first_name
+            '',                                             // customer_last_name
+            $quantity,                                      // quantity
+            $priceHT,                                       // price_ht
+            $priceTTC,                                      // price_ttc
+            $discountAmount,                                // discount_amount
+            $totalTTC,                                      // total_ttc
+            $totalHT,                                       // total_ht
+            $line['SalesPersonId'] ?? $header['SalesPersonId'] ?? '', // representant
+            $header['Active'] ? '-' : 'X',                  // ticket_annule
+            null,                                           // hour_creation_combined
+            '',                                             // creator
+            $line['DiscountTypeId'] ?? '',                  // char_libre1
+            $line['CatalogReference'] ?? '',                // char_libre2
+            $line['WarehouseId'] ?? '',                     // char_libre3
+            $syncDate,                                      // sync_date
+            json_encode(['header' => $header, 'line' => $line]) // raw_data
+        ];
+    }
+    
+    /**
+     * Map API transaction data to database format (legacy REST)
      */
     private function mapTransactionData($apiData, $syncDate) {
         // Check if this is from receipt lines
