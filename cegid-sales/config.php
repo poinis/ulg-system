@@ -25,6 +25,44 @@ define('MAX_FILE_SIZE', 50 * 1024 * 1024); // 50MB
 // Timezone
 date_default_timezone_set('Asia/Bangkok');
 
+// Store/Branch Names
+define('STORE_NAMES', [
+    '77003' => 'Store 77003',
+    '77010' => 'Store 77010',
+    '77002' => 'Store 77002',
+    '14070' => 'SW19 CentralwOrld',
+    '11020' => 'SUPERDRY LARDPRAO',
+    '88001' => 'ULG Event #2',
+    '88002' => 'ULG Event #1',
+    '14060' => 'HOOGA Central world',
+    '29040' => 'TOPOLOGIE SIAM SOI2',
+    '29080' => 'DEUS SIAM SOI2',
+    '14020' => 'SOUP CENTRAL WORLD',
+    '25030' => 'FREITAG SIAM SOI7',
+    '27030' => 'FREITAG CHIANGMAI',
+    '26030' => 'FREITAG SILOM',
+    '20240' => 'SOUP PARAGON',
+    '21020' => 'SOUP PATTAYA',
+    '22020' => 'SOUP TERMINAL 21',
+    '28040' => 'TOPOLOGIE DUSIT CENTRAL PARK',
+    '19040' => 'TOPOLOGIE Mega Bangna',
+    '11040' => 'TOPOLOGIE LADPRAO',
+    '14040' => 'TOPOLOGIE CENTRAL WORLD',
+    '18020' => 'SOUP JUNGCEYLON',
+    '16090' => 'Thepopupstore Phuket',
+    '17020' => 'SOUP EMSPHERE',
+    '13050' => 'Surplus Central Village',
+    '24010' => 'And Co ThinkPark',
+    '23010' => 'And Co OneBkk',
+    '19010' => 'Pronto Mega Bangna',
+    '20010' => 'Pronto Siam Paragon',
+    '12010' => 'Pronto Central Rama 9',
+    '15010' => 'Pronto and Co Festival Chiangmai',
+    '11010' => 'Pronto Central Lardprao',
+    '77000' => 'Pronto Online',
+    '10000' => 'Pronto Dc Office',
+]);
+
 // Error Reporting (ปิดใน production)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);

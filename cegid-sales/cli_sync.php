@@ -9,7 +9,15 @@ require_once __DIR__ . '/config.php';
 require_once __DIR__ . '/Database.php';
 require_once __DIR__ . '/SalesSync.php';
 
-$date = $argv[1] ?? date('Y-m-d', strtotime('-1 day'));
+// Parse --date=YYYY-MM-DD or plain YYYY-MM-DD argument
+$date = date('Y-m-d', strtotime('-1 day'));
+foreach (array_slice($argv, 1) as $arg) {
+    if (preg_match('/^--date=(\d{4}-\d{2}-\d{2})$/', $arg, $m)) {
+        $date = $m[1];
+    } elseif (preg_match('/^\d{4}-\d{2}-\d{2}$/', $arg)) {
+        $date = $arg;
+    }
+}
 
 echo "🔄 Syncing Cegid sales for: {$date}\n";
 
