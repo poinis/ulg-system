@@ -4,244 +4,355 @@ require_once 'Database.php';
 
 $db = Database::getInstance()->getConnection();
 
-// Selected date (default today)
-$selectedDate = $_GET['date'] ?? date('Y-m-d');
+// Get selected date & range
+$selected_date = $_GET['date'] ?? date('Y-m-d', strtotime('-1 day'));
+$date_from = $_GET['date_from'] ?? date('Y-m-01');
+$date_to = $_GET['date_to'] ?? date('Y-m-d', strtotime('-1 day'));
 
-// Get statistics
-$stats = [
-    'total_sales' => 0,
-    'total_receipts' => 0,
-    'day_sales' => 0,
-    'day_receipts' => 0
-];
-
-// Total sales (all time)
-$stmt = $db->query("SELECT COALESCE(SUM(amount_total),0) as total, COUNT(*) as count FROM sale_payments WHERE ticket_annule = '-'");
-$result = $stmt->fetch();
-$stats['total_sales'] = $result['total'];
-$stats['total_receipts'] = $result['count'];
-
-// Selected day sales
-$stmt = $db->prepare("SELECT COALESCE(SUM(amount_total),0) as total, COUNT(*) as count FROM sale_payments WHERE date_piece = ? AND ticket_annule = '-'");
-$stmt->execute([$selectedDate]);
-$result = $stmt->fetch();
-$stats['day_sales'] = $result['total'];
-$stats['day_receipts'] = $result['count'];
-
-// Sales by store for selected date
-$stmt = $db->prepare("
-    SELECT store_code, COUNT(*) as receipt_count, SUM(amount_total) as total_sales
-    FROM sale_payments
+// 1. Daily sales by store (from sale_payments via SOAP)
+$daily_stmt = $db->prepare("
+    SELECT store_code, 
+           SUM(amount_total) as daily_sales, 
+           COUNT(*) as transaction_count
+    FROM sale_payments 
     WHERE date_piece = ? AND ticket_annule = '-'
     GROUP BY store_code
-    ORDER BY total_sales DESC
 ");
-$stmt->execute([$selectedDate]);
-$storesSales = $stmt->fetchAll();
+$daily_stmt->execute([$selected_date]);
+$daily_data = [];
+foreach ($daily_stmt->fetchAll() as $row) {
+    $daily_data[$row['store_code']] = $row;
+}
 
-// Daily totals (last 14 days)
-$stmt = $db->query("
-    SELECT date_piece, COUNT(*) as receipt_count, SUM(amount_total) as total_sales
-    FROM sale_payments
-    WHERE date_piece >= DATE_SUB(CURDATE(), INTERVAL 14 DAY) AND ticket_annule = '-'
-    GROUP BY date_piece
-    ORDER BY date_piece DESC
+// 2. Period sales by store
+$period_stmt = $db->prepare("
+    SELECT store_code,
+           SUM(amount_total) as period_sales,
+           COUNT(*) as period_count
+    FROM sale_payments 
+    WHERE date_piece BETWEEN ? AND ? AND ticket_annule = '-'
+    GROUP BY store_code
 ");
-$dailyTotals = $stmt->fetchAll();
+$period_stmt->execute([$date_from, $date_to]);
+$period_data = [];
+foreach ($period_stmt->fetchAll() as $row) {
+    $period_data[$row['store_code']] = $row;
+}
 
-// Recent sync logs
-$stmt = $db->query("SELECT * FROM sync_logs ORDER BY started_at DESC LIMIT 5");
-$syncLogs = $stmt->fetchAll();
+// 3. Daily transaction lines (items sold)
+$items_stmt = $db->prepare("
+    SELECT store_code, SUM(quantity) as total_qty, COUNT(*) as line_count
+    FROM sale_transactions
+    WHERE date_piece = ? AND ticket_annule = '-'
+    GROUP BY store_code
+");
+$items_stmt->execute([$selected_date]);
+$items_data = [];
+foreach ($items_stmt->fetchAll() as $row) {
+    $items_data[$row['store_code']] = $row;
+}
+
+// 4. Build summary — only stores with period sales
+$summary = [];
+$all_codes = array_unique(array_merge(array_keys($daily_data), array_keys($period_data)));
+foreach ($all_codes as $code) {
+    $period_sales = $period_data[$code]['period_sales'] ?? 0;
+    if ($period_sales <= 0) continue;
+    
+    $summary[] = [
+        'store_code' => $code,
+        'store_name' => STORE_NAMES[$code] ?? $code,
+        'daily_sales' => $daily_data[$code]['daily_sales'] ?? 0,
+        'daily_tx' => $daily_data[$code]['transaction_count'] ?? 0,
+        'daily_qty' => $items_data[$code]['total_qty'] ?? 0,
+        'daily_lines' => $items_data[$code]['line_count'] ?? 0,
+        'period_sales' => $period_sales,
+        'period_count' => $period_data[$code]['period_count'] ?? 0,
+    ];
+}
+
+// Sort by period sales desc
+usort($summary, fn($a, $b) => $b['period_sales'] <=> $a['period_sales']);
+
+// Totals
+$total_daily = array_sum(array_column($summary, 'daily_sales'));
+$total_daily_tx = array_sum(array_column($summary, 'daily_tx'));
+$total_daily_qty = array_sum(array_column($summary, 'daily_qty'));
+$total_period = array_sum(array_column($summary, 'period_sales'));
+$total_period_count = array_sum(array_column($summary, 'period_count'));
+$max_period = !empty($summary) ? max(array_column($summary, 'period_sales')) : 1;
 
 // Available dates
-$stmt = $db->query("SELECT DISTINCT date_piece FROM sale_payments ORDER BY date_piece DESC LIMIT 30");
-$availableDates = $stmt->fetchAll(PDO::FETCH_COLUMN);
+$dates_stmt = $db->query("SELECT DISTINCT date_piece FROM sale_payments ORDER BY date_piece DESC LIMIT 30");
+$available_dates = $dates_stmt->fetchAll(PDO::FETCH_COLUMN);
 
-// Helper: get store name
-function storeName($code) {
-    return STORE_NAMES[$code] ?? $code;
-}
+// Sync status
+$sync_stmt = $db->query("SELECT * FROM sync_logs ORDER BY started_at DESC LIMIT 1");
+$last_sync = $sync_stmt->fetch();
 ?>
 <!DOCTYPE html>
 <html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cegid Sales Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <title>📊 Cegid Sales Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Sarabun', sans-serif; background: linear-gradient(135deg, #e3f2fd 0%, #f5f5f5 100%); min-height: 100vh; }
+
+        .header {
+            background: rgba(2, 136, 209, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        .header-content {
+            max-width: 1400px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px;
+        }
+        .header-title {
+            color: white; font-size: 32px; font-weight: 800;
+            display: flex; align-items: center; gap: 12px;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .header-icon {
+            background: white; padding: 10px; border-radius: 12px; font-size: 28px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .date-controls { display: flex; gap: 18px; align-items: flex-end; flex-wrap: wrap; }
+        .date-input-group { display: flex; flex-direction: column; gap: 8px; }
+        .date-input-group label { color: white; font-size: 13px; font-weight: 700; }
+        .date-input-group input {
+            padding: 12px 16px; border: 2px solid rgba(255,255,255,0.3); border-radius: 10px;
+            background: rgba(255,255,255,0.95); font-size: 14px; font-family: 'Sarabun', sans-serif; font-weight: 600;
+        }
+        .date-input-group input:focus { outline: none; border-color: white; box-shadow: 0 0 0 4px rgba(255,255,255,0.3); }
+        .btn-search {
+            padding: 12px 28px; background: white; color: #0288d1; border: none; border-radius: 10px;
+            cursor: pointer; font-weight: 700; font-size: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex; align-items: center; gap: 8px; transition: all 0.3s ease;
+        }
+        .btn-search:hover { background: #f0f0f0; transform: translateY(-3px); }
+
+        .nav-menu { background: white; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .nav-content { max-width: 1400px; margin: 0 auto; display: flex; gap: 12px; flex-wrap: wrap; }
+        .nav-btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 12px 24px; background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #333; text-decoration: none; border-radius: 12px; font-weight: 600; font-size: 14px;
+            transition: all 0.3s; border: 2px solid transparent; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .nav-btn:hover { background: linear-gradient(135deg, #0288d1, #0097a7); color: white; transform: translateY(-3px); }
+        .nav-btn.active { background: linear-gradient(135deg, #0288d1, #0097a7); color: white; }
+
+        .container { max-width: 1400px; margin: 0 auto; padding: 25px; }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; margin-bottom: 35px; }
+        .stat-card {
+            background: white; padding: 30px; border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15); transition: all 0.3s; position: relative; overflow: hidden;
+            animation: fadeIn 0.6s ease-out;
+        }
+        .stat-card::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, #0288d1, #0097a7); }
+        .stat-card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
+        .stat-label { color: #666; font-size: 14px; margin-bottom: 12px; font-weight: 600; }
+        .stat-value {
+            font-size: 36px; font-weight: 800;
+            background: linear-gradient(135deg, #0288d1, #0097a7);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 8px;
+        }
+        .stat-unit { font-size: 16px; color: #999; font-weight: 500; }
+
+        .table-card {
+            background: white; padding: 35px; border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15); margin-bottom: 25px;
+            animation: fadeIn 0.6s ease-out;
+        }
+        .table-title { font-size: 22px; font-weight: 800; margin-bottom: 25px; color: #2c3e50; padding-bottom: 15px; border-bottom: 3px solid #ecf0f1; }
+        .table-wrapper { overflow-x: auto; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 16px; text-align: left; border-bottom: 2px solid #f0f0f0; }
+        th { background: linear-gradient(135deg, #00588b, #00588b); color: white; font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: 0.5px; }
+        th:first-child { border-radius: 10px 0 0 0; }
+        th:last-child { border-radius: 0 10px 0 0; }
+        td { font-size: 14px; }
+        .number { text-align: right; font-family: 'Courier New', monospace; font-weight: 600; }
+        tbody tr { transition: all 0.3s ease; }
+        tbody tr:hover { background: linear-gradient(135deg, #e1f5fe, #ffffff); transform: scale(1.01); }
+        .total-row { background: linear-gradient(135deg, #8fd7fd, #00a8bb); color: black; font-weight: 800; }
+        .total-row td { border-bottom: none; }
+
+        .store-info { display: flex; flex-direction: column; gap: 4px; }
+        .store-name { font-weight: 700; color: #2c3e50; font-size: 15px; }
+        .store-code { font-size: 12px; color: #7f8c8d; font-weight: 600; }
+
+        .progress-bar { background: #e0e0e0; height: 10px; border-radius: 5px; overflow: hidden; margin-top: 5px; position: relative; }
+        .progress-fill {
+            height: 100%; background: linear-gradient(90deg, #0288d1, #0097a7);
+            transition: width 0.6s ease; position: relative; overflow: hidden;
+        }
+        .progress-fill::after {
+            content: ''; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+        .progress-text { font-size: 12px; color: #666; margin-top: 4px; font-weight: 600; }
+
+        .sync-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+        .sync-ok { background: #e8f5e9; color: #2e7d32; }
+        .sync-fail { background: #fbe9e7; color: #c62828; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .stat-card:nth-child(1) { animation-delay: 0.1s; }
+        .stat-card:nth-child(2) { animation-delay: 0.2s; }
+        .stat-card:nth-child(3) { animation-delay: 0.3s; }
+        .stat-card:nth-child(4) { animation-delay: 0.4s; }
+
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; align-items: flex-start; }
+            .header-title { font-size: 24px; }
+            .date-controls { width: 100%; }
+            .date-input-group { flex: 1; min-width: 120px; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .table-card { padding: 20px; }
+            th, td { padding: 12px 8px; font-size: 12px; }
+        }
+    </style>
 </head>
-<body class="bg-gray-50 min-h-screen">
-    <!-- Header -->
-    <nav class="bg-indigo-700 text-white shadow-lg">
-        <div class="max-w-7xl mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <div class="flex items-center gap-3">
-                    <i class="fas fa-chart-bar text-2xl"></i>
-                    <h1 class="text-xl font-bold">Cegid Sales Dashboard</h1>
-                </div>
-                <div class="flex gap-4 text-sm">
-                    <a href="index.php" class="bg-indigo-800 px-3 py-1.5 rounded font-medium">
-                        <i class="fas fa-home mr-1"></i> Dashboard
-                    </a>
-                    <a href="sync.php" class="hover:bg-indigo-600 px-3 py-1.5 rounded">
-                        <i class="fas fa-sync mr-1"></i> Sync
-                    </a>
-                    <a href="export.php" class="hover:bg-indigo-600 px-3 py-1.5 rounded">
-                        <i class="fas fa-download mr-1"></i> Export
-                    </a>
-                </div>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="header-title">
+                <span class="header-icon">📊</span>
+                Cegid Sales Dashboard
             </div>
-        </div>
-    </nav>
 
-    <div class="max-w-7xl mx-auto px-4 py-6">
-
-        <!-- Date Selector -->
-        <div class="mb-6 flex items-center gap-4">
-            <form method="get" class="flex items-center gap-2">
-                <label class="text-sm font-medium text-gray-700">
-                    <i class="fas fa-calendar mr-1"></i> วันที่:
-                </label>
-                <input type="date" name="date" value="<?= htmlspecialchars($selectedDate) ?>"
-                    class="border rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500"
-                    onchange="this.form.submit()">
+            <form method="GET" class="date-controls">
+                <div class="date-input-group">
+                    <label>วันที่ (ยอดรายวัน)</label>
+                    <input type="date" name="date" value="<?= htmlspecialchars($selected_date) ?>">
+                </div>
+                <div class="date-input-group">
+                    <label>ช่วงเดือน: จาก</label>
+                    <input type="date" name="date_from" value="<?= htmlspecialchars($date_from) ?>">
+                </div>
+                <div class="date-input-group">
+                    <label>ถึง</label>
+                    <input type="date" name="date_to" value="<?= htmlspecialchars($date_to) ?>">
+                </div>
+                <button type="submit" class="btn-search">🔍 ค้นหา</button>
             </form>
-            <span class="text-sm text-gray-500">
-                <?php
-                $dt = new DateTime($selectedDate);
-                $thaiDays = ['อาทิตย์','จันทร์','อังคาร','พุธ','พฤหัสบดี','ศุกร์','เสาร์'];
-                echo 'วัน' . $thaiDays[(int)$dt->format('w')] . ' ' . $dt->format('d/m/Y');
-                ?>
-            </span>
-        </div>
-
-        <!-- Stats Cards -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-            <div class="bg-white rounded-xl shadow-sm p-5 border-l-4 border-green-500">
-                <p class="text-xs text-gray-500 uppercase tracking-wide">ยอดขายวันที่เลือก</p>
-                <p class="text-2xl font-bold text-gray-900 mt-1"><?= number_format($stats['day_sales'], 2) ?></p>
-                <p class="text-xs text-gray-400">THB</p>
-            </div>
-            <div class="bg-white rounded-xl shadow-sm p-5 border-l-4 border-blue-500">
-                <p class="text-xs text-gray-500 uppercase tracking-wide">จำนวนบิล</p>
-                <p class="text-2xl font-bold text-gray-900 mt-1"><?= number_format($stats['day_receipts']) ?></p>
-                <p class="text-xs text-gray-400">รายการ</p>
-            </div>
-            <div class="bg-white rounded-xl shadow-sm p-5 border-l-4 border-purple-500">
-                <p class="text-xs text-gray-500 uppercase tracking-wide">ยอดขายรวมทั้งหมด</p>
-                <p class="text-2xl font-bold text-gray-900 mt-1"><?= number_format($stats['total_sales'], 2) ?></p>
-                <p class="text-xs text-gray-400">THB</p>
-            </div>
-            <div class="bg-white rounded-xl shadow-sm p-5 border-l-4 border-orange-500">
-                <p class="text-xs text-gray-500 uppercase tracking-wide">บิลทั้งหมด</p>
-                <p class="text-2xl font-bold text-gray-900 mt-1"><?= number_format($stats['total_receipts']) ?></p>
-                <p class="text-xs text-gray-400">รายการ</p>
-            </div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-            <!-- Sales by Store -->
-            <div class="lg:col-span-2 bg-white rounded-xl shadow-sm">
-                <div class="p-5 border-b flex justify-between items-center">
-                    <h2 class="font-bold text-gray-900">
-                        <i class="fas fa-store text-indigo-600 mr-2"></i>
-                        ยอดขายตามสาขา — <?= $dt->format('d/m/Y') ?>
-                    </h2>
-                    <span class="text-sm text-gray-400"><?= count($storesSales) ?> สาขา</span>
-                </div>
-                <div class="divide-y">
-                    <?php if (empty($storesSales)): ?>
-                        <p class="text-gray-400 text-center py-8">ไม่มีข้อมูลวันนี้</p>
-                    <?php else: ?>
-                        <?php
-                        $maxSales = max(array_column($storesSales, 'total_sales'));
-                        foreach ($storesSales as $i => $store):
-                            $pct = $maxSales > 0 ? ($store['total_sales'] / $maxSales * 100) : 0;
-                        ?>
-                        <div class="px-5 py-3 hover:bg-gray-50">
-                            <div class="flex justify-between items-center mb-1">
-                                <div>
-                                    <span class="text-sm font-medium text-gray-900"><?= htmlspecialchars(storeName($store['store_code'])) ?></span>
-                                    <span class="text-xs text-gray-400 ml-2">(<?= $store['store_code'] ?>)</span>
-                                </div>
-                                <div class="text-right">
-                                    <span class="font-bold text-gray-900"><?= number_format($store['total_sales'], 2) ?></span>
-                                    <span class="text-xs text-gray-400 ml-1"><?= $store['receipt_count'] ?> บิล</span>
-                                </div>
-                            </div>
-                            <div class="w-full bg-gray-100 rounded-full h-2">
-                                <div class="bg-indigo-500 h-2 rounded-full" style="width: <?= round($pct) ?>%"></div>
-                            </div>
-                        </div>
-                        <?php endforeach; ?>
-                    <?php endif; ?>
-                </div>
-            </div>
-
-            <!-- Right Column -->
-            <div class="space-y-6">
-
-                <!-- Daily Summary -->
-                <div class="bg-white rounded-xl shadow-sm">
-                    <div class="p-5 border-b">
-                        <h2 class="font-bold text-gray-900">
-                            <i class="fas fa-calendar-alt text-indigo-600 mr-2"></i>
-                            ยอดรายวัน
-                        </h2>
-                    </div>
-                    <div class="divide-y max-h-80 overflow-y-auto">
-                        <?php foreach ($dailyTotals as $day): ?>
-                        <a href="?date=<?= $day['date_piece'] ?>"
-                           class="block px-5 py-3 hover:bg-indigo-50 <?= $day['date_piece'] === $selectedDate ? 'bg-indigo-50 border-l-2 border-indigo-500' : '' ?>">
-                            <div class="flex justify-between">
-                                <span class="text-sm text-gray-700"><?= date('d/m (D)', strtotime($day['date_piece'])) ?></span>
-                                <span class="text-sm font-bold text-gray-900"><?= number_format($day['total_sales'], 2) ?></span>
-                            </div>
-                            <span class="text-xs text-gray-400"><?= $day['receipt_count'] ?> บิล</span>
-                        </a>
-                        <?php endforeach; ?>
-                        <?php if (empty($dailyTotals)): ?>
-                            <p class="text-gray-400 text-center py-6">ยังไม่มีข้อมูล</p>
-                        <?php endif; ?>
-                    </div>
-                </div>
-
-                <!-- Sync Status -->
-                <div class="bg-white rounded-xl shadow-sm">
-                    <div class="p-5 border-b">
-                        <h2 class="font-bold text-gray-900">
-                            <i class="fas fa-sync text-indigo-600 mr-2"></i>
-                            Sync ล่าสุด
-                        </h2>
-                    </div>
-                    <div class="divide-y">
-                        <?php foreach ($syncLogs as $log): ?>
-                        <div class="px-5 py-3">
-                            <div class="flex justify-between items-center">
-                                <span class="text-sm text-gray-700"><?= date('d/m H:i', strtotime($log['started_at'])) ?></span>
-                                <?php if ($log['status'] === 'completed'): ?>
-                                    <span class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full">✓ <?= $log['records_success'] ?></span>
-                                <?php elseif ($log['status'] === 'failed'): ?>
-                                    <span class="text-xs bg-red-100 text-red-700 px-2 py-0.5 rounded-full">✗ failed</span>
-                                <?php else: ?>
-                                    <span class="text-xs bg-yellow-100 text-yellow-700 px-2 py-0.5 rounded-full">⏳</span>
-                                <?php endif; ?>
-                            </div>
-                        </div>
-                        <?php endforeach; ?>
-                        <?php if (empty($syncLogs)): ?>
-                            <p class="text-gray-400 text-center py-6">ยังไม่มี</p>
-                        <?php endif; ?>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 
-    <footer class="text-center text-gray-400 text-xs py-6">
-        Cegid Sales Dashboard v2.1 &copy; <?= date('Y') ?>
-    </footer>
+    <div class="nav-menu">
+        <div class="nav-content">
+            <a href="index.php" class="nav-btn active">📊 Dashboard</a>
+            <a href="sync.php" class="nav-btn">🔄 Sync Data</a>
+            <a href="export.php" class="nav-btn">📥 Export CSV</a>
+            <?php if ($last_sync): ?>
+            <span class="sync-badge <?= $last_sync['status'] === 'completed' ? 'sync-ok' : 'sync-fail' ?>">
+                <?= $last_sync['status'] === 'completed' ? '✅' : '❌' ?>
+                Last sync: <?= date('d/m H:i', strtotime($last_sync['started_at'])) ?>
+                (<?= $last_sync['records_success'] ?? 0 ?> records)
+            </span>
+            <?php endif; ?>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">ยอดขายวันที่ <?= date('d/m/Y', strtotime($selected_date)) ?></div>
+                <div class="stat-value"><?= number_format($total_daily, 0) ?></div>
+                <div class="stat-unit">บาท (<?= number_format($total_daily_tx) ?> บิล)</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">สินค้าขายได้วันที่ <?= date('d/m/Y', strtotime($selected_date)) ?></div>
+                <div class="stat-value"><?= number_format($total_daily_qty, 0) ?></div>
+                <div class="stat-unit">ชิ้น</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">ยอดขายช่วง <?= date('d/m', strtotime($date_from)) ?> - <?= date('d/m/Y', strtotime($date_to)) ?></div>
+                <div class="stat-value"><?= number_format($total_period, 0) ?></div>
+                <div class="stat-unit">บาท (<?= number_format($total_period_count) ?> บิล)</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-label">จำนวนสาขาที่มียอดขาย</div>
+                <div class="stat-value"><?= count($summary) ?></div>
+                <div class="stat-unit">สาขา</div>
+            </div>
+        </div>
+
+        <!-- Sales Table -->
+        <div class="table-card">
+            <h2 class="table-title">สรุปยอดขายแยกสาขา — <?= date('d/m/Y', strtotime($date_from)) ?> ถึง <?= date('d/m/Y', strtotime($date_to)) ?></h2>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>สาขา</th>
+                            <th class="number">ยอดขาย<br><?= date('d/m/y', strtotime($selected_date)) ?></th>
+                            <th class="number">บิล</th>
+                            <th class="number">ชิ้น</th>
+                            <th class="number">ยอดขายช่วงเดือน</th>
+                            <th class="number">บิลรวม</th>
+                            <th style="min-width: 150px;">สัดส่วน</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php $i = 1; foreach ($summary as $row):
+                            $pct = $max_period > 0 ? ($row['period_sales'] / $max_period * 100) : 0;
+                            $share = $total_period > 0 ? ($row['period_sales'] / $total_period * 100) : 0;
+                        ?>
+                        <tr>
+                            <td><?= $i++ ?></td>
+                            <td>
+                                <div class="store-info">
+                                    <span class="store-name"><?= htmlspecialchars($row['store_name']) ?></span>
+                                    <span class="store-code"><?= htmlspecialchars($row['store_code']) ?></span>
+                                </div>
+                            </td>
+                            <td class="number"><?= number_format($row['daily_sales'], 0) ?></td>
+                            <td class="number"><?= number_format($row['daily_tx']) ?></td>
+                            <td class="number"><?= number_format($row['daily_qty'], 0) ?></td>
+                            <td class="number"><?= number_format($row['period_sales'], 0) ?></td>
+                            <td class="number"><?= number_format($row['period_count']) ?></td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: <?= round($pct) ?>%"></div>
+                                </div>
+                                <div class="progress-text"><?= number_format($share, 1) ?>% ของทั้งหมด</div>
+                            </td>
+                        </tr>
+                        <?php endforeach; ?>
+
+                        <tr class="total-row">
+                            <td colspan="2">รวมทั้งหมด</td>
+                            <td class="number"><?= number_format($total_daily, 0) ?></td>
+                            <td class="number"><?= number_format($total_daily_tx) ?></td>
+                            <td class="number"><?= number_format($total_daily_qty, 0) ?></td>
+                            <td class="number"><?= number_format($total_period, 0) ?></td>
+                            <td class="number"><?= number_format($total_period_count) ?></td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-fill" style="width: 100%"></div>
+                                </div>
+                                <div class="progress-text">100%</div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
