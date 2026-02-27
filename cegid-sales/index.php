@@ -251,8 +251,12 @@ $last_sync = $sync_stmt->fetch();
     <div class="nav-menu">
         <div class="nav-content">
             <a href="index.php" class="nav-btn active">📊 Dashboard</a>
-            <a href="sync.php" class="nav-btn">🔄 Sync Data</a>
-            <a href="export.php" class="nav-btn">📥 Export CSV</a>
+            <a href="compare_weeks.php" class="nav-btn">📈 เทียบยอดสัปดาห์</a>
+            <a href="compare_period_report.php" class="nav-btn">📈 เทียบยอดหลายตัวเลือก</a>
+            <a href="multi_filter_report.php" class="nav-btn">📈 รายงานแบบเลือกเอง</a>
+            <a href="detailed_report.php" class="nav-btn">📋 รายงานแยกสาขา</a>
+            <a href="sync.php" class="nav-btn">🔄 Sync</a>
+            <a href="export.php" class="nav-btn">📥 Export</a>
             <?php if ($last_sync): ?>
             <span class="sync-badge <?= $last_sync['status'] === 'completed' ? 'sync-ok' : 'sync-fail' ?>">
                 <?= $last_sync['status'] === 'completed' ? '✅' : '❌' ?>
