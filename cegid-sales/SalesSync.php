@@ -1,85 +1,57 @@
 <?php
 /**
- * Sales Sync Manager
- * ดึงข้อมูลจาก Cegid API → เก็บลง MySQL
+ * Sales Sync Manager - SOAP Version
+ * ดึงข้อมูลจาก Cegid SOAP API (SaleDocument) → เก็บลง MySQL
+ * ใช้ GetHeaderList + GetByKey เพื่อดึง full documents (header + lines + payments)
  */
 
-require_once 'CegidAPI.php';
 require_once 'CegidSOAP.php';
 
 class SalesSync {
     private $db;
-    private $api;
     private $soap;
     
     public function __construct() {
         $this->db = Database::getInstance()->getConnection();
-        $this->api = new CegidAPI();
         $this->soap = new CegidSOAP();
     }
     
     /**
-     * Sync sales data for a specific date
-     * 
-     * @param string $date Format: YYYY-MM-DD
-     * @param string $storeCode Optional
-     * @return array Result summary
+     * Sync sales data for a specific date (all stores)
      */
     public function syncDate($date, $storeCode = null) {
         $logId = $this->createLog($date);
         $result = [
             'success' => false,
             'date' => $date,
+            'documents' => ['total' => 0, 'success' => 0, 'failed' => 0],
             'payments' => ['total' => 0, 'success' => 0, 'failed' => 0],
             'transactions' => ['total' => 0, 'success' => 0, 'failed' => 0],
             'errors' => []
         ];
         
         try {
-            $this->db->beginTransaction();
+            // Step 1: Get all receipt headers for this date
+            $allHeaders = [];
+            $pageIndex = 1;
+            $pageSize = 200;
             
-            // 1. Sync Payments
-            $payments = $this->syncPayments($date, $storeCode);
-            $result['payments'] = $payments;
+            do {
+                $headers = $this->soap->getHeaderList($date, $date, $storeCode, $pageSize, $pageIndex);
+                $allHeaders = array_merge($allHeaders, $headers);
+                $pageIndex++;
+            } while (count($headers) >= $pageSize);
             
-            // 2. Sync Transactions
-            $transactions = $this->syncTransactions($date, $storeCode);
-            $result['transactions'] = $transactions;
+            $result['documents']['total'] = count($allHeaders);
             
-            $this->db->commit();
-            
-            $result['success'] = true;
-            $this->updateLog($logId, 'completed', 
-                $payments['total'] + $transactions['total'],
-                $payments['success'] + $transactions['success'],
-                $payments['failed'] + $transactions['failed']
-            );
-            
-        } catch (Exception $e) {
-            $this->db->rollBack();
-            $result['errors'][] = $e->getMessage();
-            $this->updateLog($logId, 'failed', 0, 0, 0, $e->getMessage());
-        }
-        
-        return $result;
-    }
-    
-    /**
-     * Sync Payment data
-     */
-    private function syncPayments($date, $storeCode = null) {
-        $result = ['total' => 0, 'success' => 0, 'failed' => 0];
-        
-        try {
-            // Get data from API
-            $data = $this->api->getReceipts($date, $date, $storeCode);
-            
-            if (empty($data)) {
+            if (empty($allHeaders)) {
+                $result['success'] = true;
+                $this->updateLog($logId, 'completed', 0, 0, 0);
                 return $result;
             }
             
-            // Prepare statement
-            $stmt = $this->db->prepare("
+            // Prepare statements
+            $paymentStmt = $this->db->prepare("
                 INSERT INTO sale_payments (
                     nature_piece, date_piece, store_code, caisse, souche,
                     payment_method, numero, customer_code, customer_first_name,
@@ -95,43 +67,7 @@ class SalesSync {
                     updated_at = CURRENT_TIMESTAMP
             ");
             
-            // Process each record
-            foreach ($data as $record) {
-                $result['total']++;
-                
-                try {
-                    $mapped = $this->mapPaymentData($record, $date);
-                    $stmt->execute($mapped);
-                    $result['success']++;
-                } catch (Exception $e) {
-                    $result['failed']++;
-                    error_log("Payment sync failed: " . $e->getMessage());
-                }
-            }
-            
-        } catch (Exception $e) {
-            throw new Exception("Payment sync error: " . $e->getMessage());
-        }
-        
-        return $result;
-    }
-    
-    /**
-     * Sync Transaction data via SOAP API (SaleDocument GetByKey)
-     */
-    private function syncTransactions($date, $storeCode = null) {
-        $result = ['total' => 0, 'success' => 0, 'failed' => 0];
-        
-        try {
-            // Step 1: Get headers via SOAP
-            $headers = $this->soap->getHeaderList($date, $date, $storeCode);
-            
-            if (empty($headers)) {
-                return $result;
-            }
-            
-            // Prepare statement
-            $stmt = $this->db->prepare("
+            $txStmt = $this->db->prepare("
                 INSERT INTO sale_transactions (
                     nature_piece, souche, date_piece, store_code, caisse,
                     numero, payment_ref_interne, num_ligne, indice,
@@ -154,227 +90,137 @@ class SalesSync {
                     updated_at = CURRENT_TIMESTAMP
             ");
             
-            // Step 2: For each header, get full document via GetByKey
-            foreach ($headers as $header) {
+            // Step 2: Get full document for each header
+            foreach ($allHeaders as $header) {
                 $key = $header['Key'];
                 
                 try {
                     $doc = $this->soap->getByKey($key['Type'], $key['Stump'], $key['Number']);
-                    if (!$doc || empty($doc['Lines'])) continue;
+                    if (!$doc) {
+                        $result['documents']['failed']++;
+                        continue;
+                    }
                     
+                    $result['documents']['success']++;
                     $docHeader = $doc['Header'];
+                    $documentDate = date('Y-m-d', strtotime($docHeader['Date']));
                     
+                    // Insert payments
+                    foreach ($doc['Payments'] as $payment) {
+                        $result['payments']['total']++;
+                        try {
+                            $paymentStmt->execute([
+                                'FFO',                                      // nature_piece
+                                $documentDate,                              // date_piece
+                                $docHeader['StoreId'],                      // store_code
+                                $docHeader['Key']['Stump'],                 // caisse
+                                $docHeader['Key']['Stump'],                 // souche
+                                $payment['PaymentMethodId'] ?? $payment['Code'] ?? '', // payment_method
+                                $docHeader['Key']['Number'],                // numero
+                                $docHeader['CustomerId'] ?? '',             // customer_code
+                                '',                                         // customer_first_name
+                                '',                                         // customer_last_name
+                                $payment['Amount'] ?? 0,                    // amount_total
+                                $docHeader['SalesPersonId'] ?? '',          // representant
+                                $docHeader['Active'] ? '-' : 'X',          // ticket_annule
+                                '',                                         // cb_num_ctrl
+                                $docHeader['InternalReference'],            // ref_interne
+                                null,                                       // hour_creation
+                                null,                                       // hour_creation_hhmmss
+                                null,                                       // hour_creation_combined
+                                $documentDate,                              // date_creation
+                                $date,                                      // sync_date
+                                json_encode($payment),                      // raw_data
+                            ]);
+                            $result['payments']['success']++;
+                        } catch (Exception $e) {
+                            $result['payments']['failed']++;
+                            error_log("Payment sync failed [{$docHeader['InternalReference']}]: " . $e->getMessage());
+                        }
+                    }
+                    
+                    // Insert transaction lines
                     foreach ($doc['Lines'] as $lineNum => $line) {
-                        $result['total']++;
+                        $result['transactions']['total']++;
+                        
+                        $quantity = $line['Quantity'] ?? 0;
+                        $priceTTC = $line['TaxIncludedUnitPrice'] ?? 0;
+                        $priceHT = $line['TaxExcludedUnitPrice'] ?? 0;
+                        $netPriceTTC = $line['TaxIncludedNetUnitPrice'] ?? 0;
+                        $netPriceHT = $line['TaxExcludedNetUnitPrice'] ?? 0;
+                        $discountAmount = ($priceTTC - $netPriceTTC) * $quantity;
+                        $totalTTC = $netPriceTTC * $quantity;
+                        $totalHT = $netPriceHT * $quantity;
                         
                         try {
-                            $mapped = $this->mapSOAPTransactionData($docHeader, $line, $lineNum + 1, $date);
-                            $stmt->execute($mapped);
-                            $result['success']++;
+                            $txStmt->execute([
+                                'FFO',                                      // nature_piece
+                                $docHeader['Key']['Stump'],                 // souche
+                                $documentDate,                              // date_piece
+                                $docHeader['StoreId'],                      // store_code
+                                $docHeader['Key']['Stump'],                 // caisse
+                                $docHeader['Key']['Number'],                // numero
+                                $docHeader['InternalReference'],            // payment_ref_interne
+                                $lineNum + 1,                               // num_ligne
+                                $line['Rank'] ?? '',                        // indice
+                                $line['ItemCode'] ?? '',                    // article_code
+                                $line['ItemId'] ?? '',                      // article_internal_code
+                                $line['ItemReference'] ?? '',               // barcode
+                                $line['Label'] ?? '',                       // product_title
+                                $line['ComplementaryDescription'] ?? '',    // product_description
+                                '',                                         // brand
+                                '',                                         // category
+                                '',                                         // sub_category
+                                '',                                         // dimension1
+                                '',                                         // dimension2
+                                '',                                         // libdim1
+                                '',                                         // libdim2
+                                $docHeader['CustomerId'] ?? '',             // customer_code
+                                '',                                         // customer_first_name
+                                '',                                         // customer_last_name
+                                $quantity,                                  // quantity
+                                $priceHT,                                   // price_ht
+                                $priceTTC,                                  // price_ttc
+                                $discountAmount,                            // discount_amount
+                                $totalTTC,                                  // total_ttc
+                                $totalHT,                                   // total_ht
+                                $line['SalesPersonId'] ?? $docHeader['SalesPersonId'] ?? '', // representant
+                                $docHeader['Active'] ? '-' : 'X',          // ticket_annule
+                                null,                                       // hour_creation_combined
+                                '',                                         // creator
+                                $line['DiscountTypeId'] ?? '',              // char_libre1
+                                $line['CatalogReference'] ?? '',            // char_libre2
+                                $line['WarehouseId'] ?? '',                 // char_libre3
+                                $date,                                      // sync_date
+                                json_encode(['header' => $docHeader, 'line' => $line]), // raw_data
+                            ]);
+                            $result['transactions']['success']++;
                         } catch (Exception $e) {
-                            $result['failed']++;
+                            $result['transactions']['failed']++;
                             error_log("Transaction line sync failed [{$docHeader['InternalReference']}#$lineNum]: " . $e->getMessage());
                         }
                     }
+                    
                 } catch (Exception $e) {
+                    $result['documents']['failed']++;
                     error_log("GetByKey failed for {$key['Stump']}/{$key['Number']}: " . $e->getMessage());
                 }
                 
-                usleep(100000); // 100ms delay between requests
+                usleep(50000); // 50ms delay
             }
             
+            $result['success'] = true;
+            $totalProcessed = $result['payments']['total'] + $result['transactions']['total'];
+            $totalSuccess = $result['payments']['success'] + $result['transactions']['success'];
+            $totalFailed = $result['payments']['failed'] + $result['transactions']['failed'];
+            $this->updateLog($logId, 'completed', $totalProcessed, $totalSuccess, $totalFailed);
+            
         } catch (Exception $e) {
-            throw new Exception("Transaction sync error: " . $e->getMessage());
+            $result['errors'][] = $e->getMessage();
+            $this->updateLog($logId, 'failed', 0, 0, 0, $e->getMessage());
         }
         
         return $result;
-    }
-    
-    /**
-     * Map API payment data to database format
-     */
-    private function mapPaymentData($apiData, $syncDate) {
-        // Extract data from nested structure
-        $header = $apiData['header'] ?? [];
-        $customer = $apiData['customerIdentifier'] ?? [];
-        $payment = $apiData['payment'] ?? [];
-        $lines = $apiData['lines'] ?? [];
-        
-        // Calculate total from lines if not provided
-        $totalAmount = 0;
-        if (!empty($lines)) {
-            foreach ($lines as $line) {
-                $totalAmount += ($line['totalIncludingTax'] ?? 0);
-            }
-        } else {
-            $totalAmount = $header['totalAmount'] ?? 0;
-        }
-        
-        // Parse dates
-        $documentDate = null;
-        if (!empty($header['documentDate'])) {
-            $documentDate = date('Y-m-d', strtotime($header['documentDate']));
-        }
-        
-        $createdDateTime = null;
-        if (!empty($header['createdDateTime'])) {
-            $createdDateTime = date('Y-m-d H:i:s', strtotime($header['createdDateTime']));
-        }
-        
-        return [
-            'FFO', // nature_piece
-            $documentDate ?? $syncDate, // date_piece
-            $header['storeIdentifier']['id'] ?? '', // store_code
-            $header['registerId'] ?? '', // caisse
-            $header['warehouseIdentifier']['id'] ?? '', // souche
-            $payment['method'] ?? $payment['type'] ?? '', // payment_method
-            $header['registerOpeningNumber'] ?? null, // numero
-            $customer['id'] ?? $customer['code'] ?? '', // customer_code
-            $customer['firstName'] ?? '', // customer_first_name
-            $customer['lastName'] ?? $customer['name'] ?? '', // customer_last_name
-            $totalAmount, // amount_total
-            $header['salespersonId'] ?? '', // representant
-            ($header['cancelled'] ?? false) ? 'X' : '-', // ticket_annule
-            '', // cb_num_ctrl
-            $header['references']['internal'] ?? $header['documentNumber'] ?? uniqid('REC'), // ref_interne
-            $createdDateTime ? date('H:i:s', strtotime($createdDateTime)) : null, // hour_creation
-            $createdDateTime ? date('H:i:s', strtotime($createdDateTime)) : null, // hour_creation_hhmmss
-            $createdDateTime, // hour_creation_combined
-            $documentDate ?? $syncDate, // date_creation
-            $syncDate, // sync_date
-            json_encode($apiData) // raw_data
-        ];
-    }
-    
-    /**
-     * Map SOAP transaction line data to database format
-     */
-    private function mapSOAPTransactionData($header, $line, $lineNum, $syncDate) {
-        $documentDate = null;
-        if (!empty($header['Date'])) {
-            $documentDate = date('Y-m-d', strtotime($header['Date']));
-        }
-        
-        $quantity = $line['Quantity'] ?? 0;
-        $priceTTC = $line['TaxIncludedUnitPrice'] ?? 0;
-        $priceHT = $line['TaxExcludedUnitPrice'] ?? 0;
-        $netPriceTTC = $line['TaxIncludedNetUnitPrice'] ?? 0;
-        $netPriceHT = $line['TaxExcludedNetUnitPrice'] ?? 0;
-        $discountAmount = ($priceTTC - $netPriceTTC) * $quantity;
-        $totalTTC = $netPriceTTC * $quantity;
-        $totalHT = $netPriceHT * $quantity;
-        
-        return [
-            'FFO',                                          // nature_piece
-            $header['Key']['Stump'] ?? '',                  // souche
-            $documentDate ?? $syncDate,                     // date_piece
-            $header['StoreId'] ?? '',                       // store_code
-            $header['Key']['Stump'] ?? '',                  // caisse
-            $header['Key']['Number'] ?? null,               // numero
-            $header['InternalReference'] ?? '',             // payment_ref_interne
-            $lineNum,                                       // num_ligne
-            $line['Rank'] ?? '',                            // indice
-            $line['ItemCode'] ?? '',                        // article_code
-            $line['ItemId'] ?? '',                          // article_internal_code
-            $line['ItemReference'] ?? '',                   // barcode
-            $line['Label'] ?? '',                           // product_title
-            $line['ComplementaryDescription'] ?? '',        // product_description
-            '',                                             // brand
-            '',                                             // category
-            '',                                             // sub_category
-            '',                                             // dimension1
-            '',                                             // dimension2
-            '',                                             // libdim1
-            '',                                             // libdim2
-            $header['CustomerId'] ?? '',                    // customer_code
-            '',                                             // customer_first_name
-            '',                                             // customer_last_name
-            $quantity,                                      // quantity
-            $priceHT,                                       // price_ht
-            $priceTTC,                                      // price_ttc
-            $discountAmount,                                // discount_amount
-            $totalTTC,                                      // total_ttc
-            $totalHT,                                       // total_ht
-            $line['SalesPersonId'] ?? $header['SalesPersonId'] ?? '', // representant
-            $header['Active'] ? '-' : 'X',                  // ticket_annule
-            null,                                           // hour_creation_combined
-            '',                                             // creator
-            $line['DiscountTypeId'] ?? '',                  // char_libre1
-            $line['CatalogReference'] ?? '',                // char_libre2
-            $line['WarehouseId'] ?? '',                     // char_libre3
-            $syncDate,                                      // sync_date
-            json_encode(['header' => $header, 'line' => $line]) // raw_data
-        ];
-    }
-    
-    /**
-     * Map API transaction data to database format (legacy REST)
-     */
-    private function mapTransactionData($apiData, $syncDate) {
-        // Check if this is from receipt lines
-        $receipt = $apiData['receipt'] ?? [];
-        $line = empty($receipt) ? $apiData : $apiData;
-        
-        // Product info
-        $product = $line['product'] ?? $line['productIdentifier'] ?? [];
-        $item = $line['item'] ?? [];
-        
-        // Parse dates
-        $documentDate = null;
-        if (!empty($receipt['documentDate'])) {
-            $documentDate = date('Y-m-d', strtotime($receipt['documentDate']));
-        } elseif (!empty($apiData['date'])) {
-            $documentDate = date('Y-m-d', strtotime($apiData['date']));
-        }
-        
-        $createdDateTime = null;
-        if (!empty($receipt['createdDateTime'])) {
-            $createdDateTime = date('Y-m-d H:i:s', strtotime($receipt['createdDateTime']));
-        } elseif (!empty($apiData['createdAt'])) {
-            $createdDateTime = date('Y-m-d H:i:s', strtotime($apiData['createdAt']));
-        }
-        
-        return [
-            'FFO', // nature_piece
-            $receipt['warehouseIdentifier']['id'] ?? '', // souche
-            $documentDate ?? $syncDate, // date_piece
-            $receipt['storeIdentifier']['id'] ?? $apiData['storeId'] ?? '', // store_code
-            $receipt['registerId'] ?? '', // caisse
-            $receipt['registerOpeningNumber'] ?? null, // numero
-            $receipt['references']['internal'] ?? $apiData['receiptNumber'] ?? '', // payment_ref_interne
-            $line['lineNumber'] ?? $line['number'] ?? null, // num_ligne
-            '', // indice
-            $product['id'] ?? $product['code'] ?? $item['code'] ?? '', // article_code
-            $product['internalCode'] ?? '', // article_internal_code
-            $product['barcode'] ?? $product['ean'] ?? $item['ean'] ?? '', // barcode
-            $product['name'] ?? $product['label'] ?? $item['label'] ?? '', // product_title
-            $product['description'] ?? '', // product_description
-            $product['brand'] ?? $item['brand'] ?? '', // brand
-            $product['category'] ?? '', // category
-            $product['subCategory'] ?? '', // sub_category
-            $line['size'] ?? $product['size'] ?? '', // dimension1
-            $line['color'] ?? $product['color'] ?? '', // dimension2
-            '', // libdim1
-            '', // libdim2
-            $receipt['customerIdentifier']['id'] ?? '', // customer_code
-            '', // customer_first_name
-            '', // customer_last_name
-            $line['quantity'] ?? 0, // quantity
-            $line['unitPriceExcludingTax'] ?? 0, // price_ht
-            $line['unitPriceIncludingTax'] ?? $line['unitPrice'] ?? 0, // price_ttc
-            $line['discountAmount'] ?? 0, // discount_amount
-            $line['totalIncludingTax'] ?? $line['totalAmount'] ?? 0, // total_ttc
-            $line['totalExcludingTax'] ?? 0, // total_ht
-            $receipt['salespersonId'] ?? '', // representant
-            ($receipt['cancelled'] ?? false) ? 'X' : '-', // ticket_annule
-            $createdDateTime, // hour_creation_combined
-            '', // creator
-            '', // char_libre1
-            '', // char_libre2
-            '', // char_libre3
-            $syncDate, // sync_date
-            json_encode($apiData) // raw_data
-        ];
     }
     
     /**
@@ -383,9 +229,9 @@ class SalesSync {
     private function createLog($date) {
         $stmt = $this->db->prepare("
             INSERT INTO sync_logs (sync_date, sync_type, file_name, status)
-            VALUES (?, 'api_sync', ?, 'processing')
+            VALUES (?, 'soap_sync', ?, 'processing')
         ");
-        $stmt->execute([$date, "API Sync - {$date}"]);
+        $stmt->execute([$date, "SOAP Sync - {$date}"]);
         return $this->db->lastInsertId();
     }
     
@@ -407,10 +253,10 @@ class SalesSync {
     }
     
     /**
-     * Test API connection
+     * Test SOAP connection
      */
     public function testConnection() {
-        return $this->api->testConnection();
+        return $this->soap->testConnection();
     }
 }
 ?>
