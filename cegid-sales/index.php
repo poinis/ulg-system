@@ -39,9 +39,10 @@ foreach ($period_stmt->fetchAll() as $row) {
     $period_data[$row['store_code']] = $row;
 }
 
-// 3. Daily transaction lines (items sold)
+// 3. Daily transaction lines (items sold) — use net_total_ttc if available
 $items_stmt = $db->prepare("
-    SELECT store_code, SUM(quantity) as total_qty, COUNT(*) as line_count
+    SELECT store_code, SUM(quantity) as total_qty, COUNT(*) as line_count,
+           SUM(COALESCE(net_total_ttc, total_ttc)) as items_sales
     FROM sale_transactions
     WHERE date_piece = ? AND ticket_annule = '-'
     GROUP BY store_code

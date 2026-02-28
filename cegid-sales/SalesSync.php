@@ -72,21 +72,26 @@ class SalesSync {
                     nature_piece, souche, date_piece, store_code, caisse,
                     numero, payment_ref_interne, num_ligne, indice,
                     article_code, article_internal_code, barcode,
-                    product_title, product_description, brand, category,
+                    product_title, product_description, color, brand, category,
                     sub_category, dimension1, dimension2, libdim1, libdim2,
                     customer_code, customer_first_name, customer_last_name,
                     quantity, price_ht, price_ttc, discount_amount,
-                    total_ttc, total_ht, representant, ticket_annule,
+                    total_ttc, total_ht, bill_total_ttc, bill_discount_sc,
+                    net_total_ttc, representant, ticket_annule,
                     hour_creation_combined, creator, char_libre1,
                     char_libre2, char_libre3, sync_date, raw_data
                 ) VALUES (
                     ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,
-                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+                    ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?
                 )
                 ON DUPLICATE KEY UPDATE
                     quantity = VALUES(quantity),
                     price_ttc = VALUES(price_ttc),
                     total_ttc = VALUES(total_ttc),
+                    bill_total_ttc = VALUES(bill_total_ttc),
+                    bill_discount_sc = VALUES(bill_discount_sc),
+                    net_total_ttc = VALUES(net_total_ttc),
+                    color = VALUES(color),
                     updated_at = CURRENT_TIMESTAMP
             ");
             
@@ -139,6 +144,18 @@ class SalesSync {
                         }
                     }
                     
+                    // Calculate bill-level S/C discount
+                    $billTotalTTC = $docHeader['TaxIncludedTotalAmount'] ?? 0;
+                    $linesTotalTTC = 0;
+                    foreach ($doc['Lines'] as $l) {
+                        $q = $l['Quantity'] ?? 0;
+                        $net = $l['TaxIncludedNetUnitPrice'] ?? ($l['TaxIncludedUnitPrice'] ?? 0);
+                        $linesTotalTTC += $net * $q;
+                    }
+                    $billDiscountSC = $linesTotalTTC - $billTotalTTC;
+                    if ($billDiscountSC < 0) $billDiscountSC = 0;
+                    $discountRatio = ($linesTotalTTC > 0) ? ($billTotalTTC / $linesTotalTTC) : 1;
+                    
                     // Insert transaction lines
                     foreach ($doc['Lines'] as $lineNum => $line) {
                         $result['transactions']['total']++;
@@ -151,6 +168,10 @@ class SalesSync {
                         $discountAmount = ($priceTTC - $netPriceTTC) * $quantity;
                         $totalTTC = $netPriceTTC * $quantity;
                         $totalHT = $netPriceHT * $quantity;
+                        
+                        // Net after bill S/C discount (proportional)
+                        $netTotalTTC = round($totalTTC * $discountRatio, 2);
+                        $lineDiscountSC = round($totalTTC - $netTotalTTC, 2);
                         
                         try {
                             $txStmt->execute([
@@ -168,6 +189,7 @@ class SalesSync {
                                 $line['ItemReference'] ?? '',               // barcode
                                 $line['Label'] ?? '',                       // product_title
                                 $line['ComplementaryDescription'] ?? '',    // product_description
+                                $line['ComplementaryDescription'] ?? '',    // color
                                 '',                                         // brand
                                 '',                                         // category
                                 '',                                         // sub_category
@@ -184,6 +206,9 @@ class SalesSync {
                                 $discountAmount,                            // discount_amount
                                 $totalTTC,                                  // total_ttc
                                 $totalHT,                                   // total_ht
+                                $billTotalTTC,                              // bill_total_ttc
+                                $lineDiscountSC,                            // bill_discount_sc
+                                $netTotalTTC,                               // net_total_ttc
                                 $line['SalesPersonId'] ?? $docHeader['SalesPersonId'] ?? '', // representant
                                 $docHeader['Active'] ? '-' : 'X',          // ticket_annule
                                 null,                                       // hour_creation_combined
