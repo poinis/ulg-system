@@ -11,9 +11,57 @@ class SalesSync {
     private $db;
     private $soap;
     
+    private $customerSoap;
+    private $customerCache = [];
+    
     public function __construct() {
         $this->db = Database::getInstance()->getConnection();
         $this->soap = new CegidSOAP();
+        
+        require_once __DIR__ . '/CegidCustomerSOAP.php';
+        $this->customerSoap = new CegidCustomerSOAP();
+        
+        // Pre-load customer cache from DB
+        $stmt = $this->db->query("SELECT customer_code, first_name, last_name FROM customers");
+        foreach ($stmt->fetchAll() as $row) {
+            $this->customerCache[$row['customer_code']] = $row;
+        }
+    }
+    
+    private function getCustomerName($customerId) {
+        if (empty($customerId) || strpos($customerId, 'WI00') === 0) {
+            return ['first_name' => '', 'last_name' => ''];
+        }
+        
+        if (isset($this->customerCache[$customerId])) {
+            return $this->customerCache[$customerId];
+        }
+        
+        $contact = $this->customerSoap->getContact($customerId);
+        if ($contact) {
+            $firstName = $contact['first_name'] ?? '';
+            $lastName = $contact['last_name'] ?? '';
+            
+            // Cache to DB
+            $stmt = $this->db->prepare("
+                INSERT INTO customers (customer_code, first_name, last_name, phone, email, civility)
+                VALUES (?, ?, ?, ?, ?, ?)
+                ON DUPLICATE KEY UPDATE 
+                    first_name = VALUES(first_name), last_name = VALUES(last_name),
+                    phone = VALUES(phone), email = VALUES(email)
+            ");
+            $stmt->execute([
+                $customerId, $firstName, $lastName,
+                $contact['phone'] ?? '', $contact['email'] ?? '', $contact['civility'] ?? ''
+            ]);
+            
+            $this->customerCache[$customerId] = ['first_name' => $firstName, 'last_name' => $lastName];
+            usleep(30000); // 30ms delay for API rate limiting
+            return $this->customerCache[$customerId];
+        }
+        
+        $this->customerCache[$customerId] = ['first_name' => '', 'last_name' => ''];
+        return $this->customerCache[$customerId];
     }
     
     /**
@@ -123,8 +171,8 @@ class SalesSync {
                                 $payment['PaymentMethodId'] ?? $payment['Code'] ?? '', // payment_method
                                 $docHeader['Key']['Number'],                // numero
                                 $docHeader['CustomerId'] ?? '',             // customer_code
-                                '',                                         // customer_first_name
-                                '',                                         // customer_last_name
+                                $custName['first_name'],                    // customer_first_name
+                                $custName['last_name'],                     // customer_last_name
                                 $payment['Amount'] ?? 0,                    // amount_total
                                 $docHeader['SalesPersonId'] ?? '',          // representant
                                 $docHeader['Active'] ? '-' : 'X',          // ticket_annule
@@ -143,6 +191,9 @@ class SalesSync {
                             error_log("Payment sync failed [{$docHeader['InternalReference']}]: " . $e->getMessage());
                         }
                     }
+                    
+                    // Get customer name
+                    $custName = $this->getCustomerName($docHeader['CustomerId'] ?? '');
                     
                     // Calculate bill-level S/C discount
                     $billTotalTTC = $docHeader['TaxIncludedTotalAmount'] ?? 0;
@@ -190,7 +241,7 @@ class SalesSync {
                                 $line['Label'] ?? '',                       // product_title
                                 $line['ComplementaryDescription'] ?? '',    // product_description
                                 $line['ComplementaryDescription'] ?? '',    // color
-                                '',                                         // brand
+                                $this->extractBrand($line['ItemCode'] ?? ''), // brand
                                 '',                                         // category
                                 '',                                         // sub_category
                                 '',                                         // dimension1
@@ -198,8 +249,8 @@ class SalesSync {
                                 '',                                         // libdim1
                                 '',                                         // libdim2
                                 $docHeader['CustomerId'] ?? '',             // customer_code
-                                '',                                         // customer_first_name
-                                '',                                         // customer_last_name
+                                $custName['first_name'],                    // customer_first_name
+                                $custName['last_name'],                     // customer_last_name
                                 $quantity,                                  // quantity
                                 $priceHT,                                   // price_ht
                                 $priceTTC,                                  // price_ttc
@@ -246,6 +297,17 @@ class SalesSync {
         }
         
         return $result;
+    }
+    
+    /**
+     * Extract brand code from ItemCode (first 3 chars)
+     * CSV uses same mapping: NDI=NUDIE, CRH=CARHARTT, etc.
+     */
+    private function extractBrand($itemCode) {
+        if (strlen($itemCode) >= 3) {
+            return substr($itemCode, 0, 3);
+        }
+        return '';
     }
     
     /**
