@@ -211,11 +211,16 @@ class SalesSync {
                         }
                     }
                     // S/C discount applies only to non-OFF items
-                    // billTotalTTC includes OFF, but ratio uses only real items as denominator
                     $realItemsTotal = $linesTotalTTC - $offTotalTTC;
-                    $billDiscountSC = $realItemsTotal - $billTotalTTC;
-                    if ($billDiscountSC < 0) $billDiscountSC = 0;
-                    $discountRatio = ($realItemsTotal > 0) ? ($billTotalTTC / $realItemsTotal) : 1;
+                    // If bill has S/C discount: distribute billTotal across real items only
+                    // If no discount: ratio = 1.0 (items keep original price)
+                    if ($billTotalTTC < $linesTotalTTC && $realItemsTotal > 0) {
+                        $discountRatio = $billTotalTTC / $realItemsTotal;
+                        $billDiscountSC = $realItemsTotal - $billTotalTTC;
+                    } else {
+                        $discountRatio = 1;
+                        $billDiscountSC = 0;
+                    }
                     
                     // Insert transaction lines
                     foreach ($doc['Lines'] as $lineNum => $line) {
