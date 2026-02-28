@@ -196,16 +196,26 @@ class SalesSync {
                     }
                     
                     // Calculate bill-level S/C discount
+                    // Exclude OFF items (shopping bags) from ratio calculation — CSV doesn't include them
                     $billTotalTTC = $docHeader['TaxIncludedTotalAmount'] ?? 0;
                     $linesTotalTTC = 0;
+                    $offTotalTTC = 0;
                     foreach ($doc['Lines'] as $l) {
                         $q = $l['Quantity'] ?? 0;
                         $net = $l['TaxIncludedNetUnitPrice'] ?? ($l['TaxIncludedUnitPrice'] ?? 0);
-                        $linesTotalTTC += $net * $q;
+                        $lineVal = $net * $q;
+                        $linesTotalTTC += $lineVal;
+                        $itemCode = $l['ItemCode'] ?? '';
+                        if (strpos($itemCode, 'OFF') === 0) {
+                            $offTotalTTC += $lineVal;
+                        }
                     }
-                    $billDiscountSC = $linesTotalTTC - $billTotalTTC;
+                    // S/C discount applies only to non-OFF items
+                    $realItemsTotal = $linesTotalTTC - $offTotalTTC;
+                    $billTotalExclOff = $billTotalTTC - $offTotalTTC;
+                    $billDiscountSC = $realItemsTotal - $billTotalExclOff;
                     if ($billDiscountSC < 0) $billDiscountSC = 0;
-                    $discountRatio = ($linesTotalTTC > 0) ? ($billTotalTTC / $linesTotalTTC) : 1;
+                    $discountRatio = ($realItemsTotal > 0) ? ($billTotalExclOff / $realItemsTotal) : 1;
                     
                     // Insert transaction lines
                     foreach ($doc['Lines'] as $lineNum => $line) {
@@ -221,8 +231,15 @@ class SalesSync {
                         $totalHT = $netPriceHT * $quantity;
                         
                         // Net after bill S/C discount (proportional)
-                        $netTotalTTC = round($totalTTC * $discountRatio, 2);
-                        $lineDiscountSC = round($totalTTC - $netTotalTTC, 2);
+                        // OFF items (shopping bags) keep original price — S/C discount only on real items
+                        $itemCode = $line['ItemCode'] ?? '';
+                        if (strpos($itemCode, 'OFF') === 0) {
+                            $netTotalTTC = $totalTTC;
+                            $lineDiscountSC = 0;
+                        } else {
+                            $netTotalTTC = round($totalTTC * $discountRatio, 2);
+                            $lineDiscountSC = round($totalTTC - $netTotalTTC, 2);
+                        }
                         
                         try {
                             $txStmt->execute([

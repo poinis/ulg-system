@@ -63,6 +63,16 @@ define('STORE_NAMES', [
     '10000' => 'Pronto Dc Office',
 ]);
 
+// Sales Filter — exclude non-sales items to match CSV
+// 1. CFL = Cash Float  2. OFF% = Shopping bags  3. REPAIR = Service fee
+// 4. is_excluded = voucher/marketing bills (payment < 50% of items)
+define('SALES_FILTER', "
+    AND t.article_code != 'CFL'
+    AND t.article_code NOT LIKE 'OFF%'
+    AND t.product_title NOT LIKE '%REPAIR%'
+    AND t.is_excluded = 0
+");
+
 // Error Reporting (ปิดใน production)
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
