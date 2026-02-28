@@ -44,15 +44,15 @@ class SalesSync {
             
             // Cache to DB
             $stmt = $this->db->prepare("
-                INSERT INTO customers (customer_code, first_name, last_name, phone, email, civility)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO customers (customer_code, first_name, last_name, phone)
+                VALUES (?, ?, ?, ?)
                 ON DUPLICATE KEY UPDATE 
                     first_name = VALUES(first_name), last_name = VALUES(last_name),
-                    phone = VALUES(phone), email = VALUES(email)
+                    phone = VALUES(phone)
             ");
             $stmt->execute([
                 $customerId, $firstName, $lastName,
-                $contact['phone'] ?? '', $contact['email'] ?? '', $contact['civility'] ?? ''
+                $contact['phone'] ?? ''
             ]);
             
             $this->customerCache[$customerId] = ['first_name' => $firstName, 'last_name' => $lastName];
@@ -158,6 +158,9 @@ class SalesSync {
                     $docHeader = $doc['Header'];
                     $documentDate = date('Y-m-d', strtotime($docHeader['Date']));
                     
+                    // Get customer name
+                    $custName = $this->getCustomerName($docHeader['CustomerId'] ?? '');
+                    
                     // Insert payments
                     foreach ($doc['Payments'] as $payment) {
                         $result['payments']['total']++;
@@ -191,9 +194,6 @@ class SalesSync {
                             error_log("Payment sync failed [{$docHeader['InternalReference']}]: " . $e->getMessage());
                         }
                     }
-                    
-                    // Get customer name
-                    $custName = $this->getCustomerName($docHeader['CustomerId'] ?? '');
                     
                     // Calculate bill-level S/C discount
                     $billTotalTTC = $docHeader['TaxIncludedTotalAmount'] ?? 0;
