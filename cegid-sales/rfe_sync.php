@@ -126,7 +126,7 @@ function import_sale_by_item($file, $date_prefix) {
     try {
         $db = new PDO(
             'mysql:host=localhost;dbname=ulgcegid;charset=utf8mb4',
-            DB_USER_CEGID ?? 'ulgcegid', DB_PASS_CEGID ?? '#wmIYH3wazaa',
+            'ulgcegid', '#wmIYH3wazaa',
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
         );
         
