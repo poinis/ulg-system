@@ -80,15 +80,19 @@ class SalesSync {
         
         try {
             // Step 1: Get all receipt headers for this date
+            // Query per-store to avoid SOAP pagination limits
             $allHeaders = [];
-            $pageIndex = 1;
-            $pageSize = 200;
+            $storeCodes = $storeCode ? [$storeCode] : array_keys(STORE_NAMES);
             
-            do {
-                $headers = $this->soap->getHeaderList($date, $date, $storeCode, $pageSize, $pageIndex);
-                $allHeaders = array_merge($allHeaders, $headers);
-                $pageIndex++;
-            } while (count($headers) >= $pageSize);
+            foreach ($storeCodes as $sc) {
+                $pageIndex = 1;
+                $pageSize = 200;
+                do {
+                    $headers = $this->soap->getHeaderList($date, $date, $sc, $pageSize, $pageIndex);
+                    $allHeaders = array_merge($allHeaders, $headers);
+                    $pageIndex++;
+                } while (count($headers) >= $pageSize);
+            }
             
             $result['documents']['total'] = count($allHeaders);
             
