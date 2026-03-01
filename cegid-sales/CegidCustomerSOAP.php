@@ -1,37 +1,38 @@
 <?php
 /**
  * Cegid Customer SOAP API Client
+ * Uses CustomerWcfService (richer data) + CustomerService (contact data)
  */
 class CegidCustomerSOAP {
-    private $endpoint;
+    private $wcfEndpoint;
+    private $contactEndpoint;
     private $username;
     private $password;
     private $databaseId;
     
     public function __construct() {
         $baseHost = 'https://90643827-retail-ondemand.cegid.cloud';
-        $this->endpoint = $baseHost . '/Y2/CustomerService.svc';
+        $this->wcfEndpoint = $baseHost . '/Y2/CustomerWcfService.svc';
+        $this->contactEndpoint = $baseHost . '/Y2/CustomerService.svc';
         $this->username = CEGID_USERNAME;
         $this->password = CEGID_PASSWORD;
         $this->databaseId = CEGID_FOLDER_ID;
     }
     
-    private function soapRequest($action, $body) {
-        $soapAction = "http://www.cegid.fr/Retail/1.0/ICustomerWebService/$action";
-        
+    private function soapRequest($endpoint, $soapAction, $body) {
         $xml = '<?xml version="1.0" encoding="utf-8"?>
 <s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tns="http://www.cegid.fr/Retail/1.0">
   <s:Body>' . $body . '</s:Body>
 </s:Envelope>';
         
-        $ch = curl_init($this->endpoint);
+        $ch = curl_init($endpoint);
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => true,
             CURLOPT_POSTFIELDS => $xml,
             CURLOPT_HTTPHEADER => [
                 'Content-Type: text/xml; charset=utf-8',
-                'SOAPAction: ' . $soapAction,
+                'SOAPAction: "' . $soapAction . '"',
             ],
             CURLOPT_USERPWD => $this->username . ':' . $this->password,
             CURLOPT_TIMEOUT => 30,
@@ -49,79 +50,105 @@ class CegidCustomerSOAP {
     }
     
     /**
-     * Get customer contact by CustomerId
-     * Returns: ['first_name' => ..., 'last_name' => ..., 'phone' => ..., 'email' => ...]
+     * GetCustomerDetail via CustomerWcfService
+     * Returns full customer info: name, phone, email, birthday, usual store, member type
      */
-    public function getContact($customerId) {
+    public function getCustomerDetail($customerId) {
         $body = '
-    <tns:GetContact>
-      <tns:Request>
-        <tns:Identification>
-          <tns:CustomerId>' . htmlspecialchars($customerId) . '</tns:CustomerId>
-          <tns:Number>1</tns:Number>
-        </tns:Identification>
-      </tns:Request>
-      <tns:Context>
+    <tns:GetCustomerDetail>
+      <tns:customerId>' . htmlspecialchars($customerId) . '</tns:customerId>
+      <tns:clientContext>
         <tns:DatabaseId>' . htmlspecialchars($this->databaseId) . '</tns:DatabaseId>
-      </tns:Context>
-    </tns:GetContact>';
+      </tns:clientContext>
+    </tns:GetCustomerDetail>';
         
         try {
-            $response = $this->soapRequest('GetContact', $body);
-            return $this->parseContactResponse($response);
+            $response = $this->soapRequest(
+                $this->wcfEndpoint,
+                'http://www.cegid.fr/Retail/1.0/ICustomerWcfService/GetCustomerDetail',
+                $body
+            );
+            return $this->parseCustomerDetail($response);
         } catch (Exception $e) {
             return null;
         }
     }
     
     /**
-     * Get multiple contacts for a customer
+     * Search customer by phone via CustomerWcfService
      */
-    public function getContacts($customerId, $maxResults = 5) {
+    public function searchByPhone($phone) {
         $body = '
-    <tns:GetContacts>
-      <tns:Request>
-        <tns:CustomerId>' . htmlspecialchars($customerId) . '</tns:CustomerId>
-        <tns:MaxNumberReturnedContacts>' . $maxResults . '</tns:MaxNumberReturnedContacts>
-      </tns:Request>
-      <tns:Context>
+    <tns:SearchCustomerIds>
+      <tns:searchData>
+        <tns:PhoneData>
+          <tns:CellularPhoneNumber>' . htmlspecialchars($phone) . '</tns:CellularPhoneNumber>
+        </tns:PhoneData>
+        <tns:MaxNumberOfCustomers>5</tns:MaxNumberOfCustomers>
+      </tns:searchData>
+      <tns:clientContext>
         <tns:DatabaseId>' . htmlspecialchars($this->databaseId) . '</tns:DatabaseId>
-      </tns:Context>
-    </tns:GetContacts>';
+      </tns:clientContext>
+    </tns:SearchCustomerIds>';
         
         try {
-            $response = $this->soapRequest('GetContacts', $body);
-            return $this->parseContactsResponse($response);
+            $response = $this->soapRequest(
+                $this->wcfEndpoint,
+                'http://www.cegid.fr/Retail/1.0/ICustomerWcfService/SearchCustomerIds',
+                $body
+            );
+            $ids = [];
+            if (preg_match_all('/<CustomerId>(.*?)<\/CustomerId>/s', $response, $m)) {
+                $ids = $m[1];
+            }
+            return $ids;
         } catch (Exception $e) {
             return [];
         }
     }
     
-    private function parseContactResponse($xml) {
+    /**
+     * Legacy: Get customer contact via CustomerService (backward compat)
+     */
+    public function getContact($customerId) {
+        // Try CustomerWcfService first (richer data)
+        $detail = $this->getCustomerDetail($customerId);
+        if ($detail) {
+            return [
+                'first_name' => $detail['first_name'] ?? '',
+                'last_name' => $detail['last_name'] ?? '',
+                'phone' => $detail['phone'] ?? '',
+                'email' => $detail['email'] ?? '',
+            ];
+        }
+        return null;
+    }
+    
+    private function parseCustomerDetail($xml) {
         $result = [];
         
         if (preg_match('/<FirstName>(.*?)<\/FirstName>/s', $xml, $m)) $result['first_name'] = trim($m[1]);
         if (preg_match('/<LastName>(.*?)<\/LastName>/s', $xml, $m)) $result['last_name'] = trim($m[1]);
-        if (preg_match('/<MobilePhoneNumber>(.*?)<\/MobilePhoneNumber>/s', $xml, $m)) $result['phone'] = trim($m[1]);
-        if (preg_match('/<Email>(.*?)<\/Email>/s', $xml, $m)) $result['email'] = trim($m[1]);
-        if (preg_match('/<Civility>(.*?)<\/Civility>/s', $xml, $m)) $result['civility'] = trim($m[1]);
+        if (preg_match('/<CellularPhoneNumber>(.*?)<\/CellularPhoneNumber>/s', $xml, $m)) $result['phone'] = trim($m[1]);
+        if (preg_match('/<IsCompany>(.*?)<\/IsCompany>/s', $xml, $m)) $result['is_company'] = trim($m[1]) === 'true';
+        
+        // Email
+        if (preg_match('/<EmailData>.*?<Email>(.*?)<\/Email>.*?<\/EmailData>/s', $xml, $m)) $result['email'] = trim($m[1]);
+        
+        // Birthday
+        if (preg_match('/<BirthDateDay>(.*?)<\/BirthDateDay>/s', $xml, $m)) $bDay = trim($m[1]);
+        if (preg_match('/<BirthDateMonth>(.*?)<\/BirthDateMonth>/s', $xml, $m)) $bMonth = trim($m[1]);
+        if (preg_match('/<BirthDateYear>(.*?)<\/BirthDateYear>/s', $xml, $m)) $bYear = trim($m[1]);
+        if (isset($bDay, $bMonth, $bYear) && $bYear > 0) {
+            $result['birthday'] = sprintf('%04d-%02d-%02d', $bYear, $bMonth, $bDay);
+        }
+        
+        // Usual Store
+        if (preg_match('/<UsualStoreId>(.*?)<\/UsualStoreId>/s', $xml, $m)) $result['usual_store'] = trim($m[1]);
+        
+        // Member Type (UserDefinedTable1Value)
+        if (preg_match('/<UserDefinedTable1Value>(.*?)<\/UserDefinedTable1Value>/s', $xml, $m)) $result['member_type'] = trim($m[1]);
         
         return !empty($result) ? $result : null;
-    }
-    
-    private function parseContactsResponse($xml) {
-        $contacts = [];
-        if (preg_match_all('/<Contact>(.*?)<\/Contact>/s', $xml, $matches)) {
-            foreach ($matches[1] as $contactXml) {
-                $contact = [];
-                if (preg_match('/<CustomerId>(.*?)<\/CustomerId>/s', $contactXml, $m)) $contact['customer_id'] = trim($m[1]);
-                if (preg_match('/<FirstName>(.*?)<\/FirstName>/s', $contactXml, $m)) $contact['first_name'] = trim($m[1]);
-                if (preg_match('/<LastName>(.*?)<\/LastName>/s', $contactXml, $m)) $contact['last_name'] = trim($m[1]);
-                if (preg_match('/<MobilePhoneNumber>(.*?)<\/MobilePhoneNumber>/s', $contactXml, $m)) $contact['phone'] = trim($m[1]);
-                if (preg_match('/<Email>(.*?)<\/Email>/s', $contactXml, $m)) $contact['email'] = trim($m[1]);
-                $contacts[] = $contact;
-            }
-        }
-        return $contacts;
     }
 }

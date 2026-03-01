@@ -42,17 +42,23 @@ class SalesSync {
             $firstName = $contact['first_name'] ?? '';
             $lastName = $contact['last_name'] ?? '';
             
-            // Cache to DB
+            // Cache to DB (with enriched data from CustomerWcfService)
             $stmt = $this->db->prepare("
-                INSERT INTO customers (customer_code, first_name, last_name, phone)
-                VALUES (?, ?, ?, ?)
+                INSERT INTO customers (customer_code, first_name, last_name, phone, email, birthday, usual_store, member_type)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                 ON DUPLICATE KEY UPDATE 
                     first_name = VALUES(first_name), last_name = VALUES(last_name),
-                    phone = VALUES(phone)
+                    phone = VALUES(phone), email = VALUES(email),
+                    birthday = VALUES(birthday), usual_store = VALUES(usual_store),
+                    member_type = VALUES(member_type)
             ");
             $stmt->execute([
                 $customerId, $firstName, $lastName,
-                $contact['phone'] ?? ''
+                $contact['phone'] ?? '',
+                $contact['email'] ?? '',
+                $contact['birthday'] ?? null,
+                $contact['usual_store'] ?? '',
+                $contact['member_type'] ?? ''
             ]);
             
             $this->customerCache[$customerId] = ['first_name' => $firstName, 'last_name' => $lastName];
