@@ -86,20 +86,15 @@ foreach ($blobs as $blob) {
     }
     
     $local_file = "$download_dir/{$file_date}_{$file_type}.csv";
-    $blob_url = $base_url . "/" . rawurlencode("out/{$file_date}{$file_type}.CSV") . "?" . $sas_params;
-    // Fix double encoding issue
-    $blob_url = str_replace('%2F', '/', $blob_url);
+    $encoded_name = str_replace(' ', '%20', "out/{$file_date}{$file_type}.CSV");
+    $blob_url = $base_url . "/" . $encoded_name . "?" . $sas_params;
+    
+    // Skip files we don't import
+    if (!$import_func || !function_exists($import_func)) continue;
     
     log_msg("Downloading: {$file_date}{$file_type}.CSV");
     
     $content = @file_get_contents($blob_url);
-    if ($content === false) {
-        // Try with space encoding
-        $encoded_name = str_replace(' ', '%20', "out/{$file_date}{$file_type}.CSV");
-        $blob_url = $base_url . "/" . $encoded_name . "?" . $sas_params;
-        $content = @file_get_contents($blob_url);
-    }
-    
     if ($content === false) {
         log_msg("  FAILED to download");
         continue;
@@ -107,15 +102,16 @@ foreach ($blobs as $blob) {
     
     file_put_contents($local_file, $content);
     $size = round(strlen($content) / 1024 / 1024, 1);
-    log_msg("  Downloaded: {$size}MB → $local_file");
+    log_msg("  Downloaded: {$size}MB");
     $downloaded++;
     
-    // Import if handler exists
-    if ($import_func && function_exists($import_func)) {
-        $count = $import_func($local_file, $file_date);
-        log_msg("  Imported: $count records");
-        $imported += $count;
-    }
+    // Import
+    $count = $import_func($local_file, $file_date);
+    log_msg("  Imported: $count records");
+    $imported += $count;
+    
+    // Cleanup - don't keep files
+    @unlink($local_file);
 }
 
 log_msg("=== Done: Downloaded $downloaded files, Imported $imported records ===");
