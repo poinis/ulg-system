@@ -292,7 +292,7 @@ $with_phone = count(array_filter($data, fn($d) => !empty($d['phone'])));
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎂 Birthday Members — <?= htmlspecialchars($brand_filter ?: 'All Brands') ?></title>
+    <title>🎂 Birthday Members</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f4f8; color: #1a1a2e; }
@@ -362,7 +362,7 @@ $with_phone = count(array_filter($data, fn($d) => !empty($d['phone'])));
 <body>
 <div class="container">
     <div class="header">
-        <h1>🎂 Birthday Members — <?= htmlspecialchars($brand_filter ?: 'All Brands') ?></h1>
+        <h1>🎂 Birthday Members</h1>
         <p>ลูกค้า Member ที่ซื้อสินค้า — กรองแบรนด์/เดือนเกิดเพื่อส่ง Birthday Discount</p>
     </div>
     
