@@ -256,6 +256,7 @@ $last_sync = $sync_stmt->fetch();
             <a href="compare_period_report.php" class="nav-btn">📈 เทียบยอดหลายตัวเลือก</a>
             <a href="multi_filter_report.php" class="nav-btn">📈 รายงานแบบเลือกเอง</a>
             <a href="detailed_report.php" class="nav-btn">📋 รายงานแยกสาขา</a>
+            <a href="birthday_members.php" class="nav-btn">🎂 Birthday Members</a>
             <a href="sync.php" class="nav-btn">🔄 Sync</a>
             <a href="export.php" class="nav-btn">📥 Export</a>
             <?php if ($last_sync): ?>
