@@ -21,7 +21,7 @@ if ($store_code) {
 if ($view_by === 'brand') {
     $sql = "
         SELECT COALESCE(bm.brand, SUBSTRING(t.article_code, 1, 3)) as brand_name,
-               COUNT(DISTINCT CONCAT(t.store_code, t.document_key)) as bill_count,
+               COUNT(DISTINCT CONCAT(t.store_code, t.payment_ref_interne)) as bill_count,
                SUM(t.quantity) as total_qty,
                SUM(COALESCE(t.net_total_ttc, t.total_ttc)) as total_sales
         FROM sale_transactions t
@@ -40,7 +40,7 @@ if ($view_by === 'brand') {
                COALESCE(bm.group_name, '-') as group_name,
                SUM(t.quantity) as total_qty,
                SUM(COALESCE(t.net_total_ttc, t.total_ttc)) as total_sales,
-               COUNT(DISTINCT CONCAT(t.store_code, t.document_key)) as bill_count
+               COUNT(DISTINCT CONCAT(t.store_code, t.payment_ref_interne)) as bill_count
         FROM sale_transactions t
         LEFT JOIN barcode_mapping bm ON t.barcode = bm.barcode
         $where
@@ -57,7 +57,7 @@ if ($view_by === 'brand') {
                COALESCE(bm.class_name, '-') as class_name,
                SUM(t.quantity) as total_qty,
                SUM(COALESCE(t.net_total_ttc, t.total_ttc)) as total_sales,
-               COUNT(DISTINCT CONCAT(t.store_code, t.document_key)) as bill_count
+               COUNT(DISTINCT CONCAT(t.store_code, t.payment_ref_interne)) as bill_count
         FROM sale_transactions t
         LEFT JOIN barcode_mapping bm ON t.barcode = bm.barcode
         $where
