@@ -101,12 +101,13 @@ if (isset($_GET['action']) && $_GET['action'] === 'export') {
     $date_to = $_GET['date_to'] ?? '2026-03-15';
     $birth_months = isset($_GET['birth_months']) ? explode(',', $_GET['birth_months']) : [];
     $store_filter = $_GET['store'] ?? '';
+    $brand_filter = $_GET['brand'] ?? 'TOPOLOGIE';
     
-    $data = getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, $birth_months, $store_filter);
+    $data = getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, $birth_months, $store_filter, $brand_filter);
     
     // Generate XLSX
     header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    header('Content-Disposition: attachment; filename="birthday_members_' . date('Ymd_His') . '.xlsx"');
+    header('Content-Disposition: attachment; filename="birthday_members_' . ($brand_filter ?: 'all') . '_' . date('Ymd_His') . '.xlsx"');
     header('Cache-Control: max-age=0');
     
     echo generateXLSX($data);
@@ -114,12 +115,17 @@ if (isset($_GET['action']) && $_GET['action'] === 'export') {
 }
 
 // --- Data Query Function ---
-function getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, $birth_months = [], $store_filter = '') {
-    // Step 1: Get distinct members who bought TOPOLOGIE from cmbase.daily_sales
+function getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, $birth_months = [], $store_filter = '', $brand_filter = 'TOPOLOGIE') {
+    // Step 1: Get distinct members from cmbase.daily_sales
     // Exclude Walk-in customers (WI%) — only real members
     // JOIN stores table for store_name mapping
-    $where = "WHERE d.brand = 'TOPOLOGIE' AND d.sale_date BETWEEN ? AND ? AND d.customer IS NOT NULL AND d.customer != '' AND d.customer NOT LIKE 'WI%'";
+    $where = "WHERE d.sale_date BETWEEN ? AND ? AND d.customer IS NOT NULL AND d.customer != '' AND d.customer NOT LIKE 'WI%'";
     $params = [$date_from, $date_to];
+    
+    if ($brand_filter) {
+        $where .= " AND d.brand = ?";
+        $params[] = $brand_filter;
+    }
     
     if ($store_filter) {
         $where .= " AND d.store_code = ?";
@@ -249,8 +255,9 @@ $date_to = $_GET['date_to'] ?? '2026-03-15';
 $birth_months_str = $_GET['birth_months'] ?? '3,4'; // default Mar, Apr
 $birth_months = $birth_months_str ? array_map('intval', explode(',', $birth_months_str)) : [];
 $store_filter = $_GET['store'] ?? '';
+$brand_filter = $_GET['brand'] ?? 'TOPOLOGIE'; // default TOPOLOGIE
 
-$data = getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, $birth_months, $store_filter);
+$data = getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, $birth_months, $store_filter, $brand_filter);
 
 // Count members needing enrichment
 $need_enrich = array_filter($data, fn($d) => !$d['has_enriched']);
@@ -261,9 +268,18 @@ if (isset($_GET['check_enrich'])) {
 }
 
 // Get store list for filter
-$stores_stmt = $cmbase->query("SELECT DISTINCT d.store_code, COALESCE(s.store_name, d.store_code) as store_name FROM daily_sales d LEFT JOIN stores s ON d.store_code = s.store_code WHERE d.brand = 'TOPOLOGIE' AND d.store_code IS NOT NULL AND d.store_code != '' ORDER BY s.store_name, d.store_code");
+$stores_q = "SELECT d.store_code, COALESCE(s.store_name, d.store_code) as store_name FROM daily_sales d LEFT JOIN stores s ON d.store_code = s.store_code WHERE d.store_code IS NOT NULL AND d.store_code != ''";
+if ($brand_filter) {
+    $stores_q .= " AND d.brand = " . $cmbase->quote($brand_filter);
+}
+$stores_q .= " GROUP BY d.store_code, s.store_name ORDER BY store_name, d.store_code";
+$stores_stmt = $cmbase->query($stores_q);
 $stores_data = $stores_stmt->fetchAll(PDO::FETCH_ASSOC);
 $stores = array_column($stores_data, 'store_code');
+
+// Brand list for filter
+$brands_stmt = $cmbase->query("SELECT DISTINCT brand FROM daily_sales WHERE brand IS NOT NULL AND brand != '' ORDER BY brand");
+$brand_list = $brands_stmt->fetchAll(PDO::FETCH_COLUMN);
 
 // Stats
 $total_members = count($data);
@@ -275,7 +291,7 @@ $with_phone = count(array_filter($data, fn($d) => !empty($d['phone'])));
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎂 Birthday Members — Topologie</title>
+    <title>🎂 Birthday Members — <?= htmlspecialchars($brand_filter ?: 'All Brands') ?></title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: 'Segoe UI', Tahoma, sans-serif; background: #f0f4f8; color: #1a1a2e; }
@@ -345,8 +361,8 @@ $with_phone = count(array_filter($data, fn($d) => !empty($d['phone'])));
 <body>
 <div class="container">
     <div class="header">
-        <h1>🎂 Birthday Members — Topologie Customers</h1>
-        <p>ลูกค้า Member ที่ซื้อ Topologie — กรองเดือนเกิดเพื่อส่ง Birthday Discount</p>
+        <h1>🎂 Birthday Members — <?= htmlspecialchars($brand_filter ?: 'All Brands') ?></h1>
+        <p>ลูกค้า Member ที่ซื้อสินค้า — กรองแบรนด์/เดือนเกิดเพื่อส่ง Birthday Discount</p>
     </div>
     
     <div class="nav">
@@ -365,6 +381,17 @@ $with_phone = count(array_filter($data, fn($d) => !empty($d['phone'])));
             <div class="filter-group">
                 <label>📅 ถึงวันที่</label>
                 <input type="date" name="date_to" value="<?= htmlspecialchars($date_to) ?>">
+            </div>
+            <div class="filter-group">
+                <label>🏷️ แบรนด์</label>
+                <select name="brand">
+                    <option value="">ทุกแบรนด์</option>
+                    <?php foreach ($brand_list as $b): ?>
+                    <option value="<?= htmlspecialchars($b) ?>" <?= $brand_filter === $b ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($b) ?>
+                    </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
             <div class="filter-group">
                 <label>🏪 สาขา</label>
@@ -400,9 +427,14 @@ $with_phone = count(array_filter($data, fn($d) => !empty($d['phone'])));
     <!-- Enrich Bar -->
     <?php
     // Count un-enriched from ALL Topologie members (not just filtered)
-    $all_members_sql = "SELECT DISTINCT customer FROM daily_sales WHERE brand = 'TOPOLOGIE' AND sale_date BETWEEN ? AND ? AND customer IS NOT NULL AND customer != '' AND customer NOT LIKE 'WI%'";
-    $all_stmt = $cmbase->prepare($all_members_sql);
-    $all_stmt->execute([$date_from, $date_to]);
+    $all_where = "SELECT DISTINCT customer FROM daily_sales WHERE sale_date BETWEEN ? AND ? AND customer IS NOT NULL AND customer != '' AND customer NOT LIKE 'WI%'";
+    $all_params = [$date_from, $date_to];
+    if ($brand_filter) {
+        $all_where .= " AND brand = ?";
+        $all_params[] = $brand_filter;
+    }
+    $all_stmt = $cmbase->prepare($all_where);
+    $all_stmt->execute($all_params);
     $all_member_ids = $all_stmt->fetchAll(PDO::FETCH_COLUMN);
     
     if (!empty($all_member_ids)) {
