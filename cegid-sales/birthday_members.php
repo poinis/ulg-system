@@ -117,6 +117,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'export') {
 function getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, $birth_months = [], $store_filter = '') {
     // Step 1: Get distinct members who bought TOPOLOGIE from cmbase.daily_sales
     // Exclude Walk-in customers (WI%) — only real members
+    // JOIN stores table for store_name mapping
     $where = "WHERE d.brand = 'TOPOLOGIE' AND d.sale_date BETWEEN ? AND ? AND d.customer IS NOT NULL AND d.customer != '' AND d.customer NOT LIKE 'WI%'";
     $params = [$date_from, $date_to];
     
@@ -128,12 +129,13 @@ function getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, $birth_months
     $sql = "
         SELECT d.customer as member, d.customer, 
                MAX(d.first_name) as ds_first_name, MAX(d.last_name) as ds_last_name,
-               GROUP_CONCAT(DISTINCT d.store_code ORDER BY d.store_code) as stores_bought,
+               GROUP_CONCAT(DISTINCT COALESCE(s.store_name, d.store_code) ORDER BY d.store_code SEPARATOR ', ') as stores_bought,
                COUNT(*) as purchase_count,
                SUM(d.tax_incl_total) as total_spent,
                MIN(d.sale_date) as first_purchase,
                MAX(d.sale_date) as last_purchase
         FROM daily_sales d
+        LEFT JOIN stores s ON d.store_code = s.store_code
         $where
         GROUP BY d.customer
         ORDER BY total_spent DESC
@@ -259,8 +261,9 @@ if (isset($_GET['check_enrich'])) {
 }
 
 // Get store list for filter
-$stores_stmt = $cmbase->query("SELECT DISTINCT store_code FROM daily_sales WHERE brand = 'TOPOLOGIE' AND store_code IS NOT NULL AND store_code != '' ORDER BY store_code");
-$stores = $stores_stmt->fetchAll(PDO::FETCH_COLUMN);
+$stores_stmt = $cmbase->query("SELECT DISTINCT d.store_code, COALESCE(s.store_name, d.store_code) as store_name FROM daily_sales d LEFT JOIN stores s ON d.store_code = s.store_code WHERE d.brand = 'TOPOLOGIE' AND d.store_code IS NOT NULL AND d.store_code != '' ORDER BY s.store_name, d.store_code");
+$stores_data = $stores_stmt->fetchAll(PDO::FETCH_ASSOC);
+$stores = array_column($stores_data, 'store_code');
 
 // Stats
 $total_members = count($data);
@@ -367,9 +370,9 @@ $with_phone = count(array_filter($data, fn($d) => !empty($d['phone'])));
                 <label>🏪 สาขา</label>
                 <select name="store">
                     <option value="">ทุกสาขา</option>
-                    <?php foreach ($stores as $s): ?>
-                    <option value="<?= htmlspecialchars($s) ?>" <?= $store_filter === $s ? 'selected' : '' ?>>
-                        <?= htmlspecialchars(STORE_NAMES[$s] ?? $s) ?>
+                    <?php foreach ($stores_data as $sd): ?>
+                    <option value="<?= htmlspecialchars($sd['store_code']) ?>" <?= $store_filter === $sd['store_code'] ? 'selected' : '' ?>>
+                        <?= htmlspecialchars($sd['store_name']) ?>
                     </option>
                     <?php endforeach; ?>
                 </select>
@@ -489,16 +492,7 @@ $with_phone = count(array_filter($data, fn($d) => !empty($d['phone'])));
                         <?php endif; ?>
                     </td>
                     <td><?= htmlspecialchars($row['member_type']) ?: '-' ?></td>
-                    <td>
-                        <?php
-                        $storeList = explode(',', $row['stores_bought']);
-                        foreach ($storeList as $sc) {
-                            $sc = trim($sc);
-                            echo '<span title="' . htmlspecialchars(STORE_NAMES[$sc] ?? $sc) . '" style="cursor:help">' . htmlspecialchars(STORE_NAMES[$sc] ?? $sc) . '</span>';
-                            if ($sc !== end($storeList)) echo ', ';
-                        }
-                        ?>
-                    </td>
+                    <td style="font-size: 0.85em;"><?= htmlspecialchars($row['stores_bought']) ?></td>
                     <td style="text-align: center;"><?= number_format($row['purchase_count']) ?></td>
                     <td style="text-align: right;"><?= number_format($row['total_spent'], 0) ?></td>
                     <td><?= htmlspecialchars($row['last_purchase']) ?></td>
