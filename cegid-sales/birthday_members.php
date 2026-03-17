@@ -118,8 +118,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'export') {
     $out = fopen('php://output', 'w');
     $monthNames = [1=>'ม.ค.', 2=>'ก.พ.', 3=>'มี.ค.', 4=>'เม.ย.', 5=>'พ.ค.', 6=>'มิ.ย.', 7=>'ก.ค.', 8=>'ส.ค.', 9=>'ก.ย.', 10=>'ต.ค.', 11=>'พ.ย.', 12=>'ธ.ค.'];
     
-    // Header
-    fputcsv($out, ['Member ID', 'Customer', 'ชื่อ', 'นามสกุล', 'เบอร์โทร', 'วันเกิด', 'เดือนเกิด', 'Member Type', 'สาขาที่ซื้อ', 'จำนวนรายการ', 'ยอดซื้อรวม', 'ซื้อครั้งแรก', 'ซื้อครั้งล่าสุด']);
+    // Header — PHP 8.4 requires explicit escape param
+    fputcsv($out, ['Member ID', 'Customer', 'ชื่อ', 'นามสกุล', 'เบอร์โทร', 'วันเกิด', 'เดือนเกิด', 'Member Type', 'สาขาที่ซื้อ', 'จำนวนรายการ', 'ยอดซื้อรวม', 'ซื้อครั้งแรก', 'ซื้อครั้งล่าสุด'], ',', '"', '\\');
     
     foreach ($data as $row) {
         fputcsv($out, [
@@ -136,7 +136,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'export') {
             round($row['total_spent'], 2),
             $row['first_purchase'],
             $row['last_purchase'],
-        ]);
+        ], ',', '"', '\\');
     }
     fclose($out);
     exit;
