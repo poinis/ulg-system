@@ -105,12 +105,40 @@ if (isset($_GET['action']) && $_GET['action'] === 'export') {
     
     $data = getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, $birth_months, $store_filter, $brand_filter);
     
-    // Generate XLSX
-    header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-    header('Content-Disposition: attachment; filename="birthday_members_' . ($brand_filter ?: 'all') . '_' . date('Ymd_His') . '.xlsx"');
+    $filename = "birthday_members_" . ($brand_filter ?: 'all') . '_' . date('Ymd_His');
+    
+    // Excel-compatible CSV with BOM for Thai support
+    header('Content-Type: text/csv; charset=UTF-8');
+    header('Content-Disposition: attachment; filename="' . $filename . '.csv"');
     header('Cache-Control: max-age=0');
     
-    echo generateXLSX($data);
+    // BOM for Excel to recognize UTF-8
+    echo "\xEF\xBB\xBF";
+    
+    $out = fopen('php://output', 'w');
+    $monthNames = [1=>'ม.ค.', 2=>'ก.พ.', 3=>'มี.ค.', 4=>'เม.ย.', 5=>'พ.ค.', 6=>'มิ.ย.', 7=>'ก.ค.', 8=>'ส.ค.', 9=>'ก.ย.', 10=>'ต.ค.', 11=>'พ.ย.', 12=>'ธ.ค.'];
+    
+    // Header
+    fputcsv($out, ['Member ID', 'Customer', 'ชื่อ', 'นามสกุล', 'เบอร์โทร', 'วันเกิด', 'เดือนเกิด', 'Member Type', 'สาขาที่ซื้อ', 'จำนวนรายการ', 'ยอดซื้อรวม', 'ซื้อครั้งแรก', 'ซื้อครั้งล่าสุด']);
+    
+    foreach ($data as $row) {
+        fputcsv($out, [
+            $row['member'],
+            $row['customer'],
+            $row['first_name'],
+            $row['last_name'],
+            $row['phone'],
+            $row['birthday'] ?? '-',
+            $row['birth_month'] ? ($monthNames[$row['birth_month']] ?? $row['birth_month']) : '-',
+            $row['member_type'],
+            $row['stores_bought'],
+            $row['purchase_count'],
+            round($row['total_spent'], 2),
+            $row['first_purchase'],
+            $row['last_purchase'],
+        ]);
+    }
+    fclose($out);
     exit;
 }
 
@@ -420,7 +448,7 @@ $with_phone = count(array_filter($data, fn($d) => !empty($d['phone'])));
         </div>
         <div style="margin-top: 12px; display: flex; gap: 8px;">
             <button type="submit" class="btn btn-primary" onclick="buildMonths()">🔍 ค้นหา</button>
-            <button type="button" class="btn btn-success" onclick="exportXLSX()">📥 Export XLSX</button>
+            <button type="button" class="btn btn-success" onclick="exportCSV()">📥 Export CSV</button>
         </div>
         <input type="hidden" name="birth_months" id="birth_months_input" value="<?= htmlspecialchars($birth_months_str) ?>">
     </form>
@@ -549,8 +577,8 @@ document.querySelector('form').addEventListener('submit', function() {
     buildMonths();
 });
 
-// Export XLSX
-function exportXLSX() {
+// Export CSV
+function exportCSV() {
     buildMonths();
     const params = new URLSearchParams(new FormData(document.querySelector('form')));
     params.set('action', 'export');
