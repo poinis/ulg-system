@@ -135,13 +135,14 @@ function getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, $birth_months
     $sql = "
         SELECT d.customer as member, d.customer, 
                MAX(d.first_name) as ds_first_name, MAX(d.last_name) as ds_last_name,
-               GROUP_CONCAT(DISTINCT COALESCE(s.store_name, d.store_code) ORDER BY d.store_code SEPARATOR ', ') as stores_bought,
+               GROUP_CONCAT(DISTINCT COALESCE(s.store_name, s2.store_name, d.store_code) ORDER BY d.store_code SEPARATOR ', ') as stores_bought,
                COUNT(*) as purchase_count,
                SUM(d.tax_incl_total) as total_spent,
                MIN(d.sale_date) as first_purchase,
                MAX(d.sale_date) as last_purchase
         FROM daily_sales d
         LEFT JOIN stores s ON d.store_code = s.store_code
+        LEFT JOIN stores s2 ON d.store_code = s2.store_code_new
         $where
         GROUP BY d.customer
         ORDER BY total_spent DESC
@@ -268,7 +269,7 @@ if (isset($_GET['check_enrich'])) {
 }
 
 // Get store list for filter
-$stores_q = "SELECT d.store_code, COALESCE(s.store_name, d.store_code) as store_name FROM daily_sales d LEFT JOIN stores s ON d.store_code = s.store_code WHERE d.store_code IS NOT NULL AND d.store_code != ''";
+$stores_q = "SELECT d.store_code, COALESCE(s.store_name, s2.store_name, d.store_code) as store_name FROM daily_sales d LEFT JOIN stores s ON d.store_code = s.store_code LEFT JOIN stores s2 ON d.store_code = s2.store_code_new WHERE d.store_code IS NOT NULL AND d.store_code != ''";
 if ($brand_filter) {
     $stores_q .= " AND d.brand = " . $cmbase->quote($brand_filter);
 }
