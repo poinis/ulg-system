@@ -88,32 +88,39 @@ $insertStmt = $ulgcegid->prepare("
 $startTime = time();
 
 foreach ($needEnrich as $i => $customerId) {
-    $detail = $soap->getCustomerDetail($customerId);
-    
-    if ($detail) {
-        $insertStmt->execute([
-            $customerId,
-            $detail['first_name'] ?? '',
-            $detail['last_name'] ?? '',
-            $detail['phone'] ?? '',
-            $detail['email'] ?? '',
-            $detail['birthday'] ?? null,
-            $detail['usual_store'] ?? '',
-            $detail['member_type'] ?? ''
-        ]);
-        $enriched++;
+    try {
+        $detail = $soap->getCustomerDetail($customerId);
         
-        $bday = $detail['birthday'] ?? 'none';
-        if (($i + 1) % 100 === 0 || $i < 5) {
-            $elapsed = time() - $startTime;
-            $rate = $elapsed > 0 ? round(($i + 1) / $elapsed, 1) : 0;
-            $eta = $rate > 0 ? round(($total - $i - 1) / $rate / 60, 1) : '?';
-            echo sprintf("[%d/%d] %s → bday=%s | %.1f/s ETA: %s min\n", $i + 1, $total, $customerId, $bday, $rate, $eta);
+        if ($detail) {
+            $insertStmt->execute([
+                $customerId,
+                $detail['first_name'] ?? '',
+                $detail['last_name'] ?? '',
+                $detail['phone'] ?? '',
+                $detail['email'] ?? '',
+                $detail['birthday'] ?? null,
+                $detail['usual_store'] ?? '',
+                $detail['member_type'] ?? ''
+            ]);
+            $enriched++;
+            
+            $bday = $detail['birthday'] ?? 'none';
+            if (($i + 1) % 100 === 0 || $i < 5) {
+                $elapsed = time() - $startTime;
+                $rate = $elapsed > 0 ? round(($i + 1) / $elapsed, 1) : 0;
+                $eta = $rate > 0 ? round(($total - $i - 1) / $rate / 60, 1) : '?';
+                echo sprintf("[%d/%d] %s → bday=%s | %.1f/s ETA: %s min\n", $i + 1, $total, $customerId, $bday, $rate, $eta);
+            }
+        } else {
+            $noData++;
+            // Still insert a record so we don't retry
+            $insertStmt->execute([$customerId, '', '', '', '', null, '', '']);
         }
-    } else {
-        $noData++;
-        // Still insert a record so we don't retry
-        $insertStmt->execute([$customerId, '', '', '', '', null, '', '']);
+    } catch (Exception $e) {
+        $errors++;
+        if (($i + 1) % 100 === 0) {
+            echo sprintf("[%d/%d] ERROR %s: %s\n", $i + 1, $total, $customerId, $e->getMessage());
+        }
     }
     
     usleep(40000); // 40ms delay
