@@ -116,7 +116,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'export') {
 // --- Data Query Function ---
 function getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, $birth_months = [], $store_filter = '') {
     // Step 1: Get distinct members who bought TOPOLOGIE from cmbase.daily_sales
-    $where = "WHERE d.brand = 'TOPOLOGIE' AND d.sale_date BETWEEN ? AND ? AND d.member IS NOT NULL AND d.member != ''";
+    // Exclude Walk-in customers (WI%) — only real members
+    $where = "WHERE d.brand = 'TOPOLOGIE' AND d.sale_date BETWEEN ? AND ? AND d.customer IS NOT NULL AND d.customer != '' AND d.customer NOT LIKE 'WI%'";
     $params = [$date_from, $date_to];
     
     if ($store_filter) {
@@ -125,7 +126,8 @@ function getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, $birth_months
     }
     
     $sql = "
-        SELECT DISTINCT d.member, d.customer, d.first_name as ds_first_name, d.last_name as ds_last_name,
+        SELECT d.customer as member, d.customer, 
+               MAX(d.first_name) as ds_first_name, MAX(d.last_name) as ds_last_name,
                GROUP_CONCAT(DISTINCT d.store_code ORDER BY d.store_code) as stores_bought,
                COUNT(*) as purchase_count,
                SUM(d.tax_incl_total) as total_spent,
@@ -133,7 +135,7 @@ function getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, $birth_months
                MAX(d.sale_date) as last_purchase
         FROM daily_sales d
         $where
-        GROUP BY d.member, d.customer, d.first_name, d.last_name
+        GROUP BY d.customer
         ORDER BY total_spent DESC
     ";
     
@@ -395,7 +397,7 @@ $with_phone = count(array_filter($data, fn($d) => !empty($d['phone'])));
     <!-- Enrich Bar -->
     <?php
     // Count un-enriched from ALL Topologie members (not just filtered)
-    $all_members_sql = "SELECT DISTINCT member FROM daily_sales WHERE brand = 'TOPOLOGIE' AND sale_date BETWEEN ? AND ? AND member IS NOT NULL AND member != ''";
+    $all_members_sql = "SELECT DISTINCT customer FROM daily_sales WHERE brand = 'TOPOLOGIE' AND sale_date BETWEEN ? AND ? AND customer IS NOT NULL AND customer != '' AND customer NOT LIKE 'WI%'";
     $all_stmt = $cmbase->prepare($all_members_sql);
     $all_stmt->execute([$date_from, $date_to]);
     $all_member_ids = $all_stmt->fetchAll(PDO::FETCH_COLUMN);
