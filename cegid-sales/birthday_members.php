@@ -120,13 +120,13 @@ function getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, $birth_months
     $params = [$date_from, $date_to];
     
     if ($store_filter) {
-        $where .= " AND d.store_code_new = ?";
+        $where .= " AND d.store_code = ?";
         $params[] = $store_filter;
     }
     
     $sql = "
         SELECT DISTINCT d.member, d.customer, d.first_name as ds_first_name, d.last_name as ds_last_name,
-               GROUP_CONCAT(DISTINCT d.store_code_new ORDER BY d.store_code_new) as stores_bought,
+               GROUP_CONCAT(DISTINCT d.store_code ORDER BY d.store_code) as stores_bought,
                COUNT(*) as purchase_count,
                SUM(d.tax_incl_total) as total_spent,
                MIN(d.sale_date) as first_purchase,
@@ -257,7 +257,7 @@ if (isset($_GET['check_enrich'])) {
 }
 
 // Get store list for filter
-$stores_stmt = $cmbase->query("SELECT DISTINCT store_code_new FROM daily_sales WHERE brand = 'TOPOLOGIE' AND store_code_new IS NOT NULL AND store_code_new != '' ORDER BY store_code_new");
+$stores_stmt = $cmbase->query("SELECT DISTINCT store_code FROM daily_sales WHERE brand = 'TOPOLOGIE' AND store_code IS NOT NULL AND store_code != '' ORDER BY store_code");
 $stores = $stores_stmt->fetchAll(PDO::FETCH_COLUMN);
 
 // Stats
