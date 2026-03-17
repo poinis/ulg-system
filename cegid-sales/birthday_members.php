@@ -269,11 +269,11 @@ if (isset($_GET['check_enrich'])) {
 }
 
 // Get store list for filter
-$stores_q = "SELECT d.store_code, COALESCE(s.store_name, s2.store_name, d.store_code) as store_name FROM daily_sales d LEFT JOIN stores s ON d.store_code = s.store_code LEFT JOIN stores s2 ON d.store_code = s2.store_code_new WHERE d.store_code IS NOT NULL AND d.store_code != ''";
+$stores_q = "SELECT d.store_code, COALESCE(MAX(s.store_name), MAX(s2.store_name), d.store_code) as store_name FROM daily_sales d LEFT JOIN stores s ON d.store_code = s.store_code LEFT JOIN stores s2 ON d.store_code = s2.store_code_new WHERE d.store_code IS NOT NULL AND d.store_code != ''";
 if ($brand_filter) {
     $stores_q .= " AND d.brand = " . $cmbase->quote($brand_filter);
 }
-$stores_q .= " GROUP BY d.store_code, s.store_name ORDER BY store_name, d.store_code";
+$stores_q .= " GROUP BY d.store_code ORDER BY store_name, d.store_code";
 $stores_stmt = $cmbase->query($stores_q);
 $stores_data = $stores_stmt->fetchAll(PDO::FETCH_ASSOC);
 $stores = array_column($stores_data, 'store_code');
