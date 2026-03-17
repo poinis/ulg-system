@@ -286,7 +286,15 @@ $birth_months = $birth_months_str ? array_map('intval', explode(',', $birth_mont
 $store_filter = $_GET['store'] ?? '';
 $brand_filter = $_GET['brand'] ?? 'TOPOLOGIE'; // default TOPOLOGIE
 
-$data = getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, $birth_months, $store_filter, $brand_filter);
+// Get ALL members (no birthday filter) for total count
+$all_data = getFilteredData($cmbase, $ulgcegid, $date_from, $date_to, [], $store_filter, $brand_filter);
+$total_all_members = count($all_data);
+
+// Get filtered data (with birthday filter)
+$data = !empty($birth_months) 
+    ? array_filter($all_data, fn($d) => $d['birth_month'] !== null && in_array($d['birth_month'], $birth_months))
+    : $all_data;
+$data = array_values($data);
 
 // Count members needing enrichment
 $need_enrich = array_filter($data, fn($d) => !$d['has_enriched']);
@@ -311,8 +319,8 @@ $brands_stmt = $cmbase->query("SELECT DISTINCT brand FROM daily_sales WHERE bran
 $brand_list = $brands_stmt->fetchAll(PDO::FETCH_COLUMN);
 
 // Stats
-$total_members = count($data);
-$with_birthday = count(array_filter($data, fn($d) => $d['birthday']));
+$total_members = count($data); // filtered
+$with_birthday = count(array_filter($all_data, fn($d) => $d['birthday']));
 $with_phone = count(array_filter($data, fn($d) => !empty($d['phone'])));
 ?>
 <!DOCTYPE html>
@@ -495,7 +503,7 @@ $with_phone = count(array_filter($data, fn($d) => !empty($d['phone'])));
     <!-- Stats -->
     <div class="stats">
         <div class="stat-card">
-            <div class="stat-value"><?= number_format($total_members) ?></div>
+            <div class="stat-value"><?= number_format($total_all_members) ?></div>
             <div class="stat-label">👤 ลูกค้าทั้งหมด</div>
         </div>
         <div class="stat-card">
@@ -503,12 +511,12 @@ $with_phone = count(array_filter($data, fn($d) => !empty($d['phone'])));
             <div class="stat-label">🎂 มีวันเกิด</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value"><?= number_format($with_phone) ?></div>
-            <div class="stat-label">📱 มีเบอร์โทร</div>
+            <div class="stat-value"><?= number_format($total_members) ?></div>
+            <div class="stat-label">🎯 ตรงเงื่อนไข</div>
         </div>
         <div class="stat-card">
-            <div class="stat-value"><?= number_format($total_members - $with_phone) ?></div>
-            <div class="stat-label">❌ ไม่มีเบอร์</div>
+            <div class="stat-value"><?= number_format($with_phone) ?></div>
+            <div class="stat-label">📱 มีเบอร์โทร</div>
         </div>
     </div>
     
